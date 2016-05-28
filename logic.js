@@ -114,9 +114,12 @@ function interpret() {
     }
     if (input.split(';').length == 3 && input.split(';')[2] == 'n') {
         nt = true;
-    } else { nt = false; }
-    command = input.split(';')[0].trim();
-    query = input.split(';')[1].trim();
+    } else {
+       nt = false;
+    }
+    comQry = input.split(';');
+    command = comQry[0].trim();
+    query = comQry[1].trim();
     switch(command) {
         case 'r':
             if (input.split(';')[1] == '') {
@@ -138,7 +141,11 @@ function interpret() {
         case 'g':
             goToSite('https://www.google.com/search?q='+query, nt);
             return false;
+         case 'wa':
+            goToSite('http://www.wolframalpha.com/input/?i='+query, nt);
+            return false;
         default:
             displayText('command not recognized');
+            return false;
     }
 }
