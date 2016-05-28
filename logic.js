@@ -98,6 +98,10 @@ function displayHelp() {
     	    <td>open action in new tab</td>
     	</tr>
     	<tr>
+    	   <td>wa;&ltquery&gt</td>
+    	   <td>wolfram alpha search</td>
+    	</tr>
+    	<tr>
     		<td>help</td>
     		<td>show this text</td>
     	</tr>
