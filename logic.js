@@ -91,6 +91,10 @@ function displayHelp() {
        <td>amazon search</td>
      </tr>
      <tr>
+       <td>w;&ltquery&gt</td>
+       <td>wikipedia search</td>
+     </tr>
+     <tr>
        <td>wa;&ltquery&gt</td>
        <td>wolfram alpha search</td>
      </tr>
@@ -125,32 +129,33 @@ function interpret() {
    comQry = input.split(';');
    command = comQry[0].trim();
    query = comQry[1].trim();
-   switch(command) {
-      case 'r':
-         if (input.split(';')[1] == '') {
-            goToSite('reddit.com');
-            return;
-         }
-         goToSite('reddit.com/r/'+query, nt);
+   if (command === 'r') {
+      if (input.split(';')[1] == '') {
+         goToSite('reddit.com');
+         return;
+      }
+      goToSite('reddit.com/r/'+query, nt);
+      return false;
+   } else if (command === 'yt' || command === 'y') {
+      goToSite('https://www.youtube.com/results?search_query='+query, nt);
+      return false;
+   } else if (command === 'a') {
+      goToSite('http://www.amazon.com/s?url=search-alias%3Daps&field-keywords='+query, nt);
+      return false;
+   } else if (command === 'g') {
+      goToSite('https://www.google.com/search?q='+query, nt);
+      return false;
+   } else if (command === 'w') {
+         goToSite('https://www.wikipedia.org/w/index.php?title=Special:Search&search='+query, nt);
          return false;
-      case 't':
-         goToSite(query, nt);
-         return false;
-      case 'yt':
-      case 'y':
-         goToSite('https://www.youtube.com/results?search_query='+query, nt);
-         return false;
-      case 'a':
-         goToSite('http://www.amazon.com/s?url=search-alias%3Daps&field-keywords='+query, nt);
-         return false;
-      case 'g':
-         goToSite('https://www.google.com/search?q='+query, nt);
-         return false;
-       case 'wa':
-         goToSite('http://www.wolframalpha.com/input/?i='+query, nt);
-         return false;
-      default:
-         displayText('command not recognized');
-         return false;
+   } else if (command === 'wa') {
+      goToSite('http://www.wolframalpha.com/input/?i='+query, nt);
+      return false;
+   } else if (command === 't') {
+      goToSite(query, nt);
+      return false;
+   } else {
+      displayText('command not recognized');
+      return false;
    }
 }
