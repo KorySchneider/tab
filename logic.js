@@ -111,9 +111,18 @@ function displayHelp() {
        <td>show this text</td>
      </tr>
       </table>`
-   document.getElementById('text_div').innerHTML += helpHTML;
+   document.getElementById('text_div').innerHTML = helpHTML;
 }
 
+var comLinks = { 
+   'g':'https://www.google.com/search?q=',
+   'yt':'https://www.youtube.com/results?search_query=',
+   'y':'https://www.youtube.com/results?search_query=',
+   'a':'http://www.amazon.com/s?url=search-alias%3Daps&field-keywords=',
+   'w':'https://www.wikipedia.org/w/index.php?title=Special:Search&search=',
+   'wa':'http://www.wolframalpha.com/input/?i=',
+   't':'',
+}
 function interpret() {
    var input = document.getElementById('input').value;
    if (input == '') { return; }
@@ -129,30 +138,8 @@ function interpret() {
    comQry = input.split(';');
    command = comQry[0].trim();
    query = comQry[1].trim();
-   if (command === 'r') {
-      if (input.split(';')[1] == '') {
-         goToSite('reddit.com');
-         return;
-      }
-      goToSite('reddit.com/r/'+query, nt);
-      return false;
-   } else if (command === 'yt' || command === 'y') {
-      goToSite('https://www.youtube.com/results?search_query='+query, nt);
-      return false;
-   } else if (command === 'a') {
-      goToSite('http://www.amazon.com/s?url=search-alias%3Daps&field-keywords='+query, nt);
-      return false;
-   } else if (command === 'g') {
-      goToSite('https://www.google.com/search?q='+query, nt);
-      return false;
-   } else if (command === 'w') {
-         goToSite('https://www.wikipedia.org/w/index.php?title=Special:Search&search='+query, nt);
-         return false;
-   } else if (command === 'wa') {
-      goToSite('http://www.wolframalpha.com/input/?i='+query, nt);
-      return false;
-   } else if (command === 't') {
-      goToSite(query, nt);
+   if (comLinks.hasOwnProperty(command)) {
+      goToSite(comLinks[command] + query, nt);
       return false;
    } else {
       displayText('command not recognized');
