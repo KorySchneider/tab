@@ -19,7 +19,8 @@ function verifyKey(e) {
 
 function updateInputLength() {
    var entry_len = document.getElementById('input').value.length;
-   last_len = document.getElementById('input').size = entry_len + 2;
+   document.getElementById('input').size = entry_len + 2;
+
 }
 
 function goToSite(url, nt) {
@@ -90,16 +91,16 @@ function displayHelp() {
        <td>amazon search</td>
      </tr>
      <tr>
+       <td>wa;&ltquery&gt</td>
+       <td>wolfram alpha search</td>
+     </tr>
+     <tr>
        <td>t;&lturl&gt</td>
        <td>open url in current tab</td>
      </tr>
      <tr>
         <td>&ltcommand&gt&#59;n</td>
         <td>open action in new tab</td>
-     </tr>
-     <tr>
-       <td>wa;&ltquery&gt</td>
-       <td>wolfram alpha search</td>
      </tr>
      <tr>
        <td>help</td>
