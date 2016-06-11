@@ -22,18 +22,21 @@ var comLinks = {
 function interpret() {
    var input = document.getElementById('input').value;
    if (input == '') { return; }
-   if (input.trim() == 'help') {
+   if (input.trim() === 'help') {
       displayHelp();
       return;
+   } else if (input.trim() === 'options') {
+      //displayOptions();
+      return;
    }
-   if (input.split(';').length == 3 && input.split(';')[2] == 'n') {
+   var inputArray = input.split(';');
+   if (inputArray[inputArray.length - 1] === 'n') {
       nt = true;
    } else {
       nt = false;
    }
-   comQry = input.split(';');
-   command = comQry[0].trim();
-   query = comQry[1].trim();
+   command = inputArray[0].trim();
+   query = inputArray[1].trim();
    if (comLinks.hasOwnProperty(command)) {
       goToSite(comLinks[command] + query, nt);
       return false;
