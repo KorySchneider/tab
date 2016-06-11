@@ -22,8 +22,11 @@ var comLinks = {
 function interpret() {
    var input = document.getElementById('input').value;
    if (input == '') { return; }
-   if (input.trim() == 'help') {
+   if (input.trim() === 'help') {
       displayHelp();
+      return;
+   } else if (input.trim() === 'options') {
+      displayOptions();
       return;
    }
    if (input.split(';').length == 3 && input.split(';')[2] == 'n') {
@@ -88,10 +91,45 @@ function clearText() {
    document.getElementById('text_div').innerHTML = '';
 }
 
+function displayOptions() {
+   var optionsHTML =
+      `
+      <br /><br /><br />
+      <table border='1'>
+      <tr>
+         <th align='left'>Default Command</th>
+         <th align='left'>Open Style</th>
+      </tr>
+      <tr>
+         <td align='left'>
+            <form id='defaultCommandForm' action=''>
+               <input type='radio' name='defaultCommand' value='t'>Go to website<br/>
+               <input type='radio' name='defaultCommand' value='g'>Google search<br/>
+               <input type='radio' name='defaultCommand' value='w'>Wikipedia search<br/>
+               <input type='radio' name='defaultCommand' value='y'>YouTube search <br/>
+               <input type='radio' name='defaultCommand' value='a'>Amazon search<br/>
+               <input type='radio' name='defaultCommand' value='wa'>Wolfram Alpha search<br/>
+               <input type='radio' name='defaultCommand' value='r'>Go to subreddit
+            </form>
+         </td>
+         <td align='left'>
+            <input type='checkbox' name='openStyle' value='newTab'>Always open in new tab<br/>
+         </td>
+      </tr>
+      <tr>
+         <td colspan='2'>
+            <button type='button' id='saveOptionsBtn'>Save</button>
+         </td>
+      </tr>
+      </table>
+      `
+   document.getElementById('text_div').innerHTML = optionsHTML;
+}
+
 function displayHelp() {
-   var helpHTML = 
+   var helpHTML =
       `<br /><br /><br />
-      <p class='subtext' align=center>syntax: command;query[;n]</p>
+      <p class='subtext' align='center'>syntax: command;query[;n]</p>
       <table border='1'>
       <tr>
          <th>Command</th>

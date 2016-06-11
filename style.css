@@ -1,57 +1,57 @@
 body {
-    background-color: #A1C0C0;
-    overflow-x: auto;
-    min-width: 400px;
-    min-height: 500px;
+   background-color: #A1C0C0;
+   overflow-x: auto;
+   min-width: 400px;
+   min-height: 500px;
 }
 
 p {
-    font: 24px consolas;
+   font: 24px consolas;
 }
 
 table {
-    width: 50%;
-    border: 1px solid black;
-    font: 16px consolas;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+   width: 50%;
+   border: 1px solid black;
+   font: 16px consolas;
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
 }
 
 ::selection {
-    background: #F3F6F6;
+   background: #F3F6F6;
 }
 
 .subtext {
-    font: 18px consolas;
+   font: 18px consolas;
 }
 
 .timetext {
-    font: 30px consolas;
+   font: 30px consolas;
 }
 
 .input_div {
-    margin: 0 auto;
+   margin: 0 auto;
 }
 
 .text_div {
-    text-align: center;
-    height: 500px;
+   text-align: center;
+   height: 500px;
 }
 
 input {
-    font: 24px consolas;
-    border: 0px;
-    outline: none;
-    background-color: #A1C0C0;
-    text-align: center;
-    display: inline-block;
+   font: 24px consolas;
+   border: 0px;
+   outline: none;
+   background-color: #A1C0C0;
+   text-align: center;
+   display: inline-block;
 }
 
 .center {
-    position: absolute;
-    left: 15%;
-    right: 15%;
-    top: 35%;
-    bottom: 15%;
+   position: absolute;
+   left: 15%;
+   right: 15%;
+   top: 35%;
+   bottom: 15%;
 }
