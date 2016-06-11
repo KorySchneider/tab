@@ -2,13 +2,6 @@ window.onload = function() {
    updateTime();
 };
 
-/* TODO
- * options 'screen', similar to help screen
- * ----------------------------------------
- * radio button selection of which command should be 'default',
- * default being the command that runs if you do not give a command
- */
-
 var comLinks = { 
    'g':'https://www.google.com/search?q=',
    'yt':'https://www.youtube.com/results?search_query=',
@@ -91,9 +84,15 @@ function clearText() {
 }
 
 function saveOptions() {
+   if (typeof(Storage) !== "undefined") {
+      //do things
+   }
 }
 
 function loadOptions() {
+   if (typeof(Storage) !== "undefined") {
+      //do things
+   }
 }
 
 function displayOptions() {
@@ -130,7 +129,7 @@ function displayOptions() {
       </tr>
       <tr>
          <td align='left'>
-            Color: <input type='text' id='backgroundColorInput'>
+            Color: <input type='text' id='backgroundColorInput' placeholder='#A1C0C0'>
          </td>
       </tr>
       <tr>
@@ -202,7 +201,6 @@ function checkTime(i) {
    if (i == 0) { i = '12' };
    return i;
 }
-
 function updateTime() {
    var d = new Date();
    var h = d.getHours(); if (h > 12) { h -= 12; }; h = checkTime(h);
