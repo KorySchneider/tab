@@ -39,7 +39,7 @@ table {
    height: 500px;
 }
 
-input {
+#commandInput {
    font: 24px consolas;
    border: 0px;
    outline: none;

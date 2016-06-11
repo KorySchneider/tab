@@ -20,7 +20,7 @@ var comLinks = {
 }
 
 function interpret() {
-   var input = document.getElementById('input').value;
+   var input = document.getElementById('commandInput').value;
    if (input == '') { return; }
    if (input.trim() === 'help') {
       displayHelp();
@@ -56,15 +56,14 @@ function verifyKey(e) {
    if (keycode == 13) {
       clearText();
       interpret();
-      document.getElementById('input').select();
+      document.getElementById('commandInput').select();
    }
    updateInputLength();
 }
 
 function updateInputLength() {
-   var entry_len = document.getElementById('input').value.length;
-   document.getElementById('input').size = entry_len + 2;
-
+   var entry_len = document.getElementById('commandInput').value.length;
+   document.getElementById('commandInput').size = entry_len + 2;
 }
 
 function goToSite(url, nt) {
@@ -91,14 +90,19 @@ function clearText() {
    document.getElementById('text_div').innerHTML = '';
 }
 
+function saveOptions() {
+}
+
+function loadOptions() {
+}
+
 function displayOptions() {
    var optionsHTML =
       `
       <br /><br /><br />
       <table border='1'>
       <tr>
-         <th align='left'>Default Command</th>
-         <th align='left'>Open Style</th>
+         <td align='left'><strong>Default Command</strong> (command that executes if no command was specified)</td>
       </tr>
       <tr>
          <td align='left'>
@@ -112,18 +116,32 @@ function displayOptions() {
                <input type='radio' name='defaultCommand' value='r'>Go to subreddit
             </form>
          </td>
+      </tr>
+      <tr>
+         <th align='left'>Open Style</th>
+      </tr>
+      <tr>
          <td align='left'>
-            <input type='checkbox' name='openStyle' value='newTab'>Always open in new tab<br/>
+            <input type='checkbox' name='openStyleCheckbox' value='newTab'>Always open in new tab<br/>
          </td>
       </tr>
       <tr>
-         <td colspan='2'>
+         <th align='left'>Background Color</th>
+      </tr>
+      <tr>
+         <td align='left'>
+            Color: <input type='text' id='backgroundColorInput'>
+         </td>
+      </tr>
+      <tr>
+         <td>
             <button type='button' id='saveOptionsBtn'>Save</button>
          </td>
       </tr>
       </table>
       `
    document.getElementById('text_div').innerHTML = optionsHTML;
+   document.getElementById('saveOptionsBtn').onclick = saveOptions;
 }
 
 function displayHelp() {
