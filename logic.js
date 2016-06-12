@@ -2,14 +2,8 @@ window.onload = function() {
    updateTime();
 };
 
-/* TODO
- * options 'screen', similar to help screen
- * ----------------------------------------
- * radio button selection of which command should be 'default',
- * default being the command that runs if you do not give a command
- */
-
 var comLinks = { 
+   'r':'http://www.reddit.com/r/',
    'g':'https://www.google.com/search?q=',
    'yt':'https://www.youtube.com/results?search_query=',
    'y':'https://www.youtube.com/results?search_query=',
@@ -37,6 +31,9 @@ function interpret() {
    }
    command = inputArray[0].trim();
    query = inputArray[1].trim();
+   if (command === 'w') {
+      query = query.replace(/ /g,''); // remove all spaces
+   }
    if (comLinks.hasOwnProperty(command)) {
       goToSite(comLinks[command] + query, nt);
       return false;
