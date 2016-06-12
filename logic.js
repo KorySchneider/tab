@@ -2,9 +2,6 @@ window.onload = function() {
    updateTime();
 };
 
-// TODO
-// wikipedia %20 in search
-
 var comLinks = { 
    'r':'https://www.reddit.com/r/',
    'g':'https://www.google.com/search?q=',
@@ -26,14 +23,17 @@ function interpret() {
       displayOptions();
       return;
    }
-   if (input.split(';').length == 3 && input.split(';')[2] == 'n') {
+   var inputArray = input.split(';');
+   if (inputArray[inputArray.length - 1] === 'n') {
       nt = true;
    } else {
       nt = false;
    }
-   comQry = input.split(';');
-   command = comQry[0].trim();
-   query = comQry[1].trim();
+   command = inputArray[0].trim();
+   query = inputArray[1].trim();
+   if (command === 'w') {
+      query = query.replace(/ /g,''); // remove all spaces
+   }
    if (comLinks.hasOwnProperty(command)) {
       goToSite(comLinks[command] + query, nt);
       return false;
