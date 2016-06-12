@@ -2,7 +2,11 @@ window.onload = function() {
    updateTime();
 };
 
+// TODO
+// wikipedia %20 in search
+
 var comLinks = { 
+   'r':'https://www.reddit.com/r/',
    'g':'https://www.google.com/search?q=',
    'yt':'https://www.youtube.com/results?search_query=',
    'y':'https://www.youtube.com/results?search_query=',
