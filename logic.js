@@ -1,7 +1,9 @@
 window.onload = function() {
+   loadOptions();
    updateTime();
 };
 
+var USER_OPTIONS = JSON.parse(localStorage.getItem('userOptions'));
 var comLinks = { 
    'r':'https://www.reddit.com/r/',
    'g':'https://www.google.com/search?q=',
@@ -16,6 +18,8 @@ var comLinks = {
 function interpret() {
    var input = document.getElementById('commandInput').value;
    if (input == '') { return; }
+   
+   // Check for available commands
    if (input.trim() === 'help') {
       displayHelp();
       return;
@@ -23,14 +27,32 @@ function interpret() {
       displayOptions();
       return;
    }
+
+   // Parse input
    var inputArray = input.split(';');
-   if (inputArray[inputArray.length - 1] === 'n') {
-      nt = true;
-   } else {
-      nt = false;
+   var nt;
+   switch(inputArray.length) {
+      case 1:
+         command = USER_OPTIONS.defaultCommand;
+         query = inputArray[0].trim();
+         break;
+      case 2:
+         command = inputArray[0].trim();
+         query = inputArray[1].trim();
+         break;
+      case 3:
+         command = inputArray[0].trim();
+         query = inputArray[1].trim();
+         if (inputArray[2] === 'n') {
+            nt = true;
+         }
+         break;
+      default:
+         displayText('unable to interpret');
    }
-   command = inputArray[0].trim();
-   query = inputArray[1].trim();
+   if (USER_OPTIONS.alwaysNewTab) {
+      nt = true;
+   }
    if (command === 'w') {
       query = query.replace(/ /g,''); // remove all spaces
    }
@@ -89,13 +111,51 @@ function clearText() {
 
 function saveOptions() {
    if (typeof(Storage) !== "undefined") {
-      //do things
+      // Default command
+      var defaultCommandRadios = document.getElementById('defaultCommandForm');
+      var defaultCommand = null;
+      for (var i=0; i < defaultCommandRadios.length; i++) {
+         if (defaultCommandRadios[i].checked) {
+            defaultCommand = defaultCommandRadios[i].value;
+            break;
+         }
+      }
+      if (defaultCommand !== null) {
+         USER_OPTIONS.defaultCommand = defaultCommand;
+      }
+
+      // Tab open style
+      var alwaysNewTab = document.getElementById('alwaysNewTabCheckbox').checked;
+      USER_OPTIONS.alwaysNewTab = alwaysNewTab;
+
+      // Background color
+      var bgColor = document.getElementById('bgColorInput').value;
+      // check if bgColor is a valid hex value
+      if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(bgColor)) { 
+         USER_OPTIONS.bgColor = bgColor;
+      }
+      localStorage.setItem('userOptions', JSON.stringify(USER_OPTIONS));
+      document.getElementById('optionsSubText').value = 'settings saved';
+   } else {
+      alert("Browser does not support local storage: your settings won't be saved (sorry)");
    }
 }
 
 function loadOptions() {
    if (typeof(Storage) !== "undefined") {
-      //do things
+      if (localStorage.getItem('userOptions') !== null) {
+         var userOptions = localStorage.getItem('userOptions');
+         userOptions = JSON.parse(userOptions);
+         USER_OPTIONS = userOptions;
+         return userOptions;
+      } else {
+         var options = {
+            "defaultCommand": "g",
+            "alwaysNewTab": false,
+            "bgColor": "#A1C0C0"
+         };
+         localStorage.setItem('userOptions', JSON.stringify(options));
+      }
    }
 }
 
@@ -103,6 +163,7 @@ function displayOptions() {
    var optionsHTML =
       `
       <br /><br /><br />
+      <p id='optionsSubText' class='subtext' align='center'> </p>
       <table border='1'>
       <tr>
          <td align='left'><strong>Default Command</strong> (command that executes if no command was specified)</td>
@@ -125,7 +186,7 @@ function displayOptions() {
       </tr>
       <tr>
          <td align='left'>
-            <input type='checkbox' name='openStyleCheckbox' value='newTab'>Always open in new tab<br/>
+            <input type='checkbox' id='alwaysNewTabCheckbox' value='newTab'>Always open in new tab<br/>
          </td>
       </tr>
       <tr>
@@ -133,7 +194,7 @@ function displayOptions() {
       </tr>
       <tr>
          <td align='left'>
-            Color: <input type='text' id='backgroundColorInput' placeholder='#A1C0C0'>
+            Color: <input type='text' id='bgColorInput' placeholder='#A1C0C0'>
          </td>
       </tr>
       <tr>
@@ -145,6 +206,17 @@ function displayOptions() {
       `
    document.getElementById('text_div').innerHTML = optionsHTML;
    document.getElementById('saveOptionsBtn').onclick = saveOptions;
+
+   // Set user prefs
+   var defaultCommandRadios = document.getElementById('defaultCommandForm');
+   for (var i=0; i < defaultCommandRadios.length; i++) {
+      if (USER_OPTIONS.defaultCommand === defaultCommandRadios[i].value) {
+         defaultCommandRadios[i].checked = true;
+      }
+   }
+   document.getElementById('alwaysNewTabCheckbox').checked = USER_OPTIONS.alwaysNewTab;
+   document.getElementById('bgColorInput').value = USER_OPTIONS.bgColor;
+
 }
 
 function displayHelp() {
