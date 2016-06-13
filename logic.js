@@ -224,50 +224,50 @@ function displayHelp() {
       `<br /><br /><br />
       <p class='subtext' align='center'>syntax: command;query[;n]</p>
       <table border='1'>
-      <tr>
-         <th>Command</th>
-         <th>Description</th>
-      </tr>
-     <tr>
-       <td>r;&ltsubreddit&gt</td>
-       <td>go to subreddit</td>
-     </tr>
-     <tr>
-        <td>r;</td>
-        <td>go to reddit.com</td>
-     </tr>
-     <tr>
-       <td>g;&ltquery&gt</td>
-       <td>google search</td>
-     </tr>
-     <tr>
-       <td>yt/y;&ltquery&gt</td>
-       <td>youtube search</td>
-     </tr>
-     <tr>
-       <td>a;&ltquery&gt</td>
-       <td>amazon search</td>
-     </tr>
-     <tr>
-       <td>w;&ltquery&gt</td>
-       <td>wikipedia search</td>
-     </tr>
-     <tr>
-       <td>wa;&ltquery&gt</td>
-       <td>wolfram alpha search</td>
-     </tr>
-     <tr>
-       <td>t;&lturl&gt</td>
-       <td>open url in current tab</td>
-     </tr>
-     <tr>
-        <td>&ltcommand&gt&#59;n</td>
-        <td>open action in new tab</td>
-     </tr>
-     <tr>
-       <td>help</td>
-       <td>show this text</td>
-     </tr>
+         <tr>
+            <th>Command</th>
+            <th>Description</th>
+         </tr>
+         <tr>
+            <td>options</td>
+            <td>show options menu</td>
+        </tr>
+         <tr>
+            <td>r;&ltsubreddit&gt</td>
+            <td>go to subreddit</td>
+         </tr>
+         <tr>
+            <td>g;&ltquery&gt</td>
+            <td>google search</td>
+         </tr>
+         <tr>
+            <td>yt/y;&ltquery&gt</td>
+            <td>youtube search</td>
+         </tr>
+         <tr>
+            <td>a;&ltquery&gt</td>
+            <td>amazon search</td>
+         </tr>
+         <tr>
+            <td>w;&ltquery&gt</td>
+            <td>wikipedia search</td>
+         </tr>
+         <tr>
+            <td>wa;&ltquery&gt</td>
+            <td>wolfram alpha search</td>
+         </tr>
+         <tr>
+            <td>t;&lturl&gt</td>
+            <td>open url in current tab</td>
+         </tr>
+         <tr>
+            <td>&ltcommand&gt&#59;n</td>
+            <td>open action in new tab</td>
+         </tr>
+         <tr>
+            <td>help</td>
+            <td>show this text</td>
+         </tr>
       </table>`
    document.getElementById('text_div').innerHTML = helpHTML;
 }
