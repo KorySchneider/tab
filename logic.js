@@ -62,10 +62,12 @@ function interpret() {
          displayText('unable to interpret');
    }
    if (command === 'w') { // Wikipedia fix
-      query = query.replace(/ /g,''); // remove all spaces
+      query = query.replace(/ /g,'+'); // replace all spaces with +'s
+   } else {
+      query = encodeURIComponent(query);
    }
    if (comLinks.hasOwnProperty(command)) {
-      goToSite(comLinks[command] + encodeURIComponent(query), nt);
+      goToSite(comLinks[command] + query, nt);
       return false;
    } else {
       displayText('command not recognized');
