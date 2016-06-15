@@ -16,7 +16,9 @@ var comLinks = {
 }
 
 function interpret() {
-   var input = document.getElementById('commandInput').value;
+   inputElem = document.getElementById('commandInput');
+   inputElem.select();
+   var input = inputElem.value;
    if (input == '') { return; }
    
    // Check for available commands
@@ -31,37 +33,43 @@ function interpret() {
    // Parse input
    var inputArray = input.split(';');
    var nt;
+   if (inputArray[inputArray.length-1] === 'n' || USER_OPTIONS.alwaysNewTab) {
+      nt = true;
+   } else {
+      nt = false;
+   }
    switch(inputArray.length) {
       case 1:
          command = USER_OPTIONS.defaultCommand;
          query = inputArray[0].trim();
          break;
       case 2:
-         command = inputArray[0].trim();
-         query = inputArray[1].trim();
-         break;
+         if (nt) {
+            command = USER_OPTIONS.defaultCommand;
+            query = inputArray[0];
+            break;
+         } else {
+            command = inputArray[0].trim();
+            query = inputArray[1].trim();
+            break;
+         }
       case 3:
          command = inputArray[0].trim();
          query = inputArray[1].trim();
-         if (inputArray[2] === 'n') {
-            nt = true;
-         }
+         // Assume inputArray[2] is new tab flag
          break;
       default:
          displayText('unable to interpret');
    }
-   if (USER_OPTIONS.alwaysNewTab) {
-      nt = true;
-   }
-   if (command === 'w') {
+   if (command === 'w') { // Wikipedia fix
       query = query.replace(/ /g,''); // remove all spaces
    }
    if (comLinks.hasOwnProperty(command)) {
-      goToSite(comLinks[command] + query, nt);
+      goToSite(comLinks[command] + encodeURIComponent(query), nt);
       return false;
    } else {
       displayText('command not recognized');
-      return false;
+      return;
    }
 }
 
@@ -75,7 +83,6 @@ function verifyKey(e) {
    if (keycode == 13) {
       clearText();
       interpret();
-      document.getElementById('commandInput').select();
    }
    updateInputLength();
 }
@@ -109,6 +116,11 @@ function clearText() {
    document.getElementById('text_div').innerHTML = '';
 }
 
+function applyBgColor(c) {
+   document.body.style.backgroundColor = c;
+   document.getElementById('commandInput').style.backgroundColor = c;
+}
+
 function saveOptions() {
    if (typeof(Storage) !== "undefined") {
       // Default command
@@ -130,12 +142,18 @@ function saveOptions() {
 
       // Background color
       var bgColor = document.getElementById('bgColorInput').value;
-      // check if bgColor is a valid hex value
-      if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(bgColor)) { 
+            // check if valid hex value
+      if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(bgColor)) {
          USER_OPTIONS.bgColor = bgColor;
+         applyBgColor(bgColor);
+
+         // Store prefs
+         localStorage.setItem('userOptions', JSON.stringify(USER_OPTIONS));
+         document.getElementById('optionsSubText').innerHTML = 'settings saved';
+      } else {
+         document.getElementById('optionsSubText').innerHTML = 'not a valid color';
       }
-      localStorage.setItem('userOptions', JSON.stringify(USER_OPTIONS));
-      document.getElementById('optionsSubText').value = 'settings saved';
+
    } else {
       alert("Browser does not support local storage: your settings won't be saved (sorry)");
    }
@@ -143,12 +161,13 @@ function saveOptions() {
 
 function loadOptions() {
    if (typeof(Storage) !== "undefined") {
-      if (localStorage.getItem('userOptions') !== null) {
+      if (localStorage.getItem('userOptions') !== null) { // Load options
          var userOptions = localStorage.getItem('userOptions');
          userOptions = JSON.parse(userOptions);
          USER_OPTIONS = userOptions;
+         applyBgColor(USER_OPTIONS.bgColor);
          return userOptions;
-      } else {
+      } else { // Create defaults
          var options = {
             "defaultCommand": "g",
             "alwaysNewTab": false,
@@ -162,22 +181,21 @@ function loadOptions() {
 function displayOptions() {
    var optionsHTML =
       `
-      <br /><br /><br />
-      <p id='optionsSubText' class='subtext' align='center'> </p>
+      <br/><br/><br/>
       <table border='1'>
       <tr>
          <td align='left'><strong>Default Command</strong> (command that executes if no command was specified)</td>
       </tr>
       <tr>
          <td align='left'>
-            <form id='defaultCommandForm' action=''>
-               <input type='radio' name='defaultCommand' value='t'>Go to website<br/>
-               <input type='radio' name='defaultCommand' value='g'>Google search<br/>
-               <input type='radio' name='defaultCommand' value='w'>Wikipedia search<br/>
-               <input type='radio' name='defaultCommand' value='y'>YouTube search <br/>
-               <input type='radio' name='defaultCommand' value='a'>Amazon search<br/>
-               <input type='radio' name='defaultCommand' value='wa'>Wolfram Alpha search<br/>
-               <input type='radio' name='defaultCommand' value='r'>Go to subreddit
+            <form id='defaultCommandForm'>
+               <input type='radio' name='defaultCommandRadio' value='t'>Go to website<br/>
+               <input type='radio' name='defaultCommandRadio' value='g'>Google search<br/>
+               <input type='radio' name='defaultCommandRadio' value='w'>Wikipedia search<br/>
+               <input type='radio' name='defaultCommandRadio' value='y'>YouTube search <br/>
+               <input type='radio' name='defaultCommandRadio' value='a'>Amazon search<br/>
+               <input type='radio' name='defaultCommandRadio' value='wa'>Wolfram Alpha search<br/>
+               <input type='radio' name='defaultCommandRadio' value='r'>Go to subreddit
             </form>
          </td>
       </tr>
@@ -194,7 +212,8 @@ function displayOptions() {
       </tr>
       <tr>
          <td align='left'>
-            Color: <input type='text' id='bgColorInput' placeholder='#A1C0C0'>
+            Color: <input type='text' id='bgColorInput' placeholder='#A1C0C0' size='7' spellcheck='false'>
+            <a href='http://www.colorpicker.com/' target='_blank'><small>Color Picker</small></a>
          </td>
       </tr>
       <tr>
@@ -203,11 +222,12 @@ function displayOptions() {
          </td>
       </tr>
       </table>
+      <p id='optionsSubText' class='subtext' align='center'></p>
       `
    document.getElementById('text_div').innerHTML = optionsHTML;
    document.getElementById('saveOptionsBtn').onclick = saveOptions;
 
-   // Set user prefs
+   // Show saved options
    var defaultCommandRadios = document.getElementById('defaultCommandForm');
    for (var i=0; i < defaultCommandRadios.length; i++) {
       if (USER_OPTIONS.defaultCommand === defaultCommandRadios[i].value) {
@@ -216,12 +236,11 @@ function displayOptions() {
    }
    document.getElementById('alwaysNewTabCheckbox').checked = USER_OPTIONS.alwaysNewTab;
    document.getElementById('bgColorInput').value = USER_OPTIONS.bgColor;
-
 }
 
 function displayHelp() {
    var helpHTML =
-      `<br /><br /><br />
+      `<br /><br />
       <p class='subtext' align='center'>syntax: command;query[;n]</p>
       <table border='1'>
          <tr>
@@ -281,6 +300,6 @@ function updateTime() {
    var d = new Date();
    var h = d.getHours(); if (h > 12) { h -= 12; }; h = checkTime(h);
    var m = checkTime(d.getMinutes());
-   document.getElementById('time_div').innerHTML = "<p class='timetext'>"+h+':'+m+'</p>';
+   document.getElementById('time_div').innerHTML = "<p id='timeText'>"+h+':'+m+'</p>';
    var t = setTimeout(updateTime, 5000);
 }

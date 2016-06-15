@@ -5,10 +5,6 @@ body {
    min-height: 500px;
 }
 
-p {
-   font: 24px consolas;
-}
-
 table {
    width: 50%;
    border: 1px solid black;
@@ -17,16 +13,15 @@ table {
    margin-left: auto;
    margin-right: auto;
 }
-
-::selection {
-   background: #F3F6F6;
+td {
+   padding: 4px
 }
 
 .subtext {
    font: 18px consolas;
 }
 
-.timetext {
+#timeText {
    font: 30px consolas;
 }
 
@@ -46,6 +41,28 @@ table {
    background-color: #A1C0C0;
    text-align: center;
    display: inline-block;
+}
+#commandInput::selection {
+   background: #F3F6F6;
+}
+
+#bgColorInput {
+   font: 16px consolas;
+   text-transform: uppercase;
+   text-align: center;
+   border: 0px;
+}
+#bgColorInput:focus {
+   outline: none;
+}
+
+#saveOptionsBtn {
+   font: 16px consolas;
+   border: 1px solid black;
+   background-color: #FFF;
+}
+#saveOptionsBtn:focus {
+   outline: none;
 }
 
 .center {
