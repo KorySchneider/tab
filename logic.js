@@ -7,11 +7,11 @@ var USER_OPTIONS = JSON.parse(localStorage.getItem('userOptions'));
 var comLinks = { 
    'r':'https://www.reddit.com/r/',
    'g':'https://www.google.com/search?q=',
-   'yt':'https://www.youtube.com/results?search_query=',
    'y':'https://www.youtube.com/results?search_query=',
    'a':'http://www.amazon.com/s?url=search-alias%3Daps&field-keywords=',
    'w':'https://www.wikipedia.org/w/index.php?title=Special:Search&search=',
    'wa':'http://www.wolframalpha.com/input/?i=',
+   'imdb':'https://www.imdb.com/find?s=all&q=',
    't':'',
 }
 
@@ -196,6 +196,7 @@ function displayOptions() {
                <input type='radio' name='defaultCommandRadio' value='w'>Wikipedia search<br/>
                <input type='radio' name='defaultCommandRadio' value='y'>YouTube search <br/>
                <input type='radio' name='defaultCommandRadio' value='a'>Amazon search<br/>
+               <input type='radio' name='defaultCommandRadio' value='imdb'>IMDB search<br/>
                <input type='radio' name='defaultCommandRadio' value='wa'>Wolfram Alpha search<br/>
                <input type='radio' name='defaultCommandRadio' value='r'>Go to subreddit
             </form>
@@ -262,7 +263,7 @@ function displayHelp() {
             <td>google search</td>
          </tr>
          <tr>
-            <td>yt/y;&ltquery&gt</td>
+            <td>y;&ltquery&gt</td>
             <td>youtube search</td>
          </tr>
          <tr>
@@ -272,6 +273,10 @@ function displayHelp() {
          <tr>
             <td>w;&ltquery&gt</td>
             <td>wikipedia search</td>
+         </tr>
+         <tr>
+            <td>imdb;&ltquery&gt</td>
+            <td>imdb search</td>
          </tr>
          <tr>
             <td>wa;&ltquery&gt</td>
