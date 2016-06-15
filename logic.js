@@ -44,13 +44,13 @@ function interpret() {
          query = inputArray[0].trim();
          break;
       case 2:
-         if (nt) {
-            command = USER_OPTIONS.defaultCommand;
-            query = inputArray[0];
-            break;
-         } else {
+         if (inputArray[inputArray.length-1] !== 'n') {
             command = inputArray[0].trim();
             query = inputArray[1].trim();
+            break;
+         } else {
+            command = USER_OPTIONS.defaultCommand;
+            query = inputArray[0];
             break;
          }
       case 3:
