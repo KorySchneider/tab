@@ -8,7 +8,7 @@ var comLinks = {
    'r':'https://www.reddit.com/r/',
    'g':'https://www.google.com/search?q=',
    'y':'https://www.youtube.com/results?search_query=',
-   'a':'http://www.amazon.com/s?url=search-alias%3Daps&field-keywords=',
+   'a':'http://smile.amazon.com/s?url=search-alias%3Daps&field-keywords=',
    'w':'https://www.wikipedia.org/w/index.php?title=Special:Search&search=',
    'wa':'http://www.wolframalpha.com/input/?i=',
    'imdb':'https://www.imdb.com/find?s=all&q=',
