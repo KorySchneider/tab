@@ -82,7 +82,7 @@ function verifyKey(e) {
    } else if (e) {
       keycode = e.which;
    }
-   if (keycode == 13) {
+   if (keycode == 13) { // Enter/return key
       clearText();
       interpret();
    }
@@ -90,8 +90,10 @@ function verifyKey(e) {
 }
 
 function updateInputLength() {
-   var entry_len = document.getElementById('commandInput').value.length;
-   document.getElementById('commandInput').size = entry_len + 2;
+   var input = document.getElementById('commandInput');
+   if (input.value.length >= (input.size - 1)) {
+      input.size = input.value.length + 1;
+   }
 }
 
 function goToSite(url, nt) {
@@ -120,7 +122,7 @@ function clearText() {
 
 function applyBgColor(c) {
    document.body.style.backgroundColor = c;
-   document.getElementById('commandInput').style.backgroundColor = c;
+   //document.getElementById('commandInput').style.backgroundColor = c;
 }
 
 function saveOptions() {
