@@ -1,6 +1,7 @@
 window.onload = function() {
    loadOptions();
    updateTime();
+   document.getElementById('fixedHelpBtn').addEventListener('click', fixedHelpBtnCB);
 };
 
 var USER_OPTIONS = JSON.parse(localStorage.getItem('userOptions'));
@@ -83,7 +84,7 @@ function verifyKey(e) {
       keycode = e.which;
    }
    if (keycode == 13) { // Enter/return key
-      clearText();
+      clearTextDiv();
       interpret();
    }
    updateInputLength();
@@ -112,11 +113,11 @@ function goToSite(url, nt) {
 
 function displayText(string) {
    var div = document.getElementById('text_div');
-   clearText();
+   clearTextDiv();
    div.innerHTML += '<p align=center>'+string+'</p>';
 }
 
-function clearText() {
+function clearTextDiv() {
    document.getElementById('text_div').innerHTML = '';
 }
 
@@ -309,6 +310,13 @@ function displayHelp() {
          </tr>
       </table>`
    document.getElementById('text_div').innerHTML = helpHTML;
+}
+
+function fixedHelpBtnCB() {
+   input = document.getElementById('commandInput');
+   input.value = 'help';
+   input.select();
+   displayHelp();
 }
 
 function checkTime(i) {

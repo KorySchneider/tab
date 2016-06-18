@@ -67,6 +67,18 @@ td {
    outline: none;
 }
 
+#fixedHelpBtn {
+   font: 14px sans-serif;
+   position: fixed;
+   top: 0;
+   right: 0;
+   border: 0;
+   margin: 5px;
+   cursor: pointer;
+   background: transparent;
+   outline: 0;
+}
+
 .center {
    position: absolute;
    left: 15%;
