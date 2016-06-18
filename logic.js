@@ -188,7 +188,7 @@ function loadOptions() {
 function displayOptions() {
    var optionsHTML =
       `
-      <br/><br/><br/>
+      <br/><br/>
       <table border='1'>
       <tr>
          <td align='left'><strong>Default Command</strong> (command that executes if no command was specified)</td>
@@ -257,8 +257,7 @@ function displaySavedOptions() {
 
 function displayHelp() {
    var helpHTML =
-      `<br /><br />
-      <p class='subtext' align='center'>syntax: command;query[;n]</p>
+      `<p class='subtext' align='center'><small>syntax:</small><br>command;query[;n]</p>
       <table border='1'>
          <tr>
             <th>Command</th>

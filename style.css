@@ -8,7 +8,8 @@ body {
 table {
    width: 50%;
    border: 1px solid black;
-   font: 16px consolas;
+   font-family: 'Roboto', sans-serif;
+   font-size: 16px;
    text-align: center;
    margin-left: auto;
    margin-right: auto;
@@ -18,11 +19,13 @@ td {
 }
 
 .subtext {
-   font: 18px consolas;
+   font-size: 18px;
+   font-family: 'Roboto Mono', monospace;
 }
 
 #timeText {
-   font: 30px consolas;
+   font-size: 30px;
+   font-family: 'Roboto Mono', monospace;
 }
 
 .input_div {
@@ -35,7 +38,8 @@ td {
 }
 
 #commandInput {
-   font: 24px consolas;
+   font-size: 24px;
+   font-family: 'Roboto Slab', serif;
    border: 0px;
    border-bottom: 1px solid black;
    outline: none;
@@ -49,7 +53,8 @@ td {
 }
 
 #bgColorInput {
-   font: 16px consolas;
+   font-size: 16px;
+   font-family: 'Roboto Mono', monospace;
    text-transform: uppercase;
    text-align: center;
    border: 0px;
@@ -59,7 +64,8 @@ td {
 }
 
 #saveOptionsBtn {
-   font: 16px consolas;
+   font-size: 16px;
+   font-family: 'Roboto', sans-serif;
    border: 1px solid black;
    background-color: #FFF;
 }
@@ -68,7 +74,8 @@ td {
 }
 
 #fixedHelpBtn {
-   font: 14px sans-serif;
+   font-size: 14px;
+   font-family: 'Roboto Mono', monospace;
    position: fixed;
    top: 0;
    right: 0;
