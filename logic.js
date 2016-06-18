@@ -178,6 +178,8 @@ function loadOptions() {
             "bgColor": "#A1C0C0"
          };
          localStorage.setItem('userOptions', JSON.stringify(options));
+         userOptions = localStorage.getItem('userOptions');
+         USER_OPTIONS = JSON.parse(userOptions);
       }
    }
 }
@@ -232,7 +234,16 @@ function displayOptions() {
    document.getElementById('text_div').innerHTML = optionsHTML;
    document.getElementById('saveOptionsBtn').onclick = saveOptions;
 
-   // Show saved options
+   // Display saved options
+   if (localStorage.getItem('userOptions') !== null) {
+      displaySavedOptions();
+   } else {
+      loadOptions();
+      displaySavedOptions();
+   }
+}
+
+function displaySavedOptions() {
    var defaultCommandRadios = document.getElementById('defaultCommandForm');
    for (var i=0; i < defaultCommandRadios.length; i++) {
       if (USER_OPTIONS.defaultCommand === defaultCommandRadios[i].value) {
