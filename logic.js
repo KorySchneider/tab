@@ -121,9 +121,8 @@ function clearTextDiv() {
    document.getElementById('text_div').innerHTML = '';
 }
 
-function applyBgColor(c) {
+function setBgColor(c) {
    document.body.style.backgroundColor = c;
-   //document.getElementById('commandInput').style.backgroundColor = c;
 }
 
 function saveOptions() {
@@ -150,7 +149,7 @@ function saveOptions() {
             // check if valid hex value
       if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(bgColor)) {
          USER_OPTIONS.bgColor = bgColor;
-         applyBgColor(bgColor);
+         setBgColor(bgColor);
 
          // Store prefs
          localStorage.setItem('userOptions', JSON.stringify(USER_OPTIONS));
@@ -170,7 +169,7 @@ function loadOptions() {
          var userOptions = localStorage.getItem('userOptions');
          userOptions = JSON.parse(userOptions);
          USER_OPTIONS = userOptions;
-         applyBgColor(USER_OPTIONS.bgColor);
+         setBgColor(USER_OPTIONS.bgColor);
          return userOptions;
       } else { // Create defaults
          var options = {
