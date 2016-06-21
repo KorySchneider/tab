@@ -125,7 +125,7 @@ function setBgColor(c) {
    document.body.style.backgroundColor = c;
 }
 
-function saveOptions() {
+function saveOptionsBtnCB() {
    if (typeof(Storage) !== "undefined") {
       // Default command
       var defaultCommandRadios = document.getElementById('defaultCommandForm');
@@ -161,6 +161,10 @@ function saveOptions() {
    } else {
       alert("Browser does not support local storage: your settings won't be saved (sorry)");
    }
+   clearTextDiv();
+   comInput = document.getElementById('commandInput');
+   comInput.value = '';
+   comInput.select();
 }
 
 function loadOptions() {
@@ -225,14 +229,14 @@ function displayOptions() {
       </tr>
       <tr>
          <td>
-            <button type='button' id='saveOptionsBtn'>Save</button>
+            <button type='button' id='saveOptionsBtn'>Done</button>
          </td>
       </tr>
       </table>
       <p id='optionsSubText' class='subtext' align='center'></p>
       `
    document.getElementById('text_div').innerHTML = optionsHTML;
-   document.getElementById('saveOptionsBtn').onclick = saveOptions;
+   document.getElementById('saveOptionsBtn').onclick = saveOptionsBtnCB;
 
    // Display saved options
    if (localStorage.getItem('userOptions') !== null) {
