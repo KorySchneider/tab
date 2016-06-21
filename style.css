@@ -72,17 +72,17 @@ td {
    outline: none;
 }
 
-#fixedHelpBtn {
-   font-size: 14px;
-   font-family: 'Roboto Mono', monospace;
+#fixed-help_div {
    position: fixed;
-   top: 0;
+   top: 3px;
    right: 0;
-   border: 0;
-   margin: 5px;
-   cursor: pointer;
+}
+.fixedBtn {
+   font-size: 16px;
    background: transparent;
+   border: 0;
    outline: 0;
+   cursor: pointer;
 }
 
 .center {

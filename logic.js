@@ -2,6 +2,7 @@ window.onload = function() {
    loadOptions();
    updateTime();
    document.getElementById('fixedHelpBtn').addEventListener('click', fixedHelpBtnCB);
+   document.getElementById('fixedOptionsBtn').addEventListener('click', fixedOptionsBtnCB);
 };
 
 var USER_OPTIONS = JSON.parse(localStorage.getItem('userOptions'));
@@ -319,6 +320,13 @@ function fixedHelpBtnCB() {
    input.value = 'help';
    input.select();
    displayHelp();
+}
+
+function fixedOptionsBtnCB() {
+   input = document.getElementById('commandInput');
+   input.value = 'options';
+   input.select();
+   displayOptions();
 }
 
 function checkTime(i) {
