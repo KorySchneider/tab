@@ -107,7 +107,7 @@ function goToSite(url, nt) {
       win.focus();
       return false;
    } else {
-      window.location.replace(url);
+      window.location.href = url;
       return false;
    }
 }
