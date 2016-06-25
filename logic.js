@@ -14,6 +14,7 @@ var comLinks = {
    'w':'https://www.wikipedia.org/w/index.php?title=Special:Search&search=',
    'wa':'http://www.wolframalpha.com/input/?i=',
    'imdb':'https://www.imdb.com/find?s=all&q=',
+   'img':'https://www.google.com/search?tbm=isch&q=',
    't':'',
 }
 
@@ -206,6 +207,7 @@ function displayOptions() {
                <input type='radio' name='defaultCommandRadio' value='y'>YouTube search <br/>
                <input type='radio' name='defaultCommandRadio' value='a'>Amazon search<br/>
                <input type='radio' name='defaultCommandRadio' value='imdb'>IMDB search<br/>
+               <input type='radio' name='defaultCommandRadio' value='img'>Google Images search<br/>
                <input type='radio' name='defaultCommandRadio' value='wa'>Wolfram Alpha search<br/>
                <input type='radio' name='defaultCommandRadio' value='r'>Go to subreddit
             </form>
@@ -294,6 +296,10 @@ function displayHelp() {
          <tr>
             <td>imdb;&ltquery&gt</td>
             <td>imdb search</td>
+         </tr>
+         <tr>
+            <td>img;&ltquery&gt</td>
+            <td>google images search</td>
          </tr>
          <tr>
             <td>wa;&ltquery&gt</td>
