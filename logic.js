@@ -64,8 +64,10 @@ function interpret() {
       default:
          displayText('unable to interpret');
    }
-   if (command === 'w') { // Wikipedia fix
+   if (command === 'w') {        // Wikipedia fix
       query = query.replace(/ /g,'+'); // replace all spaces with +'s
+   } else if (command === 'r') { // Reddit fix
+      // Don't encode, allowing for adding of url parameters e.g. /top?t=month
    } else {
       query = encodeURIComponent(query);
    }
