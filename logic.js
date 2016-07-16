@@ -316,7 +316,7 @@ function displayHelp() {
             <td>open action in new tab</td>
          </tr>
          <tr>
-            <td>help</td>
+            <td>help | ?</td>
             <td>show this text</td>
          </tr>
       </table>`
