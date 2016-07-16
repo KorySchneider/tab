@@ -1,7 +1,13 @@
 # tab: a startpage
 a startpage, new tab page, homepage
 
+start by typing 'help' or 'options' in the command line and pressing enter/return, or by clicking on the icons in the top right.
+
+---
 
 Now a chrome extension!
-New tabs instantly redirect to tab: a startpage.
+
+Replaces new tab with tab startpage.
+
+Link:
 https://chrome.google.com/webstore/detail/tab-a-startpage/gedoejjmdjalipopahiffdghibcodjcj
