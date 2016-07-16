@@ -2,4 +2,6 @@
 a startpage, new tab page, homepage
 
 
-also maybe a chrome extension in the future
+Now a chrome extension!
+New tabs instantly redirect to tab: a startpage.
+https://chrome.google.com/webstore/detail/tab-a-startpage/gedoejjmdjalipopahiffdghibcodjcj
