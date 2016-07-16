@@ -25,7 +25,7 @@ function interpret() {
    if (input == '') { return; }
    
    // Check for available commands
-   if (input.trim() === 'help') {
+   if (input.trim() === 'help' || input.trim() === '?') {
       displayHelp();
       return;
    } else if (input.trim() === 'options') {
