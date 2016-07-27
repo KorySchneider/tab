@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html><meta charset=utf-8><title>tab: a startpage</title><script>window.onload = function() {
 	   loadOptions();
 	   updateTime();
@@ -349,3 +350,31 @@
 	   document.getElementById('time_div').innerHTML = "<p id='timeText'>"+h+':'+m+'</p>';
 	   var t = setTimeout(updateTime, 5000);
 	}</script><style>body{background-color:#A1C0C0;overflow-x:auto;min-width:400px;min-height:500px}table{width:50%;border:1px solid #000;font-family:Roboto,sans-serif;font-size:16px;text-align:center;margin-left:auto;margin-right:auto}td{padding:4px}.subtext{font-size:18px;font-family:'Roboto Mono',monospace}#timeText{font-size:30px;font-family:'Roboto Mono',monospace}.input_div{margin:0 auto}.text_div{text-align:center;height:500px}#commandInput{font-size:24px;font-family:'Roboto Slab',serif;border:0;border-bottom:1px solid #000;outline:0;background:0 0;text-align:center;display:inline-block}#commandInput::selection{background:#F3F6F6}#bgColorInput{font-size:16px;font-family:'Roboto Mono',monospace;text-transform:uppercase;text-align:center;border:0}#bgColorInput:focus{outline:0}#saveOptionsBtn{font-size:16px;font-family:Roboto,sans-serif;border:1px solid #000;background-color:#FFF}#saveOptionsBtn:focus{outline:0}#fixed-help_div{position:fixed;top:3px;right:0}.fixedBtn{font-size:16px;background:0 0;border:0;outline:0;cursor:pointer}.center{position:absolute;left:15%;right:15%;top:35%;bottom:15%}</style><link href=images/favicon.png rel=icon type=image/png><link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab"rel=stylesheet><link href=fontello/css/fontello.css rel=stylesheet><div id=container class=center><div id=time_div align=center></div><div id=input_div align=center><input autocomplete=off autofocus id=commandInput onkeypress="return verifyKey(event)"size=20 spellcheck=false></div><div id=text_div></div><div id=fixed-help_div><button class=fixedBtn id=fixedHelpBtn type=button><i aria-hidden=true class=icon-help-circled></i></button><br><button class=fixedBtn id=fixedOptionsBtn type=button><i aria-hidden=true class=icon-cog></i></button></div></div>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset='utf-8'>
+   <title>tab: a startpage</title>
+   <script language='JavaScript' src='logic.js'></script>
+   <link rel='stylesheet' type='text/css' href='style.css'>
+   <link rel='icon' type='image/png' href='images/favicon.png'>
+   <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab" rel="stylesheet">
+   <link rel="stylesheet" href="fontello/css/fontello.css">
+</head>
+<body>
+   <div id='container' class='center'>
+      <div id='time_div' align=center></div>
+      <div id='input_div' align=center>
+         <input id='commandInput' type='text' onkeypress='return verifyKey(event)' autocomplete='off' autofocus size='20' spellcheck='false' />
+      </div>
+      <div id='text_div'></div>
+      <div id='fixed-help_div'>
+         <button type='button' id='fixedHelpBtn' class='fixedBtn'><i class="icon-help-circled" aria-hidden="true"></i></button>
+         <br>
+         <button type='button' id='fixedOptionsBtn' class='fixedBtn'><i class="icon-cog" aria-hidden="true"></i></button>
+      </div>
+   </div>
+</body>
+</html>
+>>>>>>> master
