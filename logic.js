@@ -198,7 +198,7 @@ function displayOptions() {
       <br/><br/>
       <table border='1'>
       <tr>
-         <td align='left'><strong>Default Command</strong> (command that executes if no command was specified)</td>
+         <td align='left'><strong>Default Command</strong><br>executes if no command was specified</td>
       </tr>
       <tr>
          <td align='left'>
@@ -250,6 +250,7 @@ function displayOptions() {
       loadOptions();
       displaySavedOptions();
    }
+   window.scrollBy(0, 1000);
 }
 
 function displaySavedOptions() {
@@ -272,55 +273,56 @@ function displayHelp() {
             <th>Description</th>
          </tr>
          <tr>
-            <td>options</td>
+            <td class='command'>options</td>
             <td>show options menu</td>
         </tr>
          <tr>
-            <td>r;&ltsubreddit&gt</td>
+            <td class='command'>r;&ltsubreddit&gt</td>
             <td>go to subreddit</td>
          </tr>
          <tr>
-            <td>g;&ltquery&gt</td>
+            <td class='command'>g;&ltquery&gt</td>
             <td>google search</td>
          </tr>
          <tr>
-            <td>y;&ltquery&gt</td>
+            <td class='command'>y;&ltquery&gt</td>
             <td>youtube search</td>
          </tr>
          <tr>
-            <td>a;&ltquery&gt</td>
+            <td class='command'>a;&ltquery&gt</td>
             <td>amazon search</td>
          </tr>
          <tr>
-            <td>w;&ltquery&gt</td>
+            <td class='command'>w;&ltquery&gt</td>
             <td>wikipedia search</td>
          </tr>
          <tr>
-            <td>imdb;&ltquery&gt</td>
+            <td class='command'>imdb;&ltquery&gt</td>
             <td>imdb search</td>
          </tr>
          <tr>
-            <td>img;&ltquery&gt</td>
+            <td class='command'>img;&ltquery&gt</td>
             <td>google images search</td>
          </tr>
          <tr>
-            <td>wa;&ltquery&gt</td>
+            <td class='command'>wa;&ltquery&gt</td>
             <td>wolfram alpha search</td>
          </tr>
          <tr>
-            <td>t;&lturl&gt</td>
+            <td class='command'>t;&lturl&gt</td>
             <td>open url in current tab</td>
          </tr>
          <tr>
-            <td>&ltcommand&gt&#59;n</td>
+            <td class='command'>&ltcommand&gt&#59;n</td>
             <td>open action in new tab</td>
          </tr>
          <tr>
-            <td>help | ?</td>
+            <td class='command'>help | ?</td>
             <td>show this text</td>
          </tr>
       </table>`
    document.getElementById('text_div').innerHTML = helpHTML;
+   window.scrollBy(0, 1000);
 }
 
 function fixedHelpBtnCB() {
