@@ -1,0 +1,96 @@
+body {
+   background-color: #A1C0C0;
+   overflow-x: auto;
+   width: 100%;
+   height: 100%;
+}
+
+table {
+   width: 50%;
+   border: 1px solid black;
+   font-family: 'Roboto', sans-serif;
+   font-size: 16px;
+   text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+}
+td {
+   padding: 4px
+}
+.command {
+   font-family: 'Roboto Mono', monospace;
+   font-size: 14px;
+}
+
+.subtext {
+   font-size: 18px;
+   font-family: 'Roboto Mono', monospace;
+}
+
+#timeText {
+   font-size: 40px;
+   font-family: 'Roboto', sans-serif;
+   letter-spacing: 4px;
+   margin-bottom: 22px;
+}
+
+.text_div {
+   text-align: center;
+   height: 500px;
+}
+
+#commandInput {
+   font-size: 30px;
+   font-family: 'Roboto', sans-serif;
+   border: 0px;
+   border-bottom: 2px solid black;
+   outline: none;
+   background: transparent;
+   text-align: center;
+   display: inline-block;
+}
+#commandInput::selection {
+   background: #F3F6F6;
+}
+
+#bgColorInput {
+   font-size: 16px;
+   font-family: 'Roboto Mono', monospace;
+   text-transform: uppercase;
+   text-align: center;
+   border: 0px;
+}
+#bgColorInput:focus {
+   outline: none;
+}
+
+#saveOptionsBtn {
+   font-size: 16px;
+   font-family: 'Roboto', sans-serif;
+   border: 1px solid black;
+   background-color: #FFF;
+}
+#saveOptionsBtn:focus {
+   outline: none;
+}
+
+#fixed-help_div {
+   position: fixed;
+   top: 3px;
+   right: 0;
+}
+.fixedBtn {
+   font-size: 16px;
+   background: transparent;
+   border: 0;
+   outline: 0;
+   cursor: pointer;
+}
+
+.center {
+   position: absolute;
+   left: 15%;
+   right: 15%;
+   top: 35%;
+   bottom: 15%;
+}
