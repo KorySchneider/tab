@@ -44,21 +44,45 @@ function interpret() {
   }
 
   var inputArr = input.split(';');
-  if (inputArr.length === 1) {
-    for (var i=0; i < commands.length; i++) {
-      if (input === commands[i].command) {
-        redirect(commands[i].url);
-      } else {
-        redirect('google.com/search?q=' + input);
-      }
+  var newtab = (inputArr[inputArr.length-1] === 'n');
+  var command; var query;
+  var validCommand = false;
+  for (var i=0; i < commands.length; i++) {
+    if (inputArr[0] === commands[i].command) {
+      validCommand = true;
+      command = commands[i];
     }
+  }
+
+  if (validCommand) {
+    query = (command.command === 'w' || command.command === 'wa') // wikipedia & wolframalpha fix
+      ? inputArr[1].trim().replace(/ /g, '+')
+      : inputArr[1].trim();
+    switch(inputArr.length) {
+      case 1:
+        redirect(command.url, newtab);
+        return false;
+        break;
+      case 2:
+        if (inputArr[1] === 'n') {
+          redirect(command.url, newtab);
+          return false;
+        } else {
+          redirect(command.url + command.search + query, newtab);
+          return false;
+        }
+        break;
+      default:
+        redirect(command.url + command.search + query, newtab);
+        return false;
+    }
+    redirect(command.url + command.search + query, newtab);
+    return false;
   } else {
-    for (var i=0; i < commands.length; i++) {
-      if (inputArr[0].trim() === commands[i].command) {
-        // TODO fix wikipedia and wolframalpha: spaces to plus signs
-        redirect(commands[i].url + commands[i].search + inputArr[1].trim());
-      }
-    }
+    // command = defaultCommand // TODO implement
+    query = inputArr[0].trim();
+    redirect('google.com/search?q=' + query, newtab); // TODO change to default command
+    return false;
   }
 }
 
