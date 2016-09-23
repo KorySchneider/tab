@@ -86,12 +86,18 @@ function interpret() {
   }
 }
 
-function redirect(url) {
-  var url = (!url.startsWith('http'))
+function redirect(url, newtab) {
+  url = (!url.startsWith('http'))
     ? 'https://' + url
     : url;
-  window.location.href = url;
-  return false;
+  if (newtab) {
+    var win = window.open(url);
+    win.focus();
+    return false;
+  } else {
+    window.location.href = url;
+    return false;
+  }
 }
 
 function clearContent() {
