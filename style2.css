@@ -1,0 +1,38 @@
+body {
+  background-color: #A1C0C0;
+  overflow-x: auto;
+  width: 100%;
+  height: 100%;
+}
+
+#page-wrapper {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 35%;
+  bottom: 15%;
+}
+
+#clock {
+  font-size: 40px;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 4px;
+  margin-bottom: 22px;
+}
+
+#input-box {
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+  border: 0px;
+  border-bottom: 2px solid black;
+  outline: none;
+  background: transparent;
+  text-align: center;
+  display: inline-block;
+}
+#input-box::selection {
+  background: #F3F6F6;
+}
+
+#content {
+}
