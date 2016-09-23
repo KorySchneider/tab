@@ -44,7 +44,7 @@ function interpret() {
   }
 
   var inputArr = input.split(';');
-  if (inputArr.length === 2) {
+  if (inputArr.length === 1) {
     for (var i=0; i < commands.length; i++) {
       if (input === commands[i].command) {
         redirect(commands[i].url);
