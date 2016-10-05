@@ -28,6 +28,14 @@ function verifyKey(e) {
     clearContent();
     interpret();
   }
+  checkInputLength();
+}
+
+function checkInputLength() {
+  var input = document.getElementById('input-box');
+  if (input.value.length >= (input.size - 1)) {
+     input.size = input.value.length + 1;
+  }
 }
 
 function interpret() {
