@@ -5,7 +5,7 @@ body {
   height: 100%;
 }
 
-#page-wrapper {
+#wrapper {
   position: absolute;
   left: 15%;
   right: 15%;
