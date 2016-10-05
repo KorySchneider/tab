@@ -192,8 +192,7 @@ function clearContent() {
 
 function displayContent(content) {
   clearContent();
-  var div = document.getElementById('content');
-  div.innerHTML = content;
+  document.getElementById('content').innerHTML = content;
 }
 
 function displayOptionsMenu() {
