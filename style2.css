@@ -36,3 +36,8 @@ body {
 
 #content {
 }
+
+#message {
+  text-align: center;
+  padding-top: 10%;
+}
