@@ -2,7 +2,10 @@
 
 window.onload = function() {
   clock();
+  loadOptions();
 }
+
+var SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
 
 var commands = [
   { command: 'g', url: 'https://www.google.com', search: '/search?q=' },
@@ -38,6 +41,15 @@ function checkInputLength() {
   }
 }
 
+function getFullCommand(c) {
+  for (var i=0; i < commands.length; i++) {
+    if (c === commands[i].command) {
+      return commands[i];
+    }
+  }
+  return null;
+}
+
 function interpret() {
   var inputBox = document.getElementById('input-box');
   inputBox.select();
@@ -55,12 +67,11 @@ function interpret() {
   var inputArr = input.split(';');
   var newtab = (inputArr[inputArr.length-1] === 'n');
   var command; var query;
+
   var validCommand = false;
-  for (var i=0; i < commands.length; i++) {
-    if (inputArr[0] === commands[i].command) {
-      validCommand = true;
-      command = commands[i];
-    }
+  command = getFullCommand(inputArr[0]);
+  if (command !== null) {
+    validCommand = true;
   }
 
   if (validCommand) {
@@ -87,10 +98,10 @@ function interpret() {
     }
     redirect(command.url + command.search + query, newtab);
     return false;
-  } else {
-    // command = defaultCommand // TODO implement
+  } else { // TODO check query: wikipedia & wolframalpha fix
+    command = SETTINGS.defaultCommand;
     query = inputArr[0].trim();
-    redirect('google.com/search?q=' + query, newtab); // TODO change to default command
+    redirect(command.url + command.search + query, newtab);
     return false;
   }
 }
