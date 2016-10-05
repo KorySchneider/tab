@@ -60,7 +60,7 @@ function interpret() {
     displayHelp(); // TODO implement help
     return;
   } else if (input === 'options') {
-    displayOptions(); // TODO implement options
+    displayOptionsMenu();
     return;
   }
 
@@ -120,6 +120,71 @@ function redirect(url, newtab) {
   }
 }
 
+// Options
+function saveOptions() {
+  if (typeof(Storage) == "undefined") {
+    alert("Browser does not support local storage: your settings won't be saved (sorry)");
+  } else {
+    // Get default command
+    var radios = document.getElementById('defaultCommandForm');
+    var defaultCommand = null;
+    for (var i=0; i < radios.length; i++) {
+      if (radios[i].checked) {
+        defaultCommand = radios[i].value;
+        break;
+      }
+    }
+    defaultCommand = getFullCommand(defaultCommand);
+    if (defaultCommand !== null) {
+      SETTINGS.defaultCommand = defaultCommand;
+    }
+
+    // Tab open style
+    SETTINGS.alwaysNewTab = document.getElementById('openStyleCheckbox');
+
+    // Background color
+    var color = document.getElementById('bgColorInput').value;
+    if (!color.startsWith('#')) {
+      color = '#' + color;
+    }
+    if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) { // check if valid hex value
+      SETTINGS.color = color;
+      setColor(color);
+      localStorage.setItem('userOptions', JSON.stringify(SETTINGS));
+    } else {
+      alert('not a valid hex value\n(valid example: #A1C0C0)');
+    }
+  }
+  var inputBox = document.getElementById('input-box');
+  inputBox.value = "";
+  inputBox.select();
+}
+
+function loadOptions() {
+  if (typeof(Storage) !== 'undefined') {
+    if (localStorage.getItem('userOptions') !== null) {
+      SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
+      setColor(SETTINGS.color);
+    } else {
+      var defaultSettings = {
+        defaultCommand: {
+          command: 'g',
+          url: 'https://www.google.com',
+          search: '/search?q='
+        },
+        alwaysNewtab: false,
+        color: "#A1C0C0"
+      };
+      localStorage.setItem('userOptions', JSON.stringify(defaultSettings));
+      SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
+    }
+  }
+}
+
+function setColor(color) {
+  document.body.style.backgroundColor = color;
+}
+
 // Displayed content
 function clearContent() {
   document.getElementById('content').innerHTML = '';
@@ -129,6 +194,75 @@ function displayContent(content) {
   clearContent();
   var div = document.getElementById('content');
   div.innerHTML = content;
+}
+
+function displayOptionsMenu() {
+  var html = "\
+    <br/><br/> \
+    <table border='1'> \
+    <tr> \
+       <td align='left'><strong>Default Command</strong><br>executes if no command was specified</td> \
+    </tr> \
+    <tr> \
+       <td align='left'> \
+          <form id='defaultCommandForm'> \
+             <input type='radio' name='defaultCommandRadio' value='t'>Go to website<br/> \
+             <input type='radio' name='defaultCommandRadio' value='g'>Google search<br/> \
+             <input type='radio' name='defaultCommandRadio' value='w'>Wikipedia search<br/> \
+             <input type='radio' name='defaultCommandRadio' value='y'>YouTube search <br/> \
+             <input type='radio' name='defaultCommandRadio' value='a'>Amazon search<br/> \
+             <input type='radio' name='defaultCommandRadio' value='imdb'>IMDB search<br/> \
+             <input type='radio' name='defaultCommandRadio' value='img'>Google Images search<br/> \
+             <input type='radio' name='defaultCommandRadio' value='wa'>Wolfram Alpha search<br/> \
+             <input type='radio' name='defaultCommandRadio' value='r'>Go to subreddit \
+          </form> \
+       </td> \
+    </tr> \
+    <tr> \
+       <th align='left'>Open Style</th> \
+    </tr> \
+    <tr> \
+       <td align='left'> \
+          <input type='checkbox' id='openStyleCheckbox' value='newTab'>Always open in new tab<br/> \
+       </td> \
+    </tr> \
+    <tr> \
+       <th align='left'>Background Color</th> \
+    </tr> \
+    <tr> \
+       <td align='left'> \
+          Color: <input type='text' id='bgColorInput' placeholder='#A1C0C0' size='7' spellcheck='false'> \
+          <a href='http://www.colorpicker.com/' target='_blank'><small>Color Picker</small></a> \
+       </td> \
+    </tr> \
+    <tr> \
+       <td> \
+          <button type='button' id='saveOptionsBtn'>Done</button> \
+       </td> \
+    </tr> \
+    </table>";
+
+  var wrapper = document.getElementById('wrapper');
+  wrapper.style.top = "10%";
+
+  displayContent(html);
+  document.getElementById('saveOptionsBtn').onclick = function() {
+    wrapper.style.top = "35%";
+    saveOptions();
+    clearContent();
+    displayMessage('settings saved', 2000);
+  };
+
+  // Display saved options
+  var radios = document.getElementById('defaultCommandForm');
+  for (var i=0; i < radios.length; i++) {
+    if (SETTINGS.defaultCommand.command === radios[i].value) {
+      radios[i].checked = true;
+      break;
+    }
+  }
+  document.getElementById('openStyleCheckbox').checked = SETTINGS.alwaysNewTab;
+  document.getElementById('bgColorInput').value = SETTINGS.color;
 }
 
 // Clock
