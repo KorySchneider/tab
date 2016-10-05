@@ -16,6 +16,7 @@ var commands = [
   { command: 't', url: '', search: '' }
 ];
 
+// Input
 function verifyKey(e) {
   var keycode;
   if (window.event) {
@@ -100,6 +101,7 @@ function redirect(url, newtab) {
   }
 }
 
+// Displayed content
 function clearContent() {
   document.getElementById('content').innerHTML = '';
 }
@@ -110,6 +112,7 @@ function displayContent(content) {
   div.innerHTML = content;
 }
 
+// Clock
 function clock() {
   var date = new Date();
   var h = date.getHours();
