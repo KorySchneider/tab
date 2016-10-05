@@ -186,6 +186,16 @@ function setColor(color) {
 }
 
 // Displayed content
+function clearMessage() {
+  document.getElementById('message').innerHTML = '';
+}
+
+function displayMessage(message, timeMs) {
+  clearMessage();
+  document.getElementById('message').innerHTML = message;
+  setTimeout(clearMessage, timeMs);
+}
+
 function clearContent() {
   document.getElementById('content').innerHTML = '';
 }
