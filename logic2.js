@@ -193,7 +193,9 @@ function clearMessage() {
 function displayMessage(message, timeMs) {
   clearMessage();
   document.getElementById('message').innerHTML = message;
-  setTimeout(clearMessage, timeMs);
+  if (timeMs !== 0) {
+    setTimeout(clearMessage, timeMs);
+  }
 }
 
 function clearContent() {
