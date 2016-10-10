@@ -141,6 +141,20 @@ function saveOptions() {
   if (typeof(Storage) == "undefined") {
     alert("Browser does not support local storage: your settings won't be saved (sorry)");
   } else {
+    // Background color
+    var color = document.getElementById('bgColorInput').value;
+    if (!color.startsWith('#')) {
+      color = '#' + color;
+    }
+    if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) { // check if valid hex value
+      SETTINGS.color = color;
+      setColor(color);
+      localStorage.setItem('userOptions', JSON.stringify(SETTINGS));
+    } else {
+      alert('not a valid hex value\n(valid example: #A1C0C0)');
+      return false;
+    }
+
     // Get default command
     var radios = document.getElementById('defaultCommandForm');
     var defaultCommand = null;
@@ -157,21 +171,9 @@ function saveOptions() {
 
     // Tab open style
     SETTINGS.alwaysNewTab = document.getElementById('openStyleCheckbox').checked;
-
-    // Background color
-    var color = document.getElementById('bgColorInput').value;
-    if (!color.startsWith('#')) {
-      color = '#' + color;
-    }
-    if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) { // check if valid hex value
-      SETTINGS.color = color;
-      setColor(color);
-      localStorage.setItem('userOptions', JSON.stringify(SETTINGS));
-    } else {
-      alert('not a valid hex value\n(valid example: #A1C0C0)');
-    }
   }
   clearInput();
+  return true;
 }
 
 function loadOptions() {
@@ -280,10 +282,11 @@ function displayOptionsMenu() {
   displayContent(html);
 
   document.getElementById('saveOptionsBtn').onclick = function() {
-    lowerWrapper();
-    saveOptions();
-    clearContent();
-    displayMessage('settings saved', 2000);
+    if (saveOptions()) {
+      lowerWrapper();
+      clearContent();
+      displayMessage('settings saved', 2000);
+    }
   };
 
   // Display saved options
