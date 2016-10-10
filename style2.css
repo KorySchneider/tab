@@ -14,17 +14,18 @@ body {
 }
 
 #clock {
-  font-size: 40px;
+  font-size: 60px;
   font-family: 'Roboto', sans-serif;
+  font-weight: 600;
   letter-spacing: 4px;
-  margin-bottom: 22px;
+  margin-bottom: 30px;
 }
 
 #input-box {
   font-size: 30px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Slab', serif;
   border: 0px;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   outline: none;
   background: transparent;
   text-align: center;
@@ -61,6 +62,8 @@ td {
 }
 
 #message {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
   text-align: center;
   padding-top: 10%;
 }
