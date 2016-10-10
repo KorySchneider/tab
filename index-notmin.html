@@ -301,9 +301,15 @@
          </td> \
       </tr> \
       <tr> \
-         <td colspan='2'> \
-            <button type='button' id='saveOptionsBtn' class='menuBtn'>Done</button> \
+        <td> \
+          <button type='button' id='saveOptionsBtn' class='menuBtn'>Done</button> \
          </td> \
+      </tr> \
+      <tr> \
+        <td align='right'> \
+          <button type='button' id='resetOptionsBtn' class='resetBtn'><small>Reset Options</small></button> \
+          <button type='button' id='resetOptionsTipBtn' class='resetBtn'><small>(?)</small></button> \
+        </td> \
       </tr> \
       </table>";
 
@@ -320,6 +326,18 @@
     document.getElementById('defaultColorBtn').onclick = function() {
       document.getElementById('bgColorInput').value = '#A1C0C0';
     };
+
+    document.getElementById('resetOptionsBtn').onclick = function() {
+      localStorage.removeItem('userOptions');
+      loadOptions();
+      setColor(SETTINGS.color);
+      lowerWrapper();
+      clearContent();
+      displayMessage('settings reset', 2000);
+    }
+    document.getElementById('resetOptionsTipBtn').onclick = function() {
+      alert("This button will restore the default settings.\n (might be useful if I broke something in the last update)");
+    }
 
     // Display saved options
     var radios = document.getElementById('defaultCommandForm');
@@ -470,6 +488,16 @@
     background-color: #FFF;
   }
   .menuBtn:focus {
+    outline: none;
+  }
+
+  .resetBtn {
+    text-align: center;
+    font-size: 12px;
+    border: 1px solid black;
+    background-color: transparent;
+  }
+  .resetBtn:focus {
     outline: none;
   }
 
