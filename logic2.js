@@ -223,7 +223,9 @@ function clearContent() {
 }
 
 function displayContent(content) {
+  clearInput();
   clearContent();
+  raiseWrapper();
   document.getElementById('content').innerHTML = content;
   window.scrollBy(0, 1000);
 }
@@ -282,7 +284,6 @@ function displayOptionsMenu() {
     </tr> \
     </table>";
 
-  raiseWrapper();
   displayContent(html);
 
   document.getElementById('saveOptionsBtn').onclick = function() {
@@ -367,8 +368,6 @@ function displayHelpMenu() {
       </tr> \
     </table>"
 
-
-  raiseWrapper();
   displayContent(html);
 
   document.getElementById('hideHelpBtn').onclick = function() {
