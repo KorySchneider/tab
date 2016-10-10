@@ -314,50 +314,50 @@ function displayHelpMenu() {
         <th>Description</th> \
       </tr> \
       <tr> \
-        <td class='command'>options</td> \
+        <td class='menuCommandText'>options</td> \
         <td>show options menu</td> \
       <tr> \
-        <td class='command'>r;&ltsubreddit&gt</td> \
+        <td class='menuCommandText'>r;&ltsubreddit&gt</td> \
         <td>go to subreddit</td> \
       </tr> \
       <tr> \
-        <td class='command'>g;&ltquery&gt</td> \
+        <td class='menuCommandText'>g;&ltquery&gt</td> \
         <td>google search</td> \
       </tr> \
       <tr> \
-        <td class='command'>y;&ltquery&gt</td> \
+        <td class='menuCommandText'>y;&ltquery&gt</td> \
         <td>youtube search</td> \
       </tr> \
       <tr> \
-        <td class='command'>a;&ltquery&gt</td> \
+        <td class='menuCommandText'>a;&ltquery&gt</td> \
         <td>amazon search</td> \
       </tr> \
       <tr> \
-        <td class='command'>w;&ltquery&gt</td> \
+        <td class='menuCommandText'>w;&ltquery&gt</td> \
         <td>wikipedia search</td> \
       </tr> \
       <tr> \
-        <td class='command'>imdb;&ltquery&gt</td> \
+        <td class='menuCommandText'>imdb;&ltquery&gt</td> \
         <td>imdb search</td> \
       </tr> \
       <tr> \
-        <td class='command'>img;&ltquery&gt</td> \
+        <td class='menuCommandText'>img;&ltquery&gt</td> \
         <td>google images search</td> \
       </tr> \
       <tr> \
-        <td class='command'>wa;&ltquery&gt</td> \
+        <td class='menuCommandText'>wa;&ltquery&gt</td> \
         <td>wolfram alpha search</td> \
       </tr> \
       <tr> \
-        <td class='command'>t;&lturl&gt</td> \
+        <td class='menuCommandText'>t;&lturl&gt</td> \
         <td>open url in current tab</td> \
       </tr> \
       <tr> \
-        <td class='command'>&ltcommand&gt&#59;n</td> \
+        <td class='menuCommandText'>&ltcommand&gt&#59;n</td> \
         <td>open action in new tab</td> \
       </tr> \
       <tr> \
-        <td class='command'>help | ?</td> \
+        <td class='menuCommandText'>help | ?</td> \
         <td>show this text</td> \
       </tr> \
       <tr> \

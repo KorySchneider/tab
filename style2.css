@@ -49,6 +49,11 @@ body {
   outline: none;
 }
 
+.menuCommandText {
+   font-family: 'Roboto Slab', serif;
+   font-size: 14px;
+}
+
 table {
   width: 50%;
   border: 1px solid black;
