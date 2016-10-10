@@ -1,1 +1,510 @@
-<!DOCTYPE html><meta charset=utf-8><meta content=Private http-equiv=cache-control><meta content=604800 http-equiv=Expires><title>tab: a startpage</title><script>WebFontConfig={google:{families:["Roboto","Roboto Mono"]}}</script><script async src=https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js></script><link href=images/favicon.png rel=icon type=image/png><script>function interpret(){inputElem=document.getElementById("commandInput"),inputElem.select();var t=inputElem.value;if(""!=t){if("help"===t.trim()||"?"===t.trim())return void displayHelp();if("options"===t.trim())return void displayOptions();var e,n=t.split(";");switch(e=!("n"!==n[n.length-1]&&!USER_OPTIONS.alwaysNewTab),n.length){case 1:command=USER_OPTIONS.defaultCommand,query=n[0].trim();break;case 2:if("n"!==n[n.length-1]){command=n[0].trim(),query=n[1].trim();break}command=USER_OPTIONS.defaultCommand,query=n[0];break;case 3:command=n[0].trim(),query=n[1].trim();break;default:displayText("unable to interpret")}return"w"===command?query=query.replace(/ /g,"+"):"r"===command||(query=encodeURIComponent(query)),comLinks.hasOwnProperty(command)?(goToSite(comLinks[command]+query,e),!1):void displayText("command not recognized")}}function verifyKey(t){var e;window.event?e=window.event.keyCode:t&&(e=t.which),13==e&&(clearTextDiv(),interpret()),updateInputLength()}function updateInputLength(){var t=document.getElementById("commandInput");t.value.length>=t.size-1&&(t.size=t.value.length+1)}function goToSite(t,e){if(t.startsWith("http")||(t="https://"+t),e){var n=window.open(t);return n.focus(),!1}return window.location.href=t,!1}function displayText(t){var e=document.getElementById("text_div");clearTextDiv(),e.innerHTML+="<p align=center>"+t+"</p>"}function clearTextDiv(){document.getElementById("text_div").innerHTML=""}function setBgColor(t){document.body.style.backgroundColor=t}function saveOptionsBtnCB(){if("undefined"!=typeof Storage){for(var t=document.getElementById("defaultCommandForm"),e=null,n=0;n<t.length;n++)if(t[n].checked){e=t[n].value;break}null!==e&&(USER_OPTIONS.defaultCommand=e);var a=document.getElementById("alwaysNewTabCheckbox").checked;USER_OPTIONS.alwaysNewTab=a;var o=document.getElementById("bgColorInput").value;/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(o)?(USER_OPTIONS.bgColor=o,setBgColor(o),localStorage.setItem("userOptions",JSON.stringify(USER_OPTIONS)),document.getElementById("optionsSubText").innerHTML="settings saved"):document.getElementById("optionsSubText").innerHTML="not a valid color"}else alert("Browser does not support local storage: your settings won't be saved (sorry)");clearTextDiv(),comInput=document.getElementById("commandInput"),comInput.value="",comInput.select()}function loadOptions(){if("undefined"!=typeof Storage){if(null!==localStorage.getItem("userOptions")){var t=localStorage.getItem("userOptions");return t=JSON.parse(t),USER_OPTIONS=t,setBgColor(USER_OPTIONS.bgColor),t}var e={defaultCommand:"g",alwaysNewTab:!1,bgColor:"#A1C0C0"};localStorage.setItem("userOptions",JSON.stringify(e)),t=localStorage.getItem("userOptions"),USER_OPTIONS=JSON.parse(t)}}function displayOptions(){var t=" \t\t  <br/><br/> \t\t  <table border='1'> \t\t  <tr> \t\t\t <td align='left'><strong>Default Command</strong><br>executes if no command was specified</td> \t\t  </tr> \t\t  <tr> \t\t\t <td align='left'> \t\t\t\t<form id='defaultCommandForm'> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='t'>Go to website<br/> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='g'>Google search<br/> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='w'>Wikipedia search<br/> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='y'>YouTube search <br/> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='a'>Amazon search<br/> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='imdb'>IMDB search<br/> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='img'>Google Images search<br/> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='wa'>Wolfram Alpha search<br/> \t\t\t\t   <input type='radio' name='defaultCommandRadio' value='r'>Go to subreddit \t\t\t\t</form> \t\t\t </td> \t\t  </tr> \t\t  <tr> \t\t\t <th align='left'>Open Style</th> \t\t  </tr> \t\t  <tr> \t\t\t <td align='left'> \t\t\t\t<input type='checkbox' id='alwaysNewTabCheckbox' value='newTab'>Always open in new tab<br/> \t\t\t </td> \t\t  </tr> \t\t  <tr> \t\t\t <th align='left'>Background Color</th> \t\t  </tr> \t\t  <tr> \t\t\t <td align='left'> \t\t\t\tColor: <input type='text' id='bgColorInput' placeholder='#A1C0C0' size='7' spellcheck='false'> \t\t\t\t<a href='http://www.colorpicker.com/' target='_blank'><small>Color Picker</small></a> \t\t\t </td> \t\t  </tr> \t\t  <tr> \t\t\t <td> \t\t\t\t<button type='button' id='saveOptionsBtn'>Done</button> \t\t\t </td> \t\t  </tr> \t\t  </table> \t\t  <p id='optionsSubText' class='subtext' align='center'></p> \t\t  ";document.getElementById("text_div").innerHTML=t,document.getElementById("saveOptionsBtn").onclick=saveOptionsBtnCB,null!==localStorage.getItem("userOptions")?displaySavedOptions():(loadOptions(),displaySavedOptions()),window.scrollBy(0,1e3)}function displaySavedOptions(){for(var t=document.getElementById("defaultCommandForm"),e=0;e<t.length;e++)USER_OPTIONS.defaultCommand===t[e].value&&(t[e].checked=!0);document.getElementById("alwaysNewTabCheckbox").checked=USER_OPTIONS.alwaysNewTab,document.getElementById("bgColorInput").value=USER_OPTIONS.bgColor}function displayHelp(){var t=" \t\t <p class='subtext' align='center'><small>syntax:</small><br>command;query[;n]</p> \t\t  <table border='1'> \t\t\t <tr> \t\t\t\t<th>Command</th> \t\t\t\t<th>Description</th> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>options</td> \t\t\t\t<td>show options menu</td> \t\t\t</tr> \t\t\t <tr> \t\t\t\t<td class='command'>r;&ltsubreddit&gt</td> \t\t\t\t<td>go to subreddit</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>g;&ltquery&gt</td> \t\t\t\t<td>google search</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>y;&ltquery&gt</td> \t\t\t\t<td>youtube search</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>a;&ltquery&gt</td> \t\t\t\t<td>amazon search</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>w;&ltquery&gt</td> \t\t\t\t<td>wikipedia search</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>imdb;&ltquery&gt</td> \t\t\t\t<td>imdb search</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>img;&ltquery&gt</td> \t\t\t\t<td>google images search</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>wa;&ltquery&gt</td> \t\t\t\t<td>wolfram alpha search</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>t;&lturl&gt</td> \t\t\t\t<td>open url in current tab</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>&ltcommand&gt&#59;n</td> \t\t\t\t<td>open action in new tab</td> \t\t\t </tr> \t\t\t <tr> \t\t\t\t<td class='command'>help | ?</td> \t\t\t\t<td>show this text</td> \t\t\t </tr> \t\t  </table>";document.getElementById("text_div").innerHTML=t,window.scrollBy(0,1e3)}function fixedHelpBtnCB(){input=document.getElementById("commandInput"),input.value="help",input.select(),displayHelp()}function fixedOptionsBtnCB(){input=document.getElementById("commandInput"),input.value="options",input.select(),displayOptions()}function checkTime(t){return t<10&&(t="0"+t),0==t&&(t="12"),t}function updateTime(){var t=new Date,e=t.getHours();e>12&&(e-=12),e=checkTime(e);var n=checkTime(t.getMinutes());document.getElementById("time_div").innerHTML="<p id='timeText'>"+e+":"+n+"</p>";setTimeout(updateTime,5e3)}window.onload=function(){loadOptions(),updateTime(),document.getElementById("fixedHelpBtn").addEventListener("click",fixedHelpBtnCB),document.getElementById("fixedOptionsBtn").addEventListener("click",fixedOptionsBtnCB)};var USER_OPTIONS=JSON.parse(localStorage.getItem("userOptions")),comLinks={r:"https://www.reddit.com/r/",g:"https://www.google.com/search?q=",y:"https://www.youtube.com/results?search_query=",a:"http://smile.amazon.com/s?url=search-alias%3Daps&field-keywords=",w:"https://www.wikipedia.org/w/index.php?title=Special:Search&search=",wa:"http://www.wolframalpha.com/input/?i=",imdb:"https://www.imdb.com/find?s=all&q=",img:"https://www.google.com/search?tbm=isch&q=",t:""}</script><style>body{background-color:#A1C0C0;overflow-x:auto;width:100%;height:100%}table{width:50%;border:1px solid #000;font-family:Roboto,sans-serif;font-size:16px;text-align:center;margin-left:auto;margin-right:auto}td{padding:4px}.command{font-family:'Roboto Mono',monospace;font-size:14px}.subtext{font-size:18px;font-family:'Roboto Mono',monospace}#timeText{font-size:40px;font-family:Roboto,sans-serif;letter-spacing:4px;margin-bottom:22px}.text_div{text-align:center;height:500px}#commandInput{font-size:30px;font-family:Roboto,sans-serif;border:0;border-bottom:2px solid #000;outline:0;background:0 0;text-align:center;display:inline-block}#commandInput::selection{background:#F3F6F6}#bgColorInput{font-size:16px;font-family:'Roboto Mono',monospace;text-transform:uppercase;text-align:center;border:0}#bgColorInput:focus{outline:0}#saveOptionsBtn{font-size:16px;font-family:Roboto,sans-serif;border:1px solid #000;background-color:#FFF}#saveOptionsBtn:focus{outline:0}#fixed-help_div{position:fixed;top:3px;right:0}.fixedBtn{font-size:16px;background:0 0;border:0;outline:0;cursor:pointer}.center{position:absolute;left:15%;right:15%;top:35%;bottom:15%}</style><style>@font-face{font-family:fontello;src:url(../font/fontello.eot?83428707);src:url(../font/fontello.eot?83428707#iefix) format('embedded-opentype'),url(../font/fontello.svg?83428707#fontello) format('svg');font-weight:400;font-style:normal}@font-face{font-family:fontello;src:url(data:application/octet-stream;base64,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) format('woff'),url(data:application/octet-stream;base64,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) format('truetype')}[class*=" icon-"]:before,[class^=icon-]:before{font-family:fontello;font-style:normal;font-weight:400;speak:none;display:inline-block;text-decoration:inherit;width:1em;margin-right:.2em;text-align:center;font-variant:normal;text-transform:none;line-height:1em;margin-left:.2em}.icon-cog:before{content:'\e800'}.icon-help-circled:before{content:'\e801'}</style><div id=container class=center><div id=time_div align=center></div><div id=input_div align=center><input autocomplete=off autofocus id=commandInput onkeypress="return verifyKey(event)"size=20 spellcheck=false></div><div id=text_div></div><div id=fixed-help_div><button class=fixedBtn id=fixedHelpBtn type=button><i aria-hidden=true class=icon-help-circled></i></button><br><button class=fixedBtn id=fixedOptionsBtn type=button><i aria-hidden=true class=icon-cog></i></button></div></div>
+<!doctype html>
+
+<head>
+   <meta charset='utf-8'>
+   <title>tab</title>
+   <link rel='icon' type='image/png' href='images/favicon.png'>
+   <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab" rel="stylesheet">
+</head>
+
+<script>
+  var commands = [
+    { command: 'g', url: 'https://www.google.com', search: '/search?q=' },
+    { command: 'r', url: 'https://www.reddit.com', search: '/r/' },
+    { command: 'y', url: 'https://www.youtube.com', search: '/results?search_query=' },
+    { command: 'a', url: 'https://smile.amazon.com', search: '/s/?field-keywords=' },
+    { command: 'w', url: 'https://www.wikipedia.org', search: '/w/index.php?title=Special:Search&search=' },
+    { command: 'wa', url: 'https://www.wolframalpha.com', search: '/input/?i=' },
+    { command: 'imdb', url: 'https://www.imdb.com', search: '/find?s=all&q=' },
+    { command: 'img', url: 'https://www.google.com', search: '/search?tbm=isch&q=' },
+    { command: 't', url: '', search: '' }
+  ];
+</script>
+
+<body>
+  <div id='wrapper'>
+    <div id='clock' align=center>00:00</div>
+    <div id='input' align=center>
+      <input id='input-box' type='text' onkeypress='return verifyKey(event)' autocomplete='off' spellcheck='false' autofocus>
+    </div>
+    <div id='message'></div>
+    <div id='content'></div>
+  </div>
+</body>
+
+<script>
+  'use strict'
+  window.onload = function() {
+    clock();
+    loadOptions();
+    document.getElementById('clock').addEventListener('click', displayHelpMenu);
+  }
+  var SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
+
+  // Input
+  function verifyKey(e) {
+    var keycode;
+    if (window.event) {
+      keycode = window.event.keyCode;
+    } else if (e) {
+      keycode = e.which;
+    }
+    if (keycode == 13) { // Enter/return key
+      clearContent();
+      interpret();
+    }
+    checkInputLength();
+  }
+
+  function clearInput() {
+    var input = document.getElementById('input-box');
+    input.value = '';
+    input.select();
+  }
+
+  function checkInputLength() {
+    var input = document.getElementById('input-box');
+    if (input.value.length > 20) {
+      input.size = input.value.length + 1;
+    } else {
+      input.size = 20;
+    }
+  }
+
+  function getFullCommand(c) {
+    for (var i=0; i < commands.length; i++) {
+      if (c === commands[i].command) {
+        return commands[i];
+      }
+    }
+    return null;
+  }
+
+  function queryFix(command, query) {
+    query = (command.command === 'w' || command.command === 'wa')
+      ? query.trim().replace(/ /g, '+')
+      : query.trim();
+    return query
+  }
+
+  function interpret() {
+    var inputBox = document.getElementById('input-box');
+    inputBox.select();
+    var input = inputBox.value.trim();
+    if (input === '') {
+      lowerWrapper();
+      return;
+    }
+
+    if (input === 'help' || input === '?') {
+      displayHelpMenu();
+      return;
+    } else if (input === 'options' || input === 'settings') {
+      displayOptionsMenu();
+      return;
+    }
+
+    var inputArr = input.split(';');
+    var newtab = (inputArr[inputArr.length-1] === 'n');
+    var command; var query;
+
+    var validCommand = false;
+    command = getFullCommand(inputArr[0]);
+    if (command !== null) {
+      validCommand = true;
+    }
+
+    if (validCommand) {
+      query = queryFix(command, inputArr[1]);
+      switch(inputArr.length) {
+        case 1:
+          redirect(command.url, newtab);
+          return false;
+          break;
+        case 2:
+          if (inputArr[1] === 'n') {
+            redirect(command.url, newtab);
+            return false;
+          } else {
+            redirect(command.url + command.search + query, newtab);
+            return false;
+          }
+          break;
+        default:
+          redirect(command.url + command.search + query, newtab);
+          return false;
+      }
+      redirect(command.url + command.search + query, newtab);
+      return false;
+    } else {
+      command = SETTINGS.defaultCommand;
+      query = queryFix(command, inputArr[0]);
+      redirect(command.url + command.search + query, newtab);
+      return false;
+    }
+  }
+
+  function redirect(url, newtab) {
+    url = (!url.startsWith('http'))
+      ? 'https://' + url
+      : url;
+    if (newtab || SETTINGS.alwaysNewTab) {
+      var win = window.open(url);
+      win.focus();
+      return false;
+    } else {
+      window.location.href = url;
+      return false;
+    }
+  }
+
+  // Options
+  function saveOptions() {
+    if (typeof(Storage) == "undefined") {
+      alert("Browser does not support local storage: your settings won't be saved (sorry)");
+    } else {
+      // Background color
+      var color = document.getElementById('bgColorInput').value;
+      if (!color.startsWith('#')) {
+        color = '#' + color;
+      }
+      if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) { // check if valid hex value
+        SETTINGS.color = color;
+        setColor(color);
+        localStorage.setItem('userOptions', JSON.stringify(SETTINGS));
+      } else {
+        alert('not a valid hex value\n(valid example: #A1C0C0)');
+        return false;
+      }
+
+      // Get default command
+      var radios = document.getElementById('defaultCommandForm');
+      var defaultCommand = null;
+      for (var i=0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          defaultCommand = radios[i].value;
+          break;
+        }
+      }
+      defaultCommand = getFullCommand(defaultCommand);
+      if (defaultCommand !== null) {
+        SETTINGS.defaultCommand = defaultCommand;
+      }
+
+      // Tab open style
+      SETTINGS.alwaysNewTab = document.getElementById('openStyleCheckbox').checked;
+    }
+    clearInput();
+    return true;
+  }
+
+  function loadOptions() {
+    if (typeof(Storage) !== 'undefined') {
+      if (localStorage.getItem('userOptions') !== null) {
+        SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
+        setColor(SETTINGS.color);
+      } else {
+        var defaultSettings = {
+          defaultCommand: {
+            command: 'g',
+            url: 'https://www.google.com',
+            search: '/search?q='
+          },
+          alwaysNewTab: false,
+          color: "#A1C0C0"
+        };
+        localStorage.setItem('userOptions', JSON.stringify(defaultSettings));
+        SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
+      }
+    }
+  }
+
+  function setColor(c) {
+    document.body.style.backgroundColor = c;
+  }
+
+  // Displayed content
+  function clearMessage() {
+    var div = document.getElementById('message');
+    div.innerHTML = '';
+    div.style.display = 'none';
+  }
+
+  function displayMessage(message, timeMs) {
+    var div = document.getElementById('message');
+    div.style.display = ''; // Show div
+    div.innerHTML = message;
+    if (timeMs !== 0) {
+      setTimeout(clearMessage, timeMs);
+    }
+  }
+
+  function clearContent() {
+    document.getElementById('content').innerHTML = '';
+  }
+
+  function displayContent(content) {
+    clearInput();
+    clearContent();
+    raiseWrapper();
+    document.getElementById('content').innerHTML = content;
+    window.scrollBy(0, 1000);
+  }
+
+  function raiseWrapper() {
+    document.getElementById('wrapper').style.top = "10%";
+  }
+
+  function lowerWrapper() {
+    document.getElementById('wrapper').style.top = "35%";
+  }
+
+  function displayOptionsMenu() {
+    var html = "\
+      <br/><br/> \
+      <table border='1'> \
+      <tr> \
+         <td align='left'><strong>Default Command</strong><br>executes if no command was specified</td> \
+      </tr> \
+      <tr> \
+         <td align='left'> \
+            <form id='defaultCommandForm'> \
+               <input type='radio' name='defaultCommandRadio' value='t'>Go to website<br/> \
+               <input type='radio' name='defaultCommandRadio' value='g'>Google search<br/> \
+               <input type='radio' name='defaultCommandRadio' value='w'>Wikipedia search<br/> \
+               <input type='radio' name='defaultCommandRadio' value='y'>YouTube search <br/> \
+               <input type='radio' name='defaultCommandRadio' value='a'>Amazon search<br/> \
+               <input type='radio' name='defaultCommandRadio' value='imdb'>IMDB search<br/> \
+               <input type='radio' name='defaultCommandRadio' value='img'>Google Images search<br/> \
+               <input type='radio' name='defaultCommandRadio' value='wa'>Wolfram Alpha search<br/> \
+               <input type='radio' name='defaultCommandRadio' value='r'>Go to subreddit \
+            </form> \
+         </td> \
+      </tr> \
+      <tr> \
+         <th align='left'>Open Style</th> \
+      </tr> \
+      <tr> \
+         <td align='left'> \
+            <input type='checkbox' id='openStyleCheckbox' value='newTab'>Always open in new tab<br/> \
+         </td> \
+      </tr> \
+      <tr> \
+         <th align='left'>Background Color</th> \
+      </tr> \
+      <tr> \
+         <td align='left'> \
+            Color: <input type='text' id='bgColorInput' placeholder='#A1C0C0' size='7' spellcheck='false'> \
+            <a href='http://www.colorpicker.com/' target='_blank'><small>Color Picker</small></a> \
+            <br> \
+            <button type='button' id='defaultColorBtn' class='menuBtn'>Default Color</button> \
+         </td> \
+      </tr> \
+      <tr> \
+         <td colspan='2'> \
+            <button type='button' id='saveOptionsBtn' class='menuBtn'>Done</button> \
+         </td> \
+      </tr> \
+      </table>";
+
+    displayContent(html);
+
+    document.getElementById('saveOptionsBtn').onclick = function() {
+      if (saveOptions()) {
+        saveOptions();
+        lowerWrapper();
+        clearContent();
+        displayMessage('settings saved', 2000);
+      }
+    };
+    document.getElementById('defaultColorBtn').onclick = function() {
+      document.getElementById('bgColorInput').value = '#A1C0C0';
+    };
+
+    // Display saved options
+    var radios = document.getElementById('defaultCommandForm');
+    for (var i=0; i < radios.length; i++) {
+      if (SETTINGS.defaultCommand.command === radios[i].value) {
+        radios[i].checked = true;
+        break;
+      }
+    }
+    document.getElementById('openStyleCheckbox').checked = SETTINGS.alwaysNewTab;
+    document.getElementById('bgColorInput').value = SETTINGS.color;
+  }
+
+  function displayHelpMenu() {
+    var html = " \
+      <p class='subtext' align='center'><small>syntax:</small><br>command;query[;n]</p> \
+      <table border='1'> \
+        <tr> \
+          <th>Command</th> \
+          <th>Description</th> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>options</td> \
+          <td>show options menu</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>? <small><small>or</small></small> help</td> \
+          <td>show this text</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>r;&ltsubreddit&gt</td> \
+          <td>go to subreddit</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>g;&ltquery&gt</td> \
+          <td>google search</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>y;&ltquery&gt</td> \
+          <td>youtube search</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>a;&ltquery&gt</td> \
+          <td>amazon search</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>w;&ltquery&gt</td> \
+          <td>wikipedia search</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>imdb;&ltquery&gt</td> \
+          <td>imdb search</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>img;&ltquery&gt</td> \
+          <td>google images search</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>wa;&ltquery&gt</td> \
+          <td>wolfram alpha search</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>t;&lturl&gt</td> \
+          <td>open url in current tab</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>&ltcommand&gt&#59;n</td> \
+          <td>open action in new tab</td> \
+        </tr> \
+        <tr> \
+          <td colspan='2'> \
+            <button type='button' id='closeHelpBtn' class='menuBtn'>Close</button> \
+          </td> \
+        </tr> \
+      </table>"
+
+    displayContent(html);
+
+    document.getElementById('closeHelpBtn').onclick = function() {
+      clearContent();
+      clearInput();
+      lowerWrapper();
+    }
+  }
+
+  // Clock
+  function clock() {
+    var date = new Date();
+    var h = date.getHours();
+    h = (h > 12) ? (checkTime(h -= 12)) : checkTime(h); // 12hr clock
+    var m = checkTime(date.getMinutes());
+    document.getElementById('clock').innerHTML = h + ':' + m;
+    setTimeout(clock, 1000);
+  }
+  function checkTime(n) {
+    n = (n < 10) ? (n = '0' + n) : n;
+    return n;
+  }
+</script>
+
+<style>
+  body {
+    background-color: #A1C0C0;
+    overflow-x: auto;
+    width: 100%;
+    height: 100%;
+  }
+
+  #wrapper {
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 35%;
+    bottom: 15%;
+  }
+
+  #clock {
+    font-size: 60px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+  }
+
+  #input-box {
+    font-size: 30px;
+    font-family: 'Roboto Slab', serif;
+    border: 0px;
+    border-bottom: 1px solid black;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    display: inline-block;
+    max-width: 100%;
+  }
+  #input-box::selection {
+    background: #F3F6F6;
+  }
+
+  #content {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .menuBtn {
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid black;
+    background-color: #FFF;
+  }
+  .menuBtn:focus {
+    outline: none;
+  }
+
+  .menuCommandText {
+     font-family: 'Roboto Slab', serif;
+     font-size: 14px;
+  }
+
+  #defaultColorBtn {
+    margin-top: 5px;
+    font-size: 12px;
+    background-color: #A1C0C0;
+  }
+
+  table {
+    width: 50%;
+    border: 1px solid black;
+    font-size: 16px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  td {
+    padding: 6px
+  }
+
+  #message {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 25px;
+  }
+
+  #bgColorInput {
+    border: none;
+    background-color: #FFF;
+  }
+</style>
