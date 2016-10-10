@@ -198,8 +198,8 @@ function loadOptions() {
   }
 }
 
-function setColor(color) {
-  document.body.style.backgroundColor = color;
+function setColor(c) {
+  document.body.style.backgroundColor = c;
 }
 
 // Displayed content
