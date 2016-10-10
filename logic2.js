@@ -69,7 +69,10 @@ function interpret() {
   var inputBox = document.getElementById('input-box');
   inputBox.select();
   var input = inputBox.value.trim();
-  if (input === '') { return; }
+  if (input === '') {
+    lowerWrapper();
+    return;
+  }
 
   if (input === 'help' || input === '?') {
     displayHelpMenu();
@@ -216,6 +219,15 @@ function clearContent() {
 function displayContent(content) {
   clearContent();
   document.getElementById('content').innerHTML = content;
+  window.scrollBy(0, 1000);
+}
+
+function raiseWrapper() {
+  document.getElementById('wrapper').style.top = "10%";
+}
+
+function lowerWrapper() {
+  document.getElementById('wrapper').style.top = "35%";
 }
 
 function displayOptionsMenu() {
@@ -258,18 +270,17 @@ function displayOptionsMenu() {
        </td> \
     </tr> \
     <tr> \
-       <td> \
-          <button type='button' id='saveOptionsBtn'>Done</button> \
+       <td colspan='2'> \
+          <button type='button' id='saveOptionsBtn' class='menuBtn'>Done</button> \
        </td> \
     </tr> \
     </table>";
 
-  var wrapper = document.getElementById('wrapper');
-  wrapper.style.top = "10%";
-
+  raiseWrapper();
   displayContent(html);
+
   document.getElementById('saveOptionsBtn').onclick = function() {
-    wrapper.style.top = "35%";
+    lowerWrapper();
     saveOptions();
     clearContent();
     displayMessage('settings saved', 2000);
