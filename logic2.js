@@ -203,12 +203,15 @@ function setColor(color) {
 
 // Displayed content
 function clearMessage() {
-  document.getElementById('message').innerHTML = '';
+  var div = document.getElementById('message');
+  div.innerHTML = '';
+  div.style.display = 'none';
 }
 
 function displayMessage(message, timeMs) {
-  clearMessage();
-  document.getElementById('message').innerHTML = message;
+  var div = document.getElementById('message');
+  div.style.display = ''; // Show div
+  div.innerHTML = message;
   if (timeMs !== 0) {
     setTimeout(clearMessage, timeMs);
   }
