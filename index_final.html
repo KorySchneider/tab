@@ -298,6 +298,8 @@
          <td align='left'> \
             Color: <input type='text' id='bgColorInput' placeholder='#A1C0C0' size='7' spellcheck='false'> \
             <a href='http://www.colorpicker.com/' target='_blank'><small>Color Picker</small></a> \
+            <br> \
+            <button type='button' id='defaultColorBtn' class='menuBtn'>Default Color</button> \
          </td> \
       </tr> \
       <tr> \
@@ -316,6 +318,9 @@
         clearContent();
         displayMessage('settings saved', 2000);
       }
+    };
+    document.getElementById('defaultColorBtn').onclick = function() {
+      document.getElementById('bgColorInput').value = '#A1C0C0';
     };
 
     // Display saved options

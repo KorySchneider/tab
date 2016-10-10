@@ -54,6 +54,12 @@ body {
    font-size: 14px;
 }
 
+#defaultColorBtn {
+  margin-top: 5px;
+  font-size: 12px;
+  background-color: #A1C0C0;
+}
+
 table {
   width: 50%;
   border: 1px solid black;
