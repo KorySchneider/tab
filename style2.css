@@ -67,3 +67,8 @@ td {
   text-align: center;
   padding-top: 25px;
 }
+
+#bgColorInput {
+  border: none;
+  background-color: #FFF;
+}
