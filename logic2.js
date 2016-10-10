@@ -42,8 +42,10 @@ function clearInput() {
 
 function checkInputLength() {
   var input = document.getElementById('input-box');
-  if (input.value.length >= (input.size - 1)) {
-     input.size = input.value.length + 1;
+  if (input.value.length > 20) {
+    input.size = input.value.length + 1;
+  } else {
+    input.size = 20;
   }
 }
 
