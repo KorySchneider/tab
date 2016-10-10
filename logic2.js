@@ -126,7 +126,7 @@ function redirect(url, newtab) {
   url = (!url.startsWith('http'))
     ? 'https://' + url
     : url;
-  if (newtab) {
+  if (newtab || SETTINGS.alwaysNewTab) {
     var win = window.open(url);
     win.focus();
     return false;
