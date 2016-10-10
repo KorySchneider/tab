@@ -363,14 +363,14 @@ function displayHelpMenu() {
       </tr> \
       <tr> \
         <td colspan='2'> \
-          <button type='button' id='hideHelpBtn' class='menuBtn'>Hide</button> \
+          <button type='button' id='closeHelpBtn' class='menuBtn'>Close</button> \
         </td> \
       </tr> \
     </table>"
 
   displayContent(html);
 
-  document.getElementById('hideHelpBtn').onclick = function() {
+  document.getElementById('closeHelpBtn').onclick = function() {
     clearContent();
     clearInput();
     lowerWrapper();
