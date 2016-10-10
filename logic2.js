@@ -77,7 +77,7 @@ function interpret() {
   if (input === 'help' || input === '?') {
     displayHelpMenu();
     return;
-  } else if (input === 'options') {
+  } else if (input === 'options' || input === 'settings') {
     displayOptionsMenu();
     return;
   }
