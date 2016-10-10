@@ -57,7 +57,7 @@ function interpret() {
   if (input === '') { return; }
 
   if (input === 'help' || input === '?') {
-    displayHelp(); // TODO implement help
+    displayHelpMenu();
     return;
   } else if (input === 'options') {
     displayOptionsMenu();
@@ -274,6 +274,79 @@ function displayOptionsMenu() {
   }
   document.getElementById('openStyleCheckbox').checked = SETTINGS.alwaysNewTab;
   document.getElementById('bgColorInput').value = SETTINGS.color;
+}
+
+function displayHelpMenu() {
+  var html = " \
+    <p class='subtext' align='center'><small>syntax:</small><br>command;query[;n]</p> \
+    <table border='1'> \
+      <tr> \
+        <th>Command</th> \
+        <th>Description</th> \
+      </tr> \
+      <tr> \
+        <td class='command'>options</td> \
+        <td>show options menu</td> \
+      <tr> \
+        <td class='command'>r;&ltsubreddit&gt</td> \
+        <td>go to subreddit</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>g;&ltquery&gt</td> \
+        <td>google search</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>y;&ltquery&gt</td> \
+        <td>youtube search</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>a;&ltquery&gt</td> \
+        <td>amazon search</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>w;&ltquery&gt</td> \
+        <td>wikipedia search</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>imdb;&ltquery&gt</td> \
+        <td>imdb search</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>img;&ltquery&gt</td> \
+        <td>google images search</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>wa;&ltquery&gt</td> \
+        <td>wolfram alpha search</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>t;&lturl&gt</td> \
+        <td>open url in current tab</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>&ltcommand&gt&#59;n</td> \
+        <td>open action in new tab</td> \
+      </tr> \
+      <tr> \
+        <td class='command'>help | ?</td> \
+        <td>show this text</td> \
+      </tr> \
+      <tr> \
+        <td colspan='2'> \
+          <button type='button' id='hideHelpBtn' class='menuBtn'>Hide</button> \
+        </td> \
+      </tr> \
+    </table>"
+
+
+  raiseWrapper();
+  displayContent(html);
+
+  document.getElementById('hideHelpBtn').onclick = function() {
+    clearContent();
+    clearInput();
+    lowerWrapper();
+  }
 }
 
 // Clock
