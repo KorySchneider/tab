@@ -1,13 +1,14 @@
 # tab: a startpage
-a startpage, new tab page, homepage: https://koryschneider.github.io/tab-a-startpage/
+_a startpage, new tab page, homepage_
 
-start by typing 'help' or 'options' in the command line and pressing enter/return, or by clicking on the icons in the top right.
+### Usage
+Tab lives here: https://koryschneider.github.io/tab-a-startpage/
 
----
+Start by typing `help` or `?` and pressing enter/return. <sup>(you can also click on the clock)</sup>
 
-Now a chrome extension!
+### Chrome extension
 
-Replaces new tab with tab startpage.
+Replaces the new tab page with tab startpage.
 
 Link:
 https://chrome.google.com/webstore/detail/tab-a-startpage/gedoejjmdjalipopahiffdghibcodjcj
