@@ -38,6 +38,14 @@
     clock();
     loadOptions();
     document.getElementById('clock').addEventListener('click', displayHelpMenu);
+
+
+    // Broke user options with update (new format for options), this should fix it
+    if (JSON.parse(localStorage.getItem('options-version')) == null) {
+      localStorage.removeItem('userOptions');
+      loadOptions();
+      localStorage.setItem('options-version', 1);
+    }
   }
   var SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
 
