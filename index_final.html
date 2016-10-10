@@ -5,8 +5,6 @@
    <title>tab</title>
    <link rel='icon' type='image/png' href='images/favicon.png'>
    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab" rel="stylesheet">
-
-   <link rel='stylesheet' type='text/css' href='style2.css'> <!-- TODO embed css -->
 </head>
 
 <script>
@@ -421,3 +419,91 @@
     return n;
   }
 </script>
+
+<style>
+  body {
+    background-color: #A1C0C0;
+    overflow-x: auto;
+    width: 100%;
+    height: 100%;
+  }
+
+  #wrapper {
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    top: 35%;
+    bottom: 15%;
+  }
+
+  #clock {
+    font-size: 60px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+  }
+
+  #input-box {
+    font-size: 30px;
+    font-family: 'Roboto Slab', serif;
+    border: 0px;
+    border-bottom: 1px solid black;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    display: inline-block;
+  }
+  #input-box::selection {
+    background: #F3F6F6;
+  }
+
+  #content {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .menuBtn {
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid black;
+    background-color: #FFF;
+  }
+  .menuBtn:focus {
+    outline: none;
+  }
+
+  .menuCommandText {
+     font-family: 'Roboto Slab', serif;
+     font-size: 14px;
+  }
+
+  #defaultColorBtn {
+    margin-top: 5px;
+    font-size: 12px;
+    background-color: #A1C0C0;
+  }
+
+  table {
+    width: 50%;
+    border: 1px solid black;
+    font-size: 16px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  td {
+    padding: 6px
+  }
+
+  #message {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 25px;
+  }
+
+  #bgColorInput {
+    border: none;
+    background-color: #FFF;
+  }
+</style>
