@@ -34,6 +34,12 @@ function verifyKey(e) {
   checkInputLength();
 }
 
+function clearInput() {
+  var input = document.getElementById('input-box');
+  input.value = '';
+  input.select();
+}
+
 function checkInputLength() {
   var input = document.getElementById('input-box');
   if (input.value.length >= (input.size - 1)) {
@@ -155,9 +161,7 @@ function saveOptions() {
       alert('not a valid hex value\n(valid example: #A1C0C0)');
     }
   }
-  var inputBox = document.getElementById('input-box');
-  inputBox.value = "";
-  inputBox.select();
+  clearInput();
 }
 
 function loadOptions() {
