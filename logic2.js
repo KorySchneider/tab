@@ -3,6 +3,7 @@
 window.onload = function() {
   clock();
   loadOptions();
+  document.getElementById('clock').addEventListener('click', displayHelpMenu);
 }
 
 var SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
