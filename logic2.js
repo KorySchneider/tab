@@ -140,7 +140,7 @@ function saveOptions() {
     }
 
     // Tab open style
-    SETTINGS.alwaysNewTab = document.getElementById('openStyleCheckbox');
+    SETTINGS.alwaysNewTab = document.getElementById('openStyleCheckbox').checked;
 
     // Background color
     var color = document.getElementById('bgColorInput').value;
