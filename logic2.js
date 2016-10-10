@@ -58,6 +58,13 @@ function getFullCommand(c) {
   return null;
 }
 
+function queryFix(command, query) {
+  query = (command.command === 'w' || command.command === 'wa')
+    ? query.trim().replace(/ /g, '+')
+    : query.trim();
+  return query
+}
+
 function interpret() {
   var inputBox = document.getElementById('input-box');
   inputBox.select();
@@ -83,9 +90,7 @@ function interpret() {
   }
 
   if (validCommand) {
-    query = (command.command === 'w' || command.command === 'wa') // wikipedia & wolframalpha fix
-      ? inputArr[1].trim().replace(/ /g, '+')
-      : inputArr[1].trim();
+    query = queryFix(command, inputArr[1]);
     switch(inputArr.length) {
       case 1:
         redirect(command.url, newtab);
@@ -106,9 +111,9 @@ function interpret() {
     }
     redirect(command.url + command.search + query, newtab);
     return false;
-  } else { // TODO check query: wikipedia & wolframalpha fix
+  } else {
     command = SETTINGS.defaultCommand;
-    query = inputArr[0].trim();
+    query = queryFix(command, inputArr[0]);
     redirect(command.url + command.search + query, newtab);
     return false;
   }
