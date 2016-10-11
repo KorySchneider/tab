@@ -123,13 +123,13 @@
     }
 
     if (validCommand) {
-      query = queryFix(command, inputArr[1]);
       switch(inputArr.length) {
         case 1:
           redirect(command.url, newtab);
           return false;
           break;
         case 2:
+          query = queryFix(command, inputArr[1]);
           if (inputArr[1] === 'n') {
             redirect(command.url, newtab);
             return false;
@@ -139,6 +139,7 @@
           }
           break;
         default:
+          query = queryFix(command, inputArr[1]);
           redirect(command.url + command.search + query, newtab);
           return false;
       }
