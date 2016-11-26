@@ -155,7 +155,7 @@
 
   function redirect(url, newtab) {
     url = (!url.startsWith('http'))
-      ? 'https://' + url
+      ? 'http://' + url
       : url;
     if (newtab || SETTINGS.alwaysNewTab) {
       var win = window.open(url);
