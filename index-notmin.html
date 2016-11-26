@@ -10,6 +10,7 @@
 <script>
   var commands = [
     { command: 'g', url: 'https://www.google.com', search: '/search?q=' },
+    { command: 'dg', url: 'https://duckduckgo.com', search: '/?q=' },
     { command: 'r', url: 'https://www.reddit.com', search: '/r/' },
     { command: 'y', url: 'https://www.youtube.com', search: '/results?search_query=' },
     { command: 'a', url: 'https://smile.amazon.com', search: '/s/?field-keywords=' },
@@ -38,7 +39,6 @@
     clock();
     loadOptions();
     document.getElementById('clock').addEventListener('click', displayHelpMenu);
-
 
     // Broke user options with update (new format for options), this should fix it
     if (JSON.parse(localStorage.getItem('options-version')) == null) {
@@ -278,15 +278,16 @@
       <tr> \
          <td align='left'> \
             <form id='defaultCommandForm'> \
-               <input type='radio' name='defaultCommandRadio' value='t'>Go to website<br/> \
-               <input type='radio' name='defaultCommandRadio' value='g'>Google search<br/> \
-               <input type='radio' name='defaultCommandRadio' value='w'>Wikipedia search<br/> \
-               <input type='radio' name='defaultCommandRadio' value='y'>YouTube search <br/> \
-               <input type='radio' name='defaultCommandRadio' value='a'>Amazon search<br/> \
-               <input type='radio' name='defaultCommandRadio' value='imdb'>IMDB search<br/> \
-               <input type='radio' name='defaultCommandRadio' value='img'>Google Images search<br/> \
-               <input type='radio' name='defaultCommandRadio' value='wa'>Wolfram Alpha search<br/> \
-               <input type='radio' name='defaultCommandRadio' value='r'>Go to subreddit \
+               <input type='radio' name='defaultCommandRadio' id='t' value='t'><label for='t'>Go to website</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='g' value='g'><label for='g'>search Google</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='dg' value='dg'><label for='dg'>search DuckDuckGo</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='w' value='w'><label for='w'>search Wikipedia</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='y' value='y'><label for='y'>search YouTube</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='a' value='a'><label for='a'>search Amazon</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='imdb' value='imdb'><label for='imdb'>search Internet Movie Database</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='img' value='img'><label for='img'>search Google Images</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='wa' value='wa'>search Wolfram Alpha</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='r' value='r'><label for='r'>Go to subreddit</label> \
             </form> \
          </td> \
       </tr> \
@@ -386,6 +387,10 @@
         <tr> \
           <td class='menuCommandText'>g (;&ltquery&gt)</td> \
           <td>Google</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText'>dg (;&ltquery&gt)</td> \
+          <td>DuckDuckGo</td> \
         </tr> \
         <tr> \
           <td class='menuCommandText'>y (;&ltquery&gt)</td> \
