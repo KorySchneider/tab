@@ -92,7 +92,10 @@
     query = (command.command === 'w' || command.command === 'wa')
       ? query.trim().replace(/ /g, '+')
       : query.trim();
-    return encodeURIComponent(query);
+    query = (command.command === 't')
+      ? query
+      : encodeURIComponent(query);
+    return query;
   }
 
   function interpret() {
