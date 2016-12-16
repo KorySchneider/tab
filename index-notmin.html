@@ -89,10 +89,13 @@
   }
 
   function queryFix(command, query) {
-    query = (command.command === 'w' || command.command === 'wa')
+    var c = command.command;
+    // Replace spaces with plus signs for the following commands
+    query = (c === 'w' || c === 'wa')
       ? query.trim().replace(/ /g, '+')
       : query.trim();
-    query = (command.command === 't' || command.command === 'r')
+    // Don't encode queries for the following commands
+    query = (c === 't' || c === 'r' || c === 'w' || c === 'wa')
       ? query
       : encodeURIComponent(query);
     return query;
@@ -146,6 +149,7 @@
           redirect(command.url + command.search + query, newtab);
           return false;
       }
+      // TODO pass query through queryFix
       redirect(command.url + command.search + query, newtab);
       return false;
     } else {
