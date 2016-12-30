@@ -286,14 +286,14 @@
          <td align='left'> \
             <form id='defaultCommandForm'> \
                <input type='radio' name='defaultCommandRadio' id='t' value='t'><label for='t'>Go to website</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='g' value='g'><label for='g'>search Google</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='dg' value='dg'><label for='dg'>search DuckDuckGo</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='w' value='w'><label for='w'>search Wikipedia</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='y' value='y'><label for='y'>search YouTube</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='a' value='a'><label for='a'>search Amazon</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='imdb' value='imdb'><label for='imdb'>search Internet Movie Database</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='img' value='img'><label for='img'>search Google Images</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='wa' value='wa'>search Wolfram Alpha</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='g' value='g'><label for='g'>Search Google</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='dg' value='dg'><label for='dg'>Search DuckDuckGo</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='w' value='w'><label for='w'>Search Wikipedia</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='y' value='y'><label for='y'>Search YouTube</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='a' value='a'><label for='a'>Search Amazon</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='imdb' value='imdb'><label for='imdb'>Search Internet Movie Database</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='img' value='img'><label for='img'>Search Google Images</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='wa' value='wa'>Search Wolfram Alpha</label><br> \
                <input type='radio' name='defaultCommandRadio' id='r' value='r'><label for='r'>Go to subreddit</label> \
             </form> \
          </td> \
@@ -318,6 +318,14 @@
          </td> \
       </tr> \
       <tr> \
+        <th align='left'>Found a bug? Want to request a feature?</th> \
+      </tr> \
+      <tr> \
+        <td align='left'> \
+          <button type='button' id='submitIssueBtn' class='menuBtn'>Submit an Issue</button> \
+        </td> \
+      </tr> \
+      <tr> \
         <td> \
           <button type='button' id='saveOptionsBtn' class='menuBtn'>Done</button> \
          </td> \
@@ -331,6 +339,10 @@
       </table>";
 
     displayContent(html);
+
+    document.getElementById('submitIssueBtn').onclick = function() {
+      redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
+    };
 
     document.getElementById('saveOptionsBtn').onclick = function() {
       if (saveOptions()) {
@@ -553,7 +565,10 @@
     margin-right: auto;
   }
   td {
-    padding: 6px
+    padding: 6px;
+  }
+  th {
+    padding: 6px;
   }
 
   #message {
