@@ -4,7 +4,7 @@
    <meta charset='utf-8'>
    <title>tab</title>
    <link rel='icon' type='image/png' href='images/favicon.png'>
-   <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Roboto+Condensed" rel="stylesheet">
 </head>
 
 <script>
@@ -26,7 +26,7 @@
   <div id='wrapper'>
     <div id='clock' align=center>00:00</div>
     <div id='input' align=center>
-      <input id='input-box' type='text' onkeypress='return verifyKey(event)' autocomplete='off' spellcheck='false' autofocus>
+      <input id='input-box' type='text' onkeypress='return verifyKey(event)' autocomplete='off' spellcheck='false' size='30' autofocus>
     </div>
     <div id='message'></div>
     <div id='content'></div>
@@ -72,10 +72,10 @@
 
   function checkInputLength() {
     var input = document.getElementById('input-box');
-    if (input.value.length > 20) {
+    if (input.value.length > 30) {
       input.size = input.value.length + 1;
     } else {
-      input.size = 20;
+      input.size = 30;
     }
   }
 
@@ -179,19 +179,6 @@
     if (typeof(Storage) == "undefined") {
       alert("Browser does not support local storage: your settings won't be saved (sorry)");
     } else {
-      // Background color
-      var color = document.getElementById('bgColorInput').value;
-      if (!color.startsWith('#')) {
-        color = '#' + color;
-      }
-      if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) { // check if valid hex value
-        SETTINGS.color = color;
-        setColor(color);
-        localStorage.setItem('userOptions', JSON.stringify(SETTINGS));
-      } else {
-        alert('not a valid hex value\n(valid example: #A1C0C0)');
-        return false;
-      }
 
       // Get default command
       var radios = document.getElementById('defaultCommandForm');
@@ -218,7 +205,6 @@
     if (typeof(Storage) !== 'undefined') {
       if (localStorage.getItem('userOptions') !== null) {
         SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
-        setColor(SETTINGS.color);
       } else {
         var defaultSettings = {
           defaultCommand: {
@@ -227,16 +213,11 @@
             search: '/search?q='
           },
           alwaysNewTab: false,
-          color: "#A1C0C0"
         };
         localStorage.setItem('userOptions', JSON.stringify(defaultSettings));
         SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
       }
     }
-  }
-
-  function setColor(c) {
-    document.body.style.backgroundColor = c;
   }
 
   // Displayed content
@@ -272,13 +253,13 @@
   }
 
   function lowerWrapper() {
-    document.getElementById('wrapper').style.top = "35%";
+    document.getElementById('wrapper').style.top = "30%";
   }
 
   function displayOptionsMenu() {
     var html = "\
-      <br/><br/> \
-      <table border='1'> \
+      <br/> \
+      <table border='0'> \
       <tr> \
          <td align='left'><strong>Default Command</strong><br>executes if no command was specified</td> \
       </tr> \
@@ -304,17 +285,6 @@
       <tr> \
          <td align='left'> \
             <input type='checkbox' id='openStyleCheckbox' value='newTab'>Always open in new tab<br/> \
-         </td> \
-      </tr> \
-      <tr> \
-         <th align='left'>Background Color</th> \
-      </tr> \
-      <tr> \
-         <td align='left'> \
-            Color: <input type='text' id='bgColorInput' placeholder='#A1C0C0' size='7' spellcheck='false'> \
-            <a href='http://www.colorpicker.com/' target='_blank'><small>Color Picker</small></a> \
-            <br> \
-            <button type='button' id='defaultColorBtn' class='menuBtn'>Default Color</button> \
          </td> \
       </tr> \
       <tr> \
@@ -352,14 +322,10 @@
         displayMessage('settings saved', 2000);
       }
     };
-    document.getElementById('defaultColorBtn').onclick = function() {
-      document.getElementById('bgColorInput').value = '#A1C0C0';
-    };
 
     document.getElementById('resetOptionsBtn').onclick = function() {
       localStorage.removeItem('userOptions');
       loadOptions();
-      setColor(SETTINGS.color);
       lowerWrapper();
       clearContent();
       displayMessage('settings reset', 2000);
@@ -377,71 +343,76 @@
       }
     }
     document.getElementById('openStyleCheckbox').checked = SETTINGS.alwaysNewTab;
-    document.getElementById('bgColorInput').value = SETTINGS.color;
   }
 
   function displayHelpMenu() {
     var html = " \
       <div id='helpText'> \
+        <br> \
         <p>Below is a list of commands, most of which act as shortcuts to sites or the search engine of those sites. To go to a site, simply enter its command (e.g. 'g' for Google), or type a semicolon followed by a query to search the site.</p> \
         <p><small>syntax:</small><br>command;query[;n]</p> \
       </div> \
-      <table border='1'> \
+      <table id='helpTable'> \
         <tr> \
-          <th>Command</th> \
-          <th>Site/Function</th> \
+          <th align='right'>Command</th> \
+          <th align='left'>Site/Function</th> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>options</td> \
-          <td>Show options menu</td> \
+          <td class='menuCommandText' align='right'>options</td> \
+          <td align='left'>Show options menu</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>help</td> \
-          <td>Show this menu</td> \
+          <td class='menuCommandText' align='right'>help</td> \
+          <td align='left'>Show this menu</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>r (;&ltsubreddit&gt)</td> \
-          <td>Reddit</td> \
+          <td class='menuCommandText' align='right'>r (;&ltsubreddit&gt)</td> \
+          <td align='left'>Reddit</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>g (;&ltquery&gt)</td> \
-          <td>Google</td> \
+          <td class='menuCommandText' align='right'>g (;&ltquery&gt)</td> \
+          <td align='left'>Google</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>dg (;&ltquery&gt)</td> \
-          <td>DuckDuckGo</td> \
+          <td class='menuCommandText' align='right'>dg (;&ltquery&gt)</td> \
+          <td align='left'>DuckDuckGo</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>y (;&ltquery&gt)</td> \
-          <td>YouTube</td> \
+          <td class='menuCommandText' align='right'>y (;&ltquery&gt)</td> \
+          <td align='left'>YouTube</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>a (;&ltquery&gt)</td> \
-          <td>Amazon</td> \
+          <td class='menuCommandText' align='right'>a (;&ltquery&gt)</td> \
+          <td align='left'>Amazon</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>w (;&ltquery&gt)</td> \
-          <td>Wikipedia</td> \
+          <td class='menuCommandText' align='right'>w (;&ltquery&gt)</td> \
+          <td align='left'>Wikipedia</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>imdb (;&ltquery&gt)</td> \
-          <td>Internet Movie Database</td> \
+          <td class='menuCommandText' align='right'>imdb (;&ltquery&gt)</td> \
+          <td align='left'>Internet Movie Database</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>img (;&ltquery&gt)</td> \
-          <td>Google Images</td> \
+          <td class='menuCommandText' align='right'>img (;&ltquery&gt)</td> \
+          <td align='left'>Google Images</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>wa (;&ltquery&gt)</td> \
-          <td>Wolfram Alpha</td> \
+          <td class='menuCommandText' align='right'>wa (;&ltquery&gt)</td> \
+          <td align='left'>Wolfram Alpha</td> \
         </tr> \
         <tr> \
-          <td class='menuCommandText'>t;&lturl&gt</td> \
-          <td>Open url in current tab</td> \
+          <td class='menuCommandText' align='right'>t;&lturl&gt</td> \
+          <td align='left'>Open url in current tab</td> \
         </tr> \
         <tr> \
-        <td class='menuCommandText'>&ltanything&gt&#59n</td> \
-          <td>Open in a new tab</td> \
+        <td class='menuCommandText' align='right'>&ltanything&gt&#59n</td> \
+          <td align='left'>Open in a new tab</td> \
+        </tr> \
+        <tr> \
+          <td> \
+            <br> \
+          </td> \
         </tr> \
         <tr> \
           <td colspan='2'> \
@@ -475,46 +446,60 @@
 </script>
 
 <style>
+  :root {
+    /* Dark gray */
+    --bg-color: #282828;
+
+    /* Yellowed white */
+    --text-color: #ebdbb2;
+
+    /* Blue */
+    --accent-color: #83a598;
+  }
+
   body {
-    background-color: #A1C0C0;
+    background-color: var(--bg-color);
     overflow-x: auto;
     width: 100%;
     height: 100%;
+    text-color: var(--text-color);
   }
 
   #wrapper {
     position: absolute;
     left: 15%;
     right: 15%;
-    top: 35%;
+    top: 30%;
     bottom: 15%;
   }
 
   #clock {
-    font-size: 60px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
+    font-size: 112px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
     letter-spacing: 4px;
-    margin-bottom: 30px;
+    margin-bottom: 8%;
+    color: var(--text-color);
   }
 
   #input-box {
-    font-size: 30px;
-    font-family: 'Roboto Slab', serif;
+    font-size: 24px;
+    font-family: 'Source Sans Pro', serif;
     border: 0px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--text-color);
     outline: none;
     background: transparent;
     text-align: center;
     display: inline-block;
     max-width: 100%;
+    color: var(--text-color);
   }
   #input-box::selection {
     background: #F3F6F6;
   }
 
   #content {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
   }
 
   .menuBtn {
@@ -538,7 +523,7 @@
   }
 
   .menuCommandText {
-     font-family: 'Roboto Slab', serif;
+     font-family: 'Source Sans Pro', serif;
      font-size: 14px;
   }
 
@@ -547,39 +532,48 @@
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+    color: var(--text-color);
   }
 
-  #defaultColorBtn {
-    margin-top: 5px;
-    font-size: 12px;
-    background-color: #A1C0C0;
+  #helpTable {
+    width: 100%;
+    table-layout:fixed;
   }
 
   table {
     width: 50%;
     min-width: 500px;
-    border: 1px solid black;
     font-size: 16px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    color: var(--text-color);
   }
   td {
     padding: 6px;
   }
   th {
     padding: 6px;
+    padding-top: 40px;
   }
 
   #message {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
     text-align: center;
     padding-top: 25px;
   }
 
-  #bgColorInput {
-    border: none;
-    background-color: #FFF;
+  #closeHelpBtn {
+    background-color: var(--accent-color);
+  }
+
+  #saveOptionsBtn {
+    background-color: var(--accent-color);
+    margin-top: 40px;
+  }
+
+  #submitIssueBtn {
+    background-color: #928374;
   }
 </style>
