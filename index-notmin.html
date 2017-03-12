@@ -507,11 +507,28 @@
   .menuBtn {
     text-align: center;
     font-size: 16px;
-    border: 1px solid black;
-    background-color: #FFF;
+    border: 0;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.2s cubic-bezier(.25,.8,.25,1);
+  }
+  .menuBtn:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+  .menuBtn:active {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
   .menuBtn:focus {
     outline: none;
+  }
+
+  #submitIssueBtn {
+    background-color: #928374;
+  }
+
+  #saveOptionsBtn {
+    margin-top: 40px;
   }
 
   .resetBtn {
@@ -565,18 +582,5 @@
     text-align: center;
     padding-top: 25px;
     color: var(--text-color);
-  }
-
-  #closeHelpBtn {
-    background-color: var(--accent-color);
-  }
-
-  #saveOptionsBtn {
-    background-color: var(--accent-color);
-    margin-top: 40px;
-  }
-
-  #submitIssueBtn {
-    background-color: #928374;
   }
 </style>
