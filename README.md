@@ -12,11 +12,11 @@ The syntax is as follows: `command[;query][;n]`
 
 Commands are shortcuts for sites (e.g. `y` for YouTube). If you simply enter a command, it will take you to that site.
 
-<sup>For a full list of commands and what they do, take a look at the [help menu](#menus).</sup>
+<sup>For a full list of commands and what they do, take a look at the help menu (see [menus](#menus) section below).</sup>
 
 You can search sites by separating the command and your query with a semicolon. If you wanted to search YouTube for cat videos, you would enter: `y;cat videos`. (Note that leading/trailing spaces get stripped, so entering `y; cat videos` will do the same thing.)
 
-If you do not enter a command, the input will be taken as a query and the default command will be executed. The default default command is Google, but this can be changed in the [options menu](#menus).
+If you do not enter a command, the input will be taken as a query and the default command will be executed. The default default command is Google, but this can be changed in the options menu. <sup>(see [menus](#menus) section below).</sup>
 
 Some commands behave slightly differently. For example, the Reddit command (`r`) will take you to a subreddit rather than searching Reddit. Example: `r;askreddit`. With this particular command you can also do things like: `r;askreddit/top?t=month` to quickly get where you want to be.
 
