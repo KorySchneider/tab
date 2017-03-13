@@ -93,11 +93,11 @@
   function queryFix(command, query) {
     var c = command.command;
     // Replace spaces with plus signs for the following commands
-    query = (c === 'w' || c === 'wa')
+    query = (c === 'w')
       ? query.trim().replace(/ /g, '+')
       : query.trim();
     // Don't encode queries for the following commands
-    query = (c === 't' || c === 'r' || c === 'w' || c === 'wa')
+    query = (c === 't' || c === 'r' || c === 'w')
       ? query
       : encodeURIComponent(query);
     return query;
