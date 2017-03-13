@@ -17,6 +17,7 @@
     { command: 'w', url: 'https://www.wikipedia.org', search: '/w/index.php?title=Special:Search&search=' },
     { command: 'wa', url: 'https://www.wolframalpha.com', search: '/input/?i=' },
     { command: 'imdb', url: 'https://www.imdb.com', search: '/find?s=all&q=' },
+    { command: 'n', url: 'https://www.netflix.com', search: '/search?q=' },
     { command: 'img', url: 'https://www.google.com', search: '/search?tbm=isch&q=' },
     { command: 't', url: '', search: '' }
   ];
@@ -266,16 +267,17 @@
       <tr> \
          <td align='left'> \
             <form id='defaultCommandForm'> \
-               <input type='radio' name='defaultCommandRadio' id='t' value='t'><label for='t'>Go to website</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='g' value='g'><label for='g'>Search Google</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='dg' value='dg'><label for='dg'>Search DuckDuckGo</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='w' value='w'><label for='w'>Search Wikipedia</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='y' value='y'><label for='y'>Search YouTube</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='a' value='a'><label for='a'>Search Amazon</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='t'    value='t'>   <label for='t'>Go to website</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='g'    value='g'>   <label for='g'>Search Google</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='dg'   value='dg'>  <label for='dg'>Search DuckDuckGo</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='w'    value='w'>   <label for='w'>Search Wikipedia</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='y'    value='y'>   <label for='y'>Search YouTube</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='a'    value='a'>   <label for='a'>Search Amazon</label><br> \
                <input type='radio' name='defaultCommandRadio' id='imdb' value='imdb'><label for='imdb'>Search Internet Movie Database</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='img' value='img'><label for='img'>Search Google Images</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='wa' value='wa'>Search Wolfram Alpha</label><br> \
-               <input type='radio' name='defaultCommandRadio' id='r' value='r'><label for='r'>Go to subreddit</label> \
+               <input type='radio' name='defaultCommandRadio' id='n'    value='n'>   <label for='n'>Search Netflix</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='img'  value='img'> <label for='img'>Search Google Images</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='wa'   value='wa'>  <label for='wa'>Search Wolfram Alpha</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='r'    value='r'>   <label for='r'>Go to subreddit</label> \
             </form> \
          </td> \
       </tr> \
@@ -392,6 +394,10 @@
         <tr> \
           <td class='menuCommandText' align='right'>imdb (;&ltquery&gt)</td> \
           <td align='left'>Internet Movie Database</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText' align='right'>n (;&ltquery&gt)</td> \
+          <td align='left'>Netflix</td> \
         </tr> \
         <tr> \
           <td class='menuCommandText' align='right'>img (;&ltquery&gt)</td> \
