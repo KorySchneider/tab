@@ -179,6 +179,7 @@
   function saveOptions() {
     if (typeof(Storage) == "undefined") {
       alert("Browser does not support local storage: your settings won't be saved (sorry)");
+      return false;
     } else {
 
       // Get default command
@@ -197,9 +198,12 @@
 
       // Tab open style
       SETTINGS.alwaysNewTab = document.getElementById('openStyleCheckbox').checked;
+
+      // Write changes
+      localStorage.setItem('userOptions', JSON.stringify(SETTINGS));
+
+      return true;
     }
-    clearInput();
-    return true;
   }
 
   function loadOptions() {
@@ -318,10 +322,13 @@
 
     document.getElementById('saveOptionsBtn').onclick = function() {
       if (saveOptions()) {
-        saveOptions();
         lowerWrapper();
         clearContent();
         displayMessage('settings saved', 2000);
+      } else {
+        alert('Error: No localStorage support\nYour settings were not saved\n(sorry)')
+        lowerWrapper();
+        clearContent();
       }
     };
 
