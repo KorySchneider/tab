@@ -9,17 +9,18 @@
 
 <script>
   var commands = [
-    { command: 'g',    url: 'https://www.google.com',                  search: '/search?q=' },
-    { command: 'dg',   url: 'https://duckduckgo.com',                  search: '/?q=' },
-    { command: 'r',    url: 'https://www.reddit.com',                  search: '/r/' },
-    { command: 'y',    url: 'https://www.youtube.com',                 search: '/results?search_query=' },
-    { command: 'a',    url: 'https://smile.amazon.com',                search: '/s/?field-keywords=' },
-    { command: 'w',    url: 'https://www.wikipedia.org',               search: '/w/index.php?title=Special:Search&search=' },
-    { command: 'wa',   url: 'https://www.wolframalpha.com',            search: '/input/?i=' },
-    { command: 'imdb', url: 'https://www.imdb.com',                    search: '/find?s=all&q=' },
-    { command: 'n',    url: 'https://www.netflix.com',                 search: '/search?q=' },
-    { command: 'img',  url: 'https://www.google.com',                  search: '/search?tbm=isch&q=' },
-    { command: 'k',    url: 'https://keep.google.com',                 search: '/#search/text=' },
+    { command: 'g',    url: 'https://www.google.com',       search: '/search?q=' },
+    { command: 'dg',   url: 'https://duckduckgo.com',       search: '/?q=' },
+    { command: 'r',    url: 'https://www.reddit.com',       search: '/r/' },
+    { command: 'y',    url: 'https://www.youtube.com',      search: '/results?search_query=' },
+    { command: 'a',    url: 'https://smile.amazon.com',     search: '/s/?field-keywords=' },
+    { command: 'w',    url: 'https://www.wikipedia.org',    search: '/w/index.php?title=Special:Search&search=' },
+    { command: 'wa',   url: 'https://www.wolframalpha.com', search: '/input/?i=' },
+    { command: 'imdb', url: 'https://www.imdb.com',         search: '/find?s=all&q=' },
+    { command: 'n',    url: 'https://www.netflix.com',      search: '/search?q=' },
+    { command: 'i',    url: 'https://inbox.google.com',     search: '/search/' },
+    { command: 'img',  url: 'https://www.google.com',       search: '/search?tbm=isch&q=' },
+    { command: 'k',    url: 'https://keep.google.com',      search: '/#search/text=' },
     { command: 't',    url: '', search: '' }
   ];
 </script>
@@ -282,6 +283,7 @@
                <input type='radio' name='defaultCommandRadio' id='n'    value='n'>   <label for='n'>Search Netflix</label><br> \
                <input type='radio' name='defaultCommandRadio' id='img'  value='img'> <label for='img'>Search Google Images</label><br> \
                <input type='radio' name='defaultCommandRadio' id='k'    value='k'>   <label for='k'>Search Google Keep</label><br> \
+               <input type='radio' name='defaultCommandRadio' id='i'    value='i'>   <label for='i'>Search Google Inbox<br> \
                <input type='radio' name='defaultCommandRadio' id='wa'   value='wa'>  <label for='wa'>Search Wolfram Alpha</label><br> \
                <input type='radio' name='defaultCommandRadio' id='r'    value='r'>   <label for='r'>Go to subreddit</label> \
             </form> \
@@ -407,6 +409,10 @@
         <tr> \
           <td class='menuCommandText' align='right'>n (;&ltquery&gt)</td> \
           <td align='left'>Netflix</td> \
+        </tr> \
+        <tr> \
+          <td class='menuCommandText' align='right'>i (;&ltquery&gt)</td> \
+          <td align='left'>Google Inbox</td> \
         </tr> \
         <tr> \
           <td class='menuCommandText' align='right'>img (;&ltquery&gt)</td> \
