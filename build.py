@@ -15,6 +15,13 @@ with open('html.html', 'r') as html:
     output += html.read()
 html.close()
 
+# Add commands
+with open('commands.js', 'r') as commands:
+    output += '<script>'
+    output += commands.read()
+    output += '</script>'
+commands.close()
+
 # Add JS
 with open('js.js', 'r') as js:
     output += '<script>'
