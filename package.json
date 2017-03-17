@@ -1,0 +1,22 @@
+{
+  "name": "tab-a-startpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koryschneider/tab-a-startpage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koryschneider/tab-a-startpage/issues"
+  },
+  "homepage": "https://github.com/koryschneider/tab-a-startpage#readme",
+  "devDependencies": {
+    "html-minifier": "^3.4.1"
+  }
+}
