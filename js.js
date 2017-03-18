@@ -80,6 +80,10 @@ function interpret() {
   } else if (input === 'options' || input === 'settings') {
     displayOptionsMenu();
     return;
+  } else if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(input)) {
+    // input is a URL
+    redirect(input, false);
+    return false;
   }
 
   var inputArr = input.split(';');
