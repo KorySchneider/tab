@@ -154,11 +154,10 @@ function saveOptions() {
     var defaultCommand = null;
     for (var i=0; i < radios.length; i++) {
       if (radios[i].checked) {
-        defaultCommand = radios[i].value;
+        defaultCommand = getFullCommand(radios[i].value);
         break;
       }
     }
-    defaultCommand = getFullCommand(defaultCommand);
     if (defaultCommand !== null) {
       SETTINGS.defaultCommand = defaultCommand;
     }
