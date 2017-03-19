@@ -72,12 +72,13 @@ function interpret() {
   }
 
   if (validCommand) {
-    query = formatQuery(command, inputArray[1]);
     switch(inputArray.length) {
       case 1:
+        query = formatQuery(command, inputArray[0]);
         redirect(command.url, newtab);
         return false; break;
       case 2:
+        query = formatQuery(command, inputArray[1]);
         if (inputArray[1].trim() === 'n') {
           redirect(command.url, newtab);
           return false;
