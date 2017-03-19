@@ -266,6 +266,7 @@ function openSettingsMenu() {
     if (saveSettings()) {
       lowerPageWrapper();
       clearMenu();
+      clearInput();
       displayMessage('settings saved', 2000);
     }
   });
