@@ -3,16 +3,24 @@
  <meta charset='utf-8'>
  <title>tab</title>
  <link rel='icon' type='image/png' href='images/favicon.png'>
+
+ <!-- fonts -->
  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro|Roboto+Condensed' rel='stylesheet'>
+
+ <!-- jquery -->
+ <script
+  src="https://code.jquery.com/jquery-3.2.0.slim.min.js"
+  integrity="sha256-qLAv0kBAihcHZLI3fv3WITKeRsUX27hd6upBBa0MSow="
+  crossorigin="anonymous"></script>
 </head>
 
 <body>
   <div id='wrapper'>
     <div id='clock' align=center>00:00</div>
     <div id='input' align=center>
-      <input id='input-box' type='text' onkeypress='return verifyKey(event)' autocomplete='off' spellcheck='false' size='30' autofocus>
+      <input id='input-box' type='text' onkeydown='return keyDown(event)' autocomplete='off' spellcheck='false' size='30' autofocus>
     </div>
     <div id='message'></div>
-    <div id='content'></div>
+    <div id='menu'></div>
   </div>
 </body>

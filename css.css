@@ -10,11 +10,12 @@
 }
 
 body {
-  background-color: var(--bg-color);
-  overflow-x: auto;
   width: 100%;
   height: 100%;
-  text-color: var(--text-color);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: auto;
+  margin: 10px;
 }
 
 #wrapper {
@@ -25,12 +26,100 @@ body {
   bottom: 15%;
 }
 
+#message {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  padding-top: 25px;
+  color: var(--text-color);
+}
+
+#menu {
+  margin-bottom: 40px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 #clock {
   font-size: 112px;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: bold;
   letter-spacing: 4px;
   margin-bottom: 8%;
+  color: var(--text-color);
+}
+
+table {
+  width: 50%;
+  table-layout:fixed;
+  min-width: 500px;
+  font-size: 16px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text-color);
+  border: 0;
+}
+th {
+  padding: 6px;
+  padding-top: 40px;
+}
+td {
+  padding: 6px;
+}
+
+button {
+  background-color: var(--accent-color);
+  padding: 7px 9px;
+}
+
+.menuBtn {
+  text-align: center;
+  font-size: 16px;
+  border: 0;
+  color: var(--bg-color);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.2s cubic-bezier(.25,.8,.25,1);
+}
+.menuBtn:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.menuBtn:active {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.menuBtn:focus {
+  outline: none;
+}
+
+#submitIssueBtn {
+  background-color: #928374;
+}
+
+#saveSettingsBtn {
+  margin-top: 40px;
+}
+
+#restoreDefaultSettingsBtn {
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid black;
+  background-color: transparent;
+  padding: 1px 6px;
+}
+#restoreDefaultSettingsBtn:focus {
+  outline: none;
+}
+
+.helpMenuCommandText {
+   font-family: 'Source Sans Pro', sans-serif;
+   font-size: 14px;
+}
+
+#helpText {
+  text-align: center;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -20px;
   color: var(--text-color);
 }
 
@@ -50,88 +139,4 @@ body {
 }
 #input-box::selection {
   background: #458588;
-}
-
-#content {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-.menuBtn {
-  text-align: center;
-  font-size: 16px;
-  border: 0;
-  background-color: var(--accent-color);
-  color: var(--bg-color);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.2s cubic-bezier(.25,.8,.25,1);
-}
-.menuBtn:hover {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
-.menuBtn:active {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-.menuBtn:focus {
-  outline: none;
-}
-
-#submitIssueBtn {
-  background-color: #928374;
-}
-
-#saveOptionsBtn {
-  margin-top: 40px;
-}
-
-.resetBtn {
-  text-align: center;
-  font-size: 12px;
-  border: 1px solid black;
-  background-color: transparent;
-}
-.resetBtn:focus {
-  outline: none;
-}
-
-.menuCommandText {
-   font-family: 'Source Sans Pro', serif;
-   font-size: 14px;
-}
-
-#helpText {
-  text-align: center;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--text-color);
-}
-
-#helpTable {
-  width: 100%;
-  table-layout:fixed;
-}
-
-table {
-  width: 50%;
-  min-width: 500px;
-  font-size: 16px;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--text-color);
-}
-td {
-  padding: 6px;
-}
-th {
-  padding: 6px;
-  padding-top: 40px;
-}
-
-#message {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 18px;
-  text-align: center;
-  padding-top: 25px;
-  color: var(--text-color);
 }

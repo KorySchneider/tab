@@ -1,110 +1,83 @@
 'use strict'
 window.onload = function() {
   clock();
-  loadOptions();
-  document.getElementById('clock').addEventListener('click', displayHelpMenu);
-
-  // Broke user options with update (new format for options), this should fix it
-  if (JSON.parse(localStorage.getItem('options-version')) == null) {
-    localStorage.removeItem('userOptions');
-    loadOptions();
-    localStorage.setItem('options-version', 1);
-  }
+  loadSettings();
 }
-var SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
 
+var SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
+
+//
 // Input
-function verifyKey(e) {
+//
+function keyDown(e) {
   var keycode;
   if (window.event) {
     keycode = window.event.keyCode;
   } else if (e) {
     keycode = e.which;
   }
-  if (keycode == 13) { // Enter/return key
-    clearContent();
+
+  if (keycode == 13) { // Enter key
+    clearMenu();
+    lowerPageWrapper();
     interpret();
   }
-  checkInputLength();
-}
 
-function clearInput() {
-  var input = document.getElementById('input-box');
-  input.value = '';
-  input.select();
-}
-
-function checkInputLength() {
-  var input = document.getElementById('input-box');
-  if (input.value.length > 30) {
-    input.size = input.value.length + 1;
-  } else {
-    input.size = 30;
-  }
-}
-
-function getFullCommand(c) {
-  for (var i=0; i < commands.length; i++) {
-    if (c === commands[i].command) {
-      return commands[i];
-    }
-  }
-  return null;
-}
-
-function queryFix(command, query) {
-  var c = command.command;
-  // Replace spaces with plus signs for the following commands
-  query = (c === 'w')
-    ? query.trim().replace(/ /g, '+')
-    : query.trim();
-  // Don't encode queries for the following commands
-  query = (c === 't' || c === 'r' || c === 'w')
-    ? query
-    : encodeURIComponent(query);
-  return query;
+  // Expand input box if text exceeds size
+  var minLength = 30;
+  var input = $('#input-box');
+  var size= (input.val().length > minLength)
+    ? input.val().length + 1
+    : minLength;
+  input.prop('size', size)
 }
 
 function interpret() {
-  var inputBox = document.getElementById('input-box');
+  var inputBox = $('#input-box');
   inputBox.select();
-  var input = inputBox.value.trim();
+  var input = inputBox.val();
+
+  // Input is empty string
   if (input === '') {
-    lowerWrapper();
+    lowerPageWrapper();
     return;
   }
-
-  if (input === 'help' || input === '?') {
-    displayHelpMenu();
-    return;
-  } else if (input === 'options' || input === 'settings') {
-    displayOptionsMenu();
-    return;
-  } else if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(input)) {
-    // input is a URL
+  
+  // Input is a URL
+  if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(input)) {
     redirect(input, false);
     return false;
   }
 
-  var inputArr = input.split(';');
-  var newtab = (inputArr[inputArr.length-1] === 'n');
-  var command; var query;
+  // Menus
+  if (['help', '?'].includes(input)) {
+    openHelpMenu()
+    return;
+  } else if (['settings', 'options'].includes(input)) {
+    openSettingsMenu();
+    return;
+  }
+
+  // Input is some command
+  var command;
+  var query;
+  var inputArray = input.split(';');
+  var newtab = (inputArray[inputArray.length - 1] === 'n');
 
   var validCommand = false;
-  command = getFullCommand(inputArr[0]);
+  command = getFullCommand(inputArray[0]);
   if (command !== null) {
     validCommand = true;
   }
 
   if (validCommand) {
-    switch(inputArr.length) {
+    query = formatQuery(command, inputArray[1]);
+    switch(inputArray.length) {
       case 1:
         redirect(command.url, newtab);
-        return false;
-        break;
+        return false; break;
       case 2:
-        query = queryFix(command, inputArr[1]);
-        if (inputArr[1] === 'n') {
+        if (inputArray[1].trim() === 'n') {
           redirect(command.url, newtab);
           return false;
         } else {
@@ -112,17 +85,13 @@ function interpret() {
           return false;
         }
         break;
-      default:
-        query = queryFix(command, inputArr[1]);
+      case 3:
         redirect(command.url + command.search + query, newtab);
-        return false;
+        return false; break;
     }
-    // TODO pass query through queryFix
-    redirect(command.url + command.search + query, newtab);
-    return false;
-  } else {
+  } else { // Not validCommand
     command = SETTINGS.defaultCommand;
-    query = queryFix(command, inputArr[0]);
+    query = formatQuery(command, inputArray[0]);
     redirect(command.url + command.search + query, newtab);
     return false;
   }
@@ -142,119 +111,108 @@ function redirect(url, newtab) {
   }
 }
 
-// Options
-function saveOptions() {
-  if (typeof(Storage) == "undefined") {
-    alert("Browser does not support local storage: your settings won't be saved (sorry)");
+function formatQuery(command, query) {
+  var c = command.command;
+  query = query.trim();
+  // Don't encode queries for these commands
+  query = (['r', 'w'].includes(c))
+    ? query
+    : encodeURIComponent(query);
+  // Replace spaces with plus signs
+  query = (c === 'w')
+    ? query.replace(/ /g, '+')
+    : query;
+  return query;
+}
+
+function clearInput() {
+  $('#input-box').val('').select();
+}
+
+//
+// Settings
+//
+function saveSettings() {
+  if (!typeof(Storage)) {
+    alert('Browser does not support local storage:\nYour settings won\'t be saved (sorry)');
     return false;
-  } else {
-
-    // Get default command
-    var radios = document.getElementById('defaultCommandForm');
-    var defaultCommand = null;
-    for (var i=0; i < radios.length; i++) {
-      if (radios[i].checked) {
-        defaultCommand = getFullCommand(radios[i].value);
-        break;
-      }
-    }
-    if (defaultCommand !== null) {
-      SETTINGS.defaultCommand = defaultCommand;
-    }
-
-    // Tab open style
-    SETTINGS.alwaysNewTab = document.getElementById('openStyleCheckbox').checked;
-
-    // Write changes
-    localStorage.setItem('userOptions', JSON.stringify(SETTINGS));
-
-    return true;
   }
+
+  // Default command
+  var defaultCommand = $('input[name=defaultCommandRadio]:checked', '#defaultCommandForm').val();
+  SETTINGS.defaultCommand = getFullCommand(defaultCommand);
+
+  // Open style
+  SETTINGS.alwaysNewTab = $('#openStyleCheckbox').prop('checked');
+
+  // Write changes
+  localStorage.setItem('userSettings', JSON.stringify(SETTINGS));
+
+  return true;
 }
 
-function loadOptions() {
-  if (typeof(Storage) !== 'undefined') {
-    if (localStorage.getItem('userOptions') !== null) {
-      SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
-    } else {
+function loadSettings() {
+  if (typeof(Storage)) {
+    if (localStorage.getItem('userSettings') == null) {
       var defaultSettings = {
-        defaultCommand: {
-          command: 'g',
-          url: 'https://www.google.com',
-          search: '/search?q='
-        },
-        alwaysNewTab: false,
+        defaultCommand: getFullCommand('g'),
+        alwaysNewTab: false
       };
-      localStorage.setItem('userOptions', JSON.stringify(defaultSettings));
-      SETTINGS = JSON.parse(localStorage.getItem('userOptions'));
+      localStorage.setItem('userSettings', JSON.stringify(defaultSettings));
+      SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
+    } else {
+      SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
     }
   }
 }
 
-// Displayed content
-function clearMessage() {
-  var div = document.getElementById('message');
-  div.innerHTML = '';
-  div.style.display = 'none';
+//
+// Menus
+//
+function clearMenu() {
+  $('#menu').html('');
 }
 
-function displayMessage(message, timeMs) {
-  var div = document.getElementById('message');
-  div.style.display = ''; // Show div
-  div.innerHTML = message;
-  if (timeMs !== 0) {
-    setTimeout(clearMessage, timeMs);
-  }
+function raisePageWrapper() {
+  $('#wrapper').css('top', '10%');
+}
+function lowerPageWrapper() {
+  $('#wrapper').css('top', '30%');
 }
 
-function clearContent() {
-  document.getElementById('content').innerHTML = '';
-}
-
-function displayContent(content) {
+function displayMenu(html) {
+  clearMenu();
   clearInput();
-  clearContent();
-  raiseWrapper();
-  document.getElementById('content').innerHTML = content;
-  window.scrollBy(0, 1000);
+  raisePageWrapper();
+  $('#menu').html(html);
 }
 
-function raiseWrapper() {
-  document.getElementById('wrapper').style.top = "10%";
-}
-
-function lowerWrapper() {
-  document.getElementById('wrapper').style.top = "30%";
-}
-
-function displayOptionsMenu() {
+function openSettingsMenu() {
+  // TODO css rather than inline for td & th align
   var html = "\
-    <br/> \
-    <table border='0'> \
+  <div id='settingsMenu'> \
+    <br> \
+    <table id='settingsTable'> \
     <tr> \
-       <td align='left'><strong>Default Command</strong><br>executes if no command was specified</td> \
+      <td align='left'><strong>Default Command</strong><br>executes if no command was specified</td> \
     </tr> \
     <tr> \
-       <td align='left'> \
-          <form id='defaultCommandForm'> \
-             <input type='radio' name='defaultCommandRadio' id='t'    value='t'>   <label for='t'>Go to website</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='g'    value='g'>   <label for='g'>Search Google</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='dg'   value='dg'>  <label for='dg'>Search DuckDuckGo</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='w'    value='w'>   <label for='w'>Search Wikipedia</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='y'    value='y'>   <label for='y'>Search YouTube</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='a'    value='a'>   <label for='a'>Search Amazon</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='imdb' value='imdb'><label for='imdb'>Search Internet Movie Database</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='n'    value='n'>   <label for='n'>Search Netflix</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='img'  value='img'> <label for='img'>Search Google Images</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='k'    value='k'>   <label for='k'>Search Google Keep</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='i'    value='i'>   <label for='i'>Search Google Inbox<br> \
-             <input type='radio' name='defaultCommandRadio' id='wa'   value='wa'>  <label for='wa'>Search Wolfram Alpha</label><br> \
-             <input type='radio' name='defaultCommandRadio' id='r'    value='r'>   <label for='r'>Go to subreddit</label> \
-          </form> \
-       </td> \
+      <td align='left'> \
+        <form id='defaultCommandForm'>";
+
+  // Generate options from command list
+  for (var i=0; i < COMMANDS.length; i++) {
+    var c = COMMANDS[i].command;
+    var text = COMMANDS[i]['options-text'];
+    html += "\n<input type='radio' name='defaultCommandRadio' id='"+c+"' value='"+c+"'><label for='"+c+"'>" + text + "</label><br>\n";
+  }
+
+  html += "\
+        </form> \
+      </td> \
     </tr> \
     <tr> \
-       <th align='left'>Open Style</th> \
+      <th align='left'>Open Style</th> \
     </tr> \
     <tr> \
        <td align='left'> \
@@ -271,47 +229,20 @@ function displayOptionsMenu() {
     </tr> \
     <tr> \
       <td> \
-        <button type='button' id='saveOptionsBtn' class='menuBtn'>Save</button> \
+        <button type='button' id='saveSettingsBtn' class='menuBtn'>Done</button> \
        </td> \
     </tr> \
     <tr> \
       <td align='right'> \
-        <button type='button' id='resetOptionsBtn' class='resetBtn'><small>Reset Options</small></button> \
-        <button type='button' id='resetOptionsTipBtn' class='resetBtn'><small>(?)</small></button> \
+        <button type='button' id='restoreDefaultSettingsBtn'><small>Restore Defaults</small></button> \
       </td> \
     </tr> \
-    </table>";
+    </table> \
+  </div>";
 
-  displayContent(html);
+  displayMenu(html);
 
-  document.getElementById('submitIssueBtn').onclick = function() {
-    redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
-  };
-
-  document.getElementById('saveOptionsBtn').onclick = function() {
-    if (saveOptions()) {
-      lowerWrapper();
-      clearContent();
-      displayMessage('settings saved', 2000);
-    } else {
-      alert('Error: No localStorage support\nYour settings were not saved\n(sorry)')
-      lowerWrapper();
-      clearContent();
-    }
-  };
-
-  document.getElementById('resetOptionsBtn').onclick = function() {
-    localStorage.removeItem('userOptions');
-    loadOptions();
-    lowerWrapper();
-    clearContent();
-    displayMessage('settings reset', 2000);
-  }
-  document.getElementById('resetOptionsTipBtn').onclick = function() {
-    alert("This button will restore the default settings.\n (might be useful if I broke something in the last update)");
-  }
-
-  // Display saved options
+  // Display saved settings
   var radios = document.getElementById('defaultCommandForm');
   for (var i=0; i < radios.length; i++) {
     if (SETTINGS.defaultCommand.command === radios[i].value) {
@@ -319,14 +250,32 @@ function displayOptionsMenu() {
       break;
     }
   }
-  document.getElementById('openStyleCheckbox').checked = SETTINGS.alwaysNewTab;
+  $('#openStyleCheckbox').prop('checked', SETTINGS.alwaysNewTab);
+
+  // Save on change
+  $('#defaultCommandForm').change(saveSettings);
+  $('#openStyleCheckbox').change(saveSettings);
+
+  // Button click handlers
+  $('#submitIssueBtn').click(function() {
+    redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
+  });
+
+  $('#saveSettingsBtn').click(function() {
+    if (saveSettings()) {
+      lowerPageWrapper();
+      clearMenu();
+      displayMessage('settings saved', 2000);
+    }
+  });
 }
 
-function displayHelpMenu() {
-  var html = " \
+function openHelpMenu() {
+  var html = "\
+  <div id='helpMenu'> \
     <div id='helpText'> \
       <br> \
-      <p>Below is a list of commands, most of which act as shortcuts to sites or the search engine of those sites. To go to a site, simply enter its command (e.g. 'g' for Google), or type a semicolon followed by a query to search the site.</p> \
+      <p>Below is a list of commands, most of which act as shortcuts to sites or the search engine for those sites. To go to a site, simply enter its command (e.g. <strong>y</strong> for YouTube), or type a semicolon followed by a query to search the site (like this: <strong>y;cat videos</strong>). Input a URL by itself to go to it.</p> \
       <p><small>syntax:</small><br>command;query[;n]</p> \
     </div> \
     <table id='helpTable'> \
@@ -335,67 +284,25 @@ function displayHelpMenu() {
         <th align='left'>Site/Function</th> \
       </tr> \
       <tr> \
-        <td class='menuCommandText' align='right'>options</td> \
+        <td class='helpMenuCommandText' align='right'>options</td> \
         <td align='left'>Show options menu</td> \
       </tr> \
       <tr> \
-        <td class='menuCommandText' align='right'>help</td> \
+        <td class='helpMenuCommandText' align='right'>help</td> \
         <td align='left'>Show this menu</td> \
-      </tr> \
+      </tr>";
+
+  // Generate table from command list
+  for (var i=0; i < COMMANDS.length; i++) {
+    var command = COMMANDS[i]['help-command'];
+    var desc = COMMANDS[i]['help-desc'];
+    html += "\n<tr>\n<td class='helpMenuCommandText' align='right'>"+command+"</td>";
+    html += "\n<td align='left'>"+desc+"</td>\n</tr>"
+  }
+
+  html += "\
       <tr> \
-        <td class='menuCommandText' align='right'>r (;&ltsubreddit&gt)</td> \
-        <td align='left'>Reddit</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>g (;&ltquery&gt)</td> \
-        <td align='left'>Google</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>dg (;&ltquery&gt)</td> \
-        <td align='left'>DuckDuckGo</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>y (;&ltquery&gt)</td> \
-        <td align='left'>YouTube</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>a (;&ltquery&gt)</td> \
-        <td align='left'>Amazon</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>w (;&ltquery&gt)</td> \
-        <td align='left'>Wikipedia</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>imdb (;&ltquery&gt)</td> \
-        <td align='left'>Internet Movie Database</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>n (;&ltquery&gt)</td> \
-        <td align='left'>Netflix</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>i (;&ltquery&gt)</td> \
-        <td align='left'>Google Inbox</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>img (;&ltquery&gt)</td> \
-        <td align='left'>Google Images</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>k (;&ltquery&gt)</td> \
-        <td align='left'>Google Keep</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>wa (;&ltquery&gt)</td> \
-        <td align='left'>Wolfram Alpha</td> \
-      </tr> \
-      <tr> \
-        <td class='menuCommandText' align='right'>t;&lturl&gt</td> \
-        <td align='left'>Open url in current tab</td> \
-      </tr> \
-      <tr> \
-      <td class='menuCommandText' align='right'>&ltanything&gt&#59n</td> \
+        <td class='helpMenuCommandText' align='right'>&ltcommand&gt&#59n</td> \
         <td align='left'>Open in a new tab</td> \
       </tr> \
       <tr> \
@@ -404,31 +311,55 @@ function displayHelpMenu() {
         </td> \
       </tr> \
       <tr> \
-        <td colspan='2'> \
+        <td colspan='2' align='center'> \
           <button type='button' id='closeHelpBtn' class='menuBtn'>Close</button> \
         </td> \
       </tr> \
-    </table>"
+    </table>";
 
-  displayContent(html);
+  displayMenu(html);
 
-  document.getElementById('closeHelpBtn').onclick = function() {
-    clearContent();
+  $('#closeHelpBtn').click(function() {
+    clearMenu();
     clearInput();
-    lowerWrapper();
+    lowerPageWrapper();
+  });
+}
+
+//
+// Misc helper functions
+//
+function getFullCommand(c) { // Takes a command shortcut, returns full command object
+  for (var i=0; i < COMMANDS.length; i++) {
+    if (c === COMMANDS[i].command) {
+      return COMMANDS[i];
+    }
+  }
+  return null;
+}
+
+function displayMessage(message, timeMs) {
+  $('#message').show().text(message);
+
+  if (timeMs > 0) {
+    setTimeout(function() {
+      $('#message').html('').prop('display', 'none');
+    }, timeMs);
   }
 }
 
+//
 // Clock
+//
 function clock() {
+  var formatTime = function(n) {
+    n = (n < 10) ? (n = '0' + n) : n;
+    return n;
+  };
   var date = new Date();
   var h = date.getHours();
-  h = (h > 12) ? (checkTime(h -= 12)) : checkTime(h); // 12hr clock
-  var m = checkTime(date.getMinutes());
+  h = (h > 12) ? (formatTime(h -= 12)) : formatTime(h); // 12hr clock
+  var m = formatTime(date.getMinutes());
   document.getElementById('clock').innerHTML = h + ':' + m;
   setTimeout(clock, 1000);
-}
-function checkTime(n) {
-  n = (n < 10) ? (n = '0' + n) : n;
-  return n;
 }
