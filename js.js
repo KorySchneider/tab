@@ -2,6 +2,7 @@
 window.onload = function() {
   clock();
   loadSettings();
+  $('#clock').click(openHelpMenu);
 }
 
 var SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
