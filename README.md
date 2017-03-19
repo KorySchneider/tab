@@ -9,9 +9,9 @@ Tab lives [here](https://koryschneider.github.io/tab-a-startpage). Please read b
  
    - [Intro](#intro)
    
- - [Examples](#examples)
+   - [Examples](#examples)
  
- - [Menus](#menus)
+   - [Menus](#menus)
  
  - [Chrome Extension](#chrome-extension)
  
