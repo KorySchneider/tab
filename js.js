@@ -261,6 +261,11 @@ function openSettingsMenu() {
   $('#submitIssueBtn').click(function() {
     redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
   });
+  $('#restoreDefaultSettingsBtn').click(function() {
+    localStorage.removeItem('userSettings');
+    loadSettings();
+    displayMessage('settings reset', 2000);
+  });
 
   $('#saveSettingsBtn').click(function() {
     if (saveSettings()) {
