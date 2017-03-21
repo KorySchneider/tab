@@ -265,16 +265,15 @@ function openSettingsMenu() {
   $('#restoreDefaultSettingsBtn').click(function() {
     localStorage.removeItem('userSettings');
     loadSettings();
-    displayMessage('settings reset', 2000);
+    openSettingsMenu();
+    displayMessage('settings reset', 1500);
   });
 
   $('#saveSettingsBtn').click(function() {
-    if (saveSettings()) {
-      lowerPageWrapper();
-      clearMenu();
-      clearInput();
-      displayMessage('settings saved', 2000);
-    }
+    lowerPageWrapper();
+    clearMenu();
+    clearInput();
+    displayMessage('settings saved', 2000);
   });
 }
 
