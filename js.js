@@ -75,7 +75,7 @@ function interpret() {
     switch(inputArray.length) {
       case 1:
         query = formatQuery(command, inputArray[0]);
-        redirect(command.url, newtab);
+        redirect(command.url, false);
         return false; break;
       case 2:
         query = formatQuery(command, inputArray[1]);
