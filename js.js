@@ -88,6 +88,7 @@ function interpret() {
         }
         break;
       case 3:
+        query = formatQuery(command, inputArray[1]);
         redirect(command.url + command.search + query, newtab);
         return false; break;
     }

@@ -62,6 +62,13 @@ var COMMANDS = [
     'help-desc': 'Netflix',
     'options-text': 'Search Netflix'
   },
+  { command: 'gm',
+    url: 'https://www.google.com',
+    search: '/maps?q=',
+    'help-command': 'gm (;&ltquery&lt)',
+    'help-desc': 'Google Maps',
+    'options-text': 'Search Google Maps'
+  },
   { command: 'i',
     url: 'https://inbox.google.com',
     search: '/search/',
