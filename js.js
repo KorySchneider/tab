@@ -218,9 +218,9 @@ function openSettingsMenu() {
       <th align='left'>Open Style</th> \
     </tr> \
     <tr> \
-       <td align='left'> \
-    <input type='checkbox' id='openStyleCheckbox' value='newTab'><label for='openStyleCheckbox'>Always open in new tab</label><br/> \
-       </td> \
+      <td align='left'> \
+        <input type='checkbox' id='openStyleCheckbox' value='newTab'><label for='openStyleCheckbox'>Always open in new tab</label><br/> \
+      </td> \
     </tr> \
     <tr> \
       <th align='left'>Found a bug? Have a request?</th> \
