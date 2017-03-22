@@ -92,7 +92,7 @@ function interpret() {
         redirect(command.url + command.search + query, newtab);
         return false; break;
     }
-  } else { // Not validCommand
+  } else {
     command = SETTINGS.defaultCommand;
     query = formatQuery(command, inputArray[0]);
     redirect(command.url + command.search + query, newtab);
@@ -228,6 +228,7 @@ function openSettingsMenu() {
     <tr> \
       <td align='left'> \
         <button type='button' id='submitIssueBtn' class='menuBtn'>Submit an Issue</button> \
+        <small>or email <a href='mailto:tab.startpage@gmail.com'>tab.startpage@gmail.com</a></small> \
       </td> \
     </tr> \
     <tr> \
@@ -263,6 +264,7 @@ function openSettingsMenu() {
   $('#submitIssueBtn').click(function() {
     redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
   });
+
   $('#restoreDefaultSettingsBtn').click(function() {
     localStorage.removeItem('userSettings');
     loadSettings();

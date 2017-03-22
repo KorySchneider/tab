@@ -67,6 +67,10 @@ td {
   padding: 6px;
 }
 
+a {
+  color: #928374;
+}
+
 button {
   background-color: var(--accent-color);
   padding: 7px 9px;
@@ -93,6 +97,7 @@ button {
 
 #submitIssueBtn {
   background-color: #928374;
+  margin-right: 5px;
 }
 
 #saveSettingsBtn {
