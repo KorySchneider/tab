@@ -25,9 +25,9 @@ The purpose of this site is to use short, simple commands to access and search w
 
 The syntax is as follows: `command;query[;n]`
 
-Commands are shortcuts for sites (e.g. `y` for YouTube). You can search sites by separating the command and your query with a semicolon. If you wanted to search YouTube for cat videos, you would enter: `y;cat videos`. If you simply enter a command and no query, it will take you to that site. (Note that leading/trailing spaces get stripped, so entering `y; cat videos` will do the same thing.)
+Commands are shortcuts for sites (e.g. `y` for YouTube). You can search sites by separating the command and your query with a semicolon. If you wanted to search YouTube for cat videos, you would enter: `y;cat videos`. If you simply enter a command and no query, it will take you to that site. <sup>(Note that leading/trailing spaces get stripped, so entering `y; cat videos` will do the same thing.)</sup>
 
-<sup>For a full list of commands and what they do, refer to the command list in the help menu (see [menus](#menus) section below).</sup>
+For a full list of commands and what they do, refer to the command list in the help menu. <sup>(see [menus](#menus) section below)</sup>
 
 #### Examples
 Here some sample inputs and what they do:
