@@ -223,7 +223,7 @@ function openSettingsMenu() {
        </td> \
     </tr> \
     <tr> \
-      <th align='left'>Found a bug? Want to request a feature?</th> \
+      <th align='left'>Found a bug? Have a request?</th> \
     </tr> \
     <tr> \
       <td align='left'> \
@@ -325,9 +325,24 @@ function openHelpMenu() {
           <button type='button' id='closeHelpBtn' class='menuBtn'>Close</button> \
         </td> \
       </tr> \
+      <tr colspan='2' align='center'> \
+        <th colspan='2' align='center'>Found a bug? Have a request?</th> \
+      </tr> \
+      <tr colspan='2'> \
+        <td colspan='2' align='center'> \
+          <button type='button' id='submitIssueBtn' class='menuBtn'>Submit an Issue</button> \
+          <br> \
+          <small>or email <a href='mailto:tab.startpage@gmail.com'>tab.startpage@gmail.com</a></small> \
+        </td> \
+      </tr> \
     </table>";
 
   displayMenu(html);
+
+  // Button click handlers
+  $('#submitIssueBtn').click(function() {
+    redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
+  });
 
   $('#closeHelpBtn').click(function() {
     clearMenu();
