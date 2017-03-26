@@ -5,7 +5,12 @@ window.onload = function() {
   $('#clock').click(openHelpMenu);
 }
 
-var SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
+try {
+  var SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
+  var CUSTOM_COMMANDS = JSON.parse(localStorage.getItem('customCommands'));
+} catch(e) {
+  loadSettings();
+}
 
 //
 // Input
@@ -43,7 +48,7 @@ function interpret() {
     lowerPageWrapper();
     return;
   }
-  
+
   // Input is a URL
   if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(input)) {
     redirect(input, false);
@@ -141,6 +146,19 @@ function saveSettings() {
     return false;
   }
 
+  // Custom commands
+  try {
+    var text = $('#customCommandsTextarea').val();
+    if (text == '') {
+      CUSTOM_COMMANDS = JSON.parse('[]');
+    } else {
+      CUSTOM_COMMANDS = JSON.parse(text);
+    }
+  } catch(e) {
+    alert('Invalid JSON in custom commands');
+    return false;
+  }
+
   // Default command
   var defaultCommand = $('input[name=defaultCommandRadio]:checked', '#defaultCommandForm').val();
   SETTINGS.defaultCommand = getFullCommand(defaultCommand);
@@ -150,22 +168,29 @@ function saveSettings() {
 
   // Write changes
   localStorage.setItem('userSettings', JSON.stringify(SETTINGS));
+  localStorage.setItem('customCommands', JSON.stringify(CUSTOM_COMMANDS));
 
   return true;
 }
 
 function loadSettings() {
   if (typeof(Storage)) {
+
+    // Settings
     if (localStorage.getItem('userSettings') == null) {
       var defaultSettings = {
         defaultCommand: getFullCommand('g'),
         alwaysNewTab: false
       };
       localStorage.setItem('userSettings', JSON.stringify(defaultSettings));
-      SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
-    } else {
-      SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
     }
+    SETTINGS = JSON.parse(localStorage.getItem('userSettings'));
+
+    // Custom commands
+    if (localStorage.getItem('customCommands') == null) {
+      localStorage.setItem('customCommands', '[]');
+    }
+    CUSTOM_COMMANDS = localStorage.getItem('customCommands');
   }
 }
 
@@ -215,6 +240,16 @@ function openSettingsMenu() {
       </td> \
     </tr> \
     <tr> \
+      <th align='left'>Custom Commands</th> \
+    </tr> \
+    <tr> \
+      <td align='left'> \
+        <textarea id='customCommandsTextarea' rows='10' cols='50' spellcheck='false' /> \
+        <button type='button' id='addCommandBtn' class='menuBtn'>Add Command</button> \
+        <button type='button' id='customCommandsHelpBtn' class='menuBtn'>Help</button> \
+      </td> \
+    </tr> \
+    <tr> \
       <th align='left'>Open Style</th> \
     </tr> \
     <tr> \
@@ -254,11 +289,15 @@ function openSettingsMenu() {
       break;
     }
   }
+
   $('#openStyleCheckbox').prop('checked', SETTINGS.alwaysNewTab);
+
+  $('#customCommandsTextarea').val(JSON.stringify(JSON.parse(localStorage.getItem('customCommands')), undefined, '  '));
 
   // Save on change
   $('#defaultCommandForm').change(saveSettings);
   $('#openStyleCheckbox').change(saveSettings);
+  $('#customCommandsTextarea').change(saveSettings);
 
   // Button click handlers
   $('#submitIssueBtn').click(function() {
@@ -266,17 +305,44 @@ function openSettingsMenu() {
   });
 
   $('#restoreDefaultSettingsBtn').click(function() {
-    localStorage.removeItem('userSettings');
-    loadSettings();
-    openSettingsMenu();
-    displayMessage('settings reset', 1500);
+    if (confirm('WARNING:\nAll custom commands will be deleted! (no way to undo)')) {
+      localStorage.removeItem('userSettings');
+      localStorage.removeItem('customCommands');
+      loadSettings();
+      openSettingsMenu();
+      displayMessage('settings reset', 1500);
+    }
   });
 
   $('#saveSettingsBtn').click(function() {
-    lowerPageWrapper();
-    clearMenu();
-    clearInput();
-    displayMessage('settings saved', 2000);
+    if (saveSettings()) {
+      lowerPageWrapper();
+      clearMenu();
+      clearInput();
+      displayMessage('settings saved', 2000);
+    }
+  });
+
+  $('#addCommandBtn').click(function() {
+    var textarea = $('#customCommandsTextarea');
+    var template = '{"command": "", "url": "", "search": ""}';
+
+    if (textarea.val() == '') {
+      textarea.val('[]');
+    }
+
+    try {
+      var obj = JSON.parse(textarea.val());
+    } catch(e) {
+      alert('Error: Invalid JSON in custom commands.\nCannot add template - fix syntax and try again.');
+      return;
+    }
+    obj.push(JSON.parse(template));
+    textarea.val(JSON.stringify(obj, undefined, '  '));
+  });
+
+  $('#customCommandsHelpBtn').click(function() {
+    redirect('https://github.com/KorySchneider/tab-a-startpage/blob/gh-pages/README.md#custom-commands', true);
   });
 }
 
@@ -355,9 +421,16 @@ function openHelpMenu() {
 // Misc helper functions
 //
 function getFullCommand(c) { // Takes a command shortcut, returns full command object
+  // Built-in commands
   for (var i=0; i < COMMANDS.length; i++) {
     if (c === COMMANDS[i].command) {
       return COMMANDS[i];
+    }
+  }
+  // Custom commands
+  for (var i=0; i < CUSTOM_COMMANDS.length; i++) {
+    if (c === CUSTOM_COMMANDS[i].command) {
+      return CUSTOM_COMMANDS[i];
     }
   }
   return null;
