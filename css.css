@@ -159,3 +159,7 @@ button {
   /*outline: 1px solid var(--text-color);*/
   outline: none;
 }
+
+input[type='radio'] {
+  margin-bottom: 5px;
+}
