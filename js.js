@@ -56,10 +56,10 @@ function interpret() {
   }
 
   // Menus
-  if (['help', '?'].includes(input)) {
+  if (['help', '?'].includes(input.toLowerCase())) {
     openHelpMenu()
     return;
-  } else if (['settings', 'options'].includes(input)) {
+  } else if (['settings', 'options'].includes(input.toLowerCase())) {
     openSettingsMenu();
     return;
   }
