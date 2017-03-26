@@ -245,6 +245,7 @@ function openSettingsMenu() {
     <tr> \
       <td align='left'> \
         <textarea id='customCommandsTextarea' rows='10' cols='50' spellcheck='false' /> \
+        <br> \
         <button type='button' id='addCommandBtn' class='menuBtn'>Add Command</button> \
         <button type='button' id='customCommandsHelpBtn' class='menuBtn'>Help</button> \
       </td> \
