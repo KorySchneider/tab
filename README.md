@@ -1,7 +1,7 @@
 # tab: a startpage
 _a startpage, new tab page, homepage_
 
-Tab lives [here](https://koryschneider.github.io/tab-a-startpage). Please read below if you haven't used it before.
+Tab lives [here](https://koryschneider.github.io/tab-a-startpage). Please [read below](#usage) if you haven't used it before.
 
 ### Contents
 
@@ -28,6 +28,8 @@ The purpose of this site is to use short, simple commands to access and search w
 The syntax is as follows: `command;query[;n]`
 
 Commands are shortcuts for sites (e.g. `y` for YouTube). You can search sites by separating the command and your query with a semicolon. If you wanted to search YouTube for cats, you would enter: `y;cats`. If you simply enter a command and no query, it will take you to that site. <sup>(Note that leading/trailing spaces get stripped, so entering `y; cats` will do the same thing.)</sup>
+
+You can also enter a URL by itself to go to it.
 
 For a full list of commands and what they do, refer to the command list in the help menu. <sup>(see [menus](#menus) section below)</sup>
 
