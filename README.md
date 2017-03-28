@@ -22,7 +22,7 @@ Tab lives [here](https://koryschneider.github.io/tab-a-startpage). Please read b
 
 ## Usage
 
-#### Intro
+### Intro
 The purpose of this site is to use short, simple commands to access and search websites quickly.
 
 The syntax is as follows: `command;query[;n]`
@@ -31,7 +31,7 @@ Commands are shortcuts for sites (e.g. `y` for YouTube). You can search sites by
 
 For a full list of commands and what they do, refer to the command list in the help menu. <sup>(see [menus](#menus) section below)</sup>
 
-#### Examples
+### Examples
 Here some sample inputs and what they do:
 
  - `y;cats` searches YouTube for 'cats'.
@@ -49,16 +49,19 @@ Some commands behave slightly differently. For example, the `r` command will tak
 
 If you do not enter a command, the input will be taken as a query and the default command will be executed. The default default command is Google, but this can be changed in the options menu. <sup>(again, see [menus](#menus) section below).</sup>
 
-#### Menus
+### Menus
 There are two menus you can access: help and options.
 
  - To get to the _help_ menu, enter `help` or `?`. <sup>(you can also click on the clock)</sup>
 
  - To get to the _options_ menu, enter `options` or `settings`.
 
-#### Custom Commands
+### Custom Commands
 You can add your own custom commands in the options menu.
 Custom commands are specified using [JSON](https://en.wikipedia.org/wiki/Json).
+Note that built-in commands have precedence over custom commands;
+check the help menu  to make sure any shortcuts (`command`s) you choose are not already taken.
+
 The format is as follows (using YouTube as an example):
 
     {
@@ -74,8 +77,6 @@ __Explanation of each item__:
  - `url` - The base site; this is where you will be redirected to if you enter `command` by itself.
 
  - `search` - When you add a query to your command (e.g. `y;cats`), `search` will be appended to `url`, and then your query will be appended to *that* to form the full search URL, like this: `https://youtube.com/results?search_query=cats`.
-
-__!!__ Note that built-in commands have precidence over custom commands. Check the help menu to make sure that what you choose for `command` is not already taken.
 
 To figure out what `search` should be for your custom command, go to the website you want to add and do a search (for anything), then look at and dissect the URL you are taken to.
 
