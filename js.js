@@ -246,8 +246,19 @@ function openSettingsMenu() {
       <td align='left'> \
         <textarea id='customCommandsTextarea' rows='10' cols='50' spellcheck='false' /> \
         <br> \
-        <button type='button' id='addCommandBtn' class='menuBtn'>Add Command</button> \
-        <button type='button' id='customCommandsHelpBtn' class='menuBtn'>Help</button> \
+        <form id='customCommandsForm'> \
+          <label class='customCommandsFormLabel'>Command: </label> \
+          <input type='text' id='command' class='customCommandsInputField' name='command' /><br> \
+\
+          <label class='customCommandsFormLabel'>URL: </label> \
+          <input type='text' id='url' class='customCommandsInputField' name='url' /><br> \
+\
+          <label class='customCommandsFormLabel'>Command: </search> \
+          <input type='text' id='search' class='customCommandsInputField' name='search' /><br> \
+\
+          <button type='button' id='addCommandBtn' class='menuBtn'>Add Command</button> \
+          <button type='button' id='customCommandsHelpBtn' class='menuBtn'>Help</button> \
+        </form> \
       </td> \
     </tr> \
     <tr> \

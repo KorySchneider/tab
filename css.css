@@ -7,6 +7,9 @@
 
   /* Green */
   --accent-color: #689d6a;
+
+  /* Kind of beige-ish? */
+  --button-color: #928374;
 }
 
 body {
@@ -71,11 +74,6 @@ a {
   color: #928374;
 }
 
-button {
-  background-color: var(--accent-color);
-  padding: 7px 9px;
-}
-
 .menuBtn {
   text-align: center;
   font-size: 16px;
@@ -84,6 +82,8 @@ button {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.17s cubic-bezier(.25,.8,.25,1);
   border-radius: 4px;
+  background-color: var(--button-color);
+  padding: 7px 9px;
 }
 .menuBtn:hover {
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -98,12 +98,12 @@ button {
 #addCommandBtn,
 #customCommandsHelpBtn,
 #submitIssueBtn {
-  background-color: #928374;
   margin-right: 5px;
 }
 
 #saveSettingsBtn {
   margin-top: 40px;
+  background-color: var(--accent-color);
 }
 
 #restoreDefaultSettingsBtn {
@@ -115,6 +115,10 @@ button {
 }
 #restoreDefaultSettingsBtn:focus {
   outline: none;
+}
+
+#closeHelpBtn {
+  background-color: var(--accent-color);
 }
 
 .helpMenuCommandText {
@@ -149,14 +153,39 @@ button {
   background: #458588;
 }
 
+#customCommandsForm {
+  display: table;
+}
+
+.customCommandsFormlabel {
+  display: table-cell;
+}
+
+p#customCommandsForm {
+  display: table-row;
+}
+
+.customCommandsInputField,
 #customCommandsTextarea {
   background-color: #3c3836;
   outline: 1px solid var(--bg-color);
   border: 1px solid var(--bg-color);
   color: var(--text-color);
 }
+.customCommandsInputField,
 #customCommandsTextarea:focus {
-  /*outline: 1px solid var(--text-color);*/
+  outline: none;
+}
+
+.customCommandsInputField {
+  background-color: #3c3836;
+  outline: 1px solid var(--bg-color);
+  border: 1px solid var(--bg-color);
+  color: var(--text-color);
+  margin-bottom: 4px;
+  display: table-cell;
+}
+.customCommandsInputField:focus {
   outline: none;
 }
 
