@@ -56,14 +56,6 @@ var COMMANDS = [
     "options-text": "Search Wolfram Alpha"
   },
   {
-    "command": "imdb",
-    "url": "https://www.imdb.com",
-    "search": "/find?s=all&q=",
-    "help-command": "imdb (;&ltquery&gt)",
-    "help-desc": "Internet Movie Database",
-    "options-text": "Search Internet Movie Database"
-  },
-  {
     "command": "n",
     "url": "https://www.netflix.com",
     "search": "/search?q=",
@@ -72,12 +64,28 @@ var COMMANDS = [
     "options-text": "Search Netflix"
   },
   {
+    "command": "imdb",
+    "url": "https://www.imdb.com",
+    "search": "/find?s=all&q=",
+    "help-command": "imdb (;&ltquery&gt)",
+    "help-desc": "Internet Movie Database",
+    "options-text": "Search Internet Movie Database"
+  },
+  {
     "command": "gm",
     "url": "https://www.google.com",
     "search": "/maps?q=",
     "help-command": "gm (;&ltquery&gt)",
     "help-desc": "Google Maps",
     "options-text": "Search Google Maps"
+  },
+  {
+    "command": "gd",
+    "url": "https://drive.google.com",
+    "search": "/drive/search?q=",
+    "help-command": "gd (;&ltquery&gt)",
+    "help-desc": "Google Drive",
+    "options-text": "Search Google Drive"
   },
   {
     "command": "i",
