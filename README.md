@@ -60,14 +60,16 @@ There are two menus you can access: help and options.
 
 #### Custom Commands
 You can add your own custom commands in the options menu.
-Custom commands are specified using [JSON](https://en.wikipedia.org/wiki/Json).
-The format is as follows (using YouTube as an example):
+Custom commands are specified using [JSON](https://en.wikipedia.org/wiki/Json);
+the format is as follows (using YouTube as an example):
 
     {
       "command": "y",
       "url": "https://www.youtube.com",
       "search": "/results?search_query="
     }
+
+Using the quick-add form in the options menu will save you some typing.
 
 __Explanation of each item__:
 
