@@ -72,6 +72,8 @@ The format is as follows (using YouTube as an example):
       "search": "/results?search_query="
     }
 
+Using the quick-add form in the options menu will save you some typing.
+
 __Explanation of each item__:
 
  - `command` - This is what you type into the input box.

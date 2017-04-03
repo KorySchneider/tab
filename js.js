@@ -222,7 +222,10 @@ function openSettingsMenu() {
     <br> \
     <table id='settingsTable'> \
     <tr> \
-      <td align='left'><strong>Default Command</strong><br>executes if no command was specified</td> \
+      <th align='left'>Default Command</td> \
+    </tr> \
+    <tr> \
+      <td align='left'><p class='subheader'>executes if no command was specified</p></td> \
     </tr> \
     <tr> \
       <td align='left'> \
@@ -244,10 +247,21 @@ function openSettingsMenu() {
     </tr> \
     <tr> \
       <td align='left'> \
-        <textarea id='customCommandsTextarea' rows='10' cols='50' spellcheck='false' /> \
+        <form id='customCommandsForm'> \
+          <label for='command' class='customCommandsFormLabel'>Command: </label> \
+          <input type='text' id='command' class='customCommandsInputField' name='command' /> \
+          <br> \
+          <label for='url' class='customCommandsFormLabel'>URL: </label> \
+          <input type='text' id='url' class='customCommandsInputField' name='url' /> \
+          <br> \
+          <label for='search' class='customCommandsFormLabel'>Search: </label> \
+          <input type='text' id='search' class='customCommandsInputField' name='search' /> \
+          <br> \
+          <button type='button' id='addCommandBtn' class='menuBtn'>Add Command</button> \
+          <button type='button' id='customCommandsHelpBtn' class='menuBtn'>Help</button> \
+        </form> \
         <br> \
-        <button type='button' id='addCommandBtn' class='menuBtn'>Add Command</button> \
-        <button type='button' id='customCommandsHelpBtn' class='menuBtn'>Help</button> \
+        <textarea id='customCommandsTextarea' rows='10' cols='50' spellcheck='false' /> \
       </td> \
     </tr> \
     <tr> \
@@ -333,13 +347,18 @@ function openSettingsMenu() {
     }
 
     try {
-      var obj = JSON.parse(textarea.val());
+      var customCommands = JSON.parse(textarea.val());
     } catch(e) {
       alert('Error: Invalid JSON in custom commands.\nCannot add template - fix syntax and try again.');
       return;
     }
-    obj.push(JSON.parse(template));
-    textarea.val(JSON.stringify(obj, undefined, '  '));
+    template = JSON.parse(template)
+    template.command = $('#command').val();
+    template.url = $('#url').val();
+    template.search = $('#search').val();
+
+    customCommands.push(template);
+    textarea.val(JSON.stringify(customCommands, undefined, '  '));
   });
 
   $('#customCommandsHelpBtn').click(function() {
@@ -361,11 +380,11 @@ function openHelpMenu() {
         <th align='left'>Site/Function</th> \
       </tr> \
       <tr> \
-        <td class='helpMenuCommandText' align='right'>options</td> \
-        <td align='left'>Show options menu</td> \
+        <td class='helpMenuCommandText' align='right'>settings // options</td> \
+        <td align='left'>Show settings menu</td> \
       </tr> \
       <tr> \
-        <td class='helpMenuCommandText' align='right'>help</td> \
+        <td class='helpMenuCommandText' align='right'>help // ?</td> \
         <td align='left'>Show this menu</td> \
       </tr>";
 
