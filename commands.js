@@ -110,5 +110,21 @@ var COMMANDS = [
     "help-command": "k (;&ltquery&gt)",
     "help-desc": "Google Keep",
     "options-text": "Search Google Keep"
+  },
+  {
+    "command": "dict",
+    "url": "http://www.dictionary.com",
+    "search": "/browse/",
+    "help-command": "dict (;&ltquery&gt)",
+    "help-desc": "Dictionary.com",
+    "options-text": "Search Dictionary.com"
+  },
+  {
+    "command": "thes",
+    "url": "http://www.thesaurus.com",
+    "search": "/browse/",
+    "help-command": "thes (;&ltquery&gt)",
+    "help-desc": "Thesaurus.com",
+    "options-text": "Search Thesaurus.com"
   }
 ];
