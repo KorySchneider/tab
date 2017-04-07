@@ -359,6 +359,10 @@ function openSettingsMenu() {
 
     customCommands.push(template);
     textarea.val(JSON.stringify(customCommands, undefined, '  '));
+
+    $('#command').val('');
+    $('#url').val('');
+    $('#search').val('');
   });
 
   $('#customCommandsHelpBtn').click(function() {
