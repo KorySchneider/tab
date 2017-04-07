@@ -190,7 +190,7 @@ function loadSettings() {
     if (localStorage.getItem('customCommands') == null) {
       localStorage.setItem('customCommands', '[]');
     }
-    CUSTOM_COMMANDS = localStorage.getItem('customCommands');
+    CUSTOM_COMMANDS = JSON.parse(localStorage.getItem('customCommands'));
   }
 }
 
