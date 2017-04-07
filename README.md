@@ -47,9 +47,9 @@ Here some sample inputs and what they do:
  - `a;popsicles;n` searches Amazon for popsicles in a new tab.
 
 
-Some commands behave slightly differently. For example, the `r` command will take you to a subreddit rather than searching Reddit (e.g. `r;askreddit`). With this particular command you can also do things like `r;askreddit/top?t=month` to quickly get where you want to be. The `t` command takes a URL instead of a query, e.g. `t;gmail.com`.
+Not all commands search websites. For example the `r` command will take you to a subreddit rather than searching Reddit (e.g. `r;askreddit`). With this particular command you can also do things like `r;askreddit/top?t=month` to quickly get where you want to be.
 
-If you do not enter a command, the input will be taken as a query and the default command will be executed. The default default command is Google, but this can be changed in the options menu. <sup>(again, see [menus](#menus) section below).</sup>
+If you enter a query but no command, the default command will be executed. The default default command is Google, but this can be changed in the options menu. <sup>(again, see [menus](#menus) section below).</sup>
 
 ### Menus
 There are two menus you can access: help and options.
