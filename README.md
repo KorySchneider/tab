@@ -90,4 +90,4 @@ If the website you wish to add a command for does not have a search engine, you 
 Replaces the new tab page with tab startpage. [Highly recommended - get it here!](https://chrome.google.com/webstore/detail/tab-a-startpage/gedoejjmdjalipopahiffdghibcodjcj)
 
 ## Bugs & Suggestions
-If something is not working right or you have an idea to make this startpage better, please let me know by [opening an issue](https://github.com/koryschneider/tab-a-startpage/issues) or emailing [tab.startpage@gmail.com](mailto:tab.startpage@gmail.com). Thanks!
+If something is not working right or you have an idea to make this startpage better, please let me know by [opening an issue](https://github.com/KorySchneider/tab-a-startpage/issues/new) or emailing [tab.startpage@gmail.com](mailto:tab.startpage@gmail.com). Thanks!
