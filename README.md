@@ -1,7 +1,7 @@
 # tab: a startpage
 _a startpage, new tab page, homepage_
 
-Tab lives [here](https://koryschneider.github.io/tab-a-startpage). Please [read below](#usage) if you haven't used it before.
+Tab lives [here](https://koryschneider.github.io/tab-a-startpage). You should probably [read below](#usage) if you haven't used it before.
 
 ### Contents
 
