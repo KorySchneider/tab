@@ -73,7 +73,7 @@ var COMMANDS = [
   },
   {
     "command": "gm",
-    "url": "https://www.google.com",
+    "url": "https://maps.google.com",
     "search": "/maps?q=",
     "help-command": "gm (;&ltquery&gt)",
     "help-desc": "Google Maps",
