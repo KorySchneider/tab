@@ -284,7 +284,7 @@ function openSettingsMenu() {
     <tr> \
       <td> \
         <button type='button' id='saveSettingsBtn' class='menuBtn'>Done</button> \
-       </td> \
+      </td> \
     </tr> \
     <tr> \
       <td align='right'> \
