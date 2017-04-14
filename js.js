@@ -413,6 +413,8 @@ function openHelpMenu() {
       <tr> \
         <td colspan='2' align='center'> \
           <button type='button' id='closeHelpBtn' class='menuBtn'>Close</button> \
+          <br> \
+          <button type='button' id='settingsMenuBtn' class='menuBtn'>Settings Menu</button> \
         </td> \
       </tr> \
       <tr colspan='2' align='center'> \
@@ -432,6 +434,10 @@ function openHelpMenu() {
   // Button click handlers
   $('#submitIssueBtn').click(function() {
     redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
+  });
+
+  $('#settingsMenuBtn').click(function() {
+    openSettingsMenu();
   });
 
   $('#closeHelpBtn').click(function() {
