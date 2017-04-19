@@ -27,7 +27,7 @@ Commands are shortcuts for sites (e.g. `y` for YouTube). You can search sites by
 
 You can also enter a URL by itself to go to it.
 
-Not all commands search websites. For example, the `r` command will take you to a subreddit rather than searching Reddit (e.g. `r;askreddit`). With this particular command you can also do things like `r;askreddit/top?t=month` to quickly get where you want to be.
+Not all commands search websites. For example, the `r` command will take you to a subreddit rather than searching Reddit, e.g. `r;askreddit`. You can also do things like `r;askreddit/top?t=month` to quickly get where you want to be.
 
 If you enter a query but no command, the default command will be executed. The default default command is Google, but this can be changed in the options menu. <sup>(see [menus](#menus) section below)</sup>
 
