@@ -75,7 +75,10 @@ __Explanation of each item__:
 
  - `url` - The base site; this is where you will be redirected to if you enter `command` by itself.
 
- - `search` - When you add a query to your command (e.g. `y;cats`), `search` will be appended to `url`, and then your query will be appended to *that* to form the full search URL, like this: `https://youtube.com/results?search_query=cats`.
+ - `search` - When you add a query to your command (e.g. `y;cats`), `search` will
+    be appended to `url`, and then your query will be appended to *that* to form the
+    full search URL, like this:
+    `https://youtube.com/results?search_query=cats`.
 
 To figure out what `search` should be for your custom command, go to the website you want to add and do a search (for anything), then look at and dissect the URL you are taken to.
 
