@@ -49,9 +49,9 @@ Here some sample inputs and what they do:
 ## Menus
 There are two menus you can access: help and options.
 
- - To get to the _help_ menu, enter `help` or `?`. <sup>(you can also click on the clock)</sup>
+ - To get to the _help_ menu, enter `help` or `?` <sup>(you can also click on the clock)</sup>
 
- - To get to the _options_ menu, enter `options` or `settings`.
+ - To get to the _options_ menu, enter `options` or `settings`
 
 ## Custom Commands
 You can add your own custom commands in the options menu.
