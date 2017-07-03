@@ -3,7 +3,7 @@ _a startpage, new tab page, homepage_
 
 Tab lives [here](https://koryschneider.github.io/tab-a-startpage). You should probably read below if you haven't used it before.
 
-## Contents
+#### Contents of this page
 
  - [Usage](#usage)
 
