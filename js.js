@@ -485,8 +485,7 @@ function clock() {
     n = (n < 10) ? (n = '0' + n) : n;
     return n;
   };
-  var date = new Date();
-  var h = date.getHours();
+  var h = new Date().getHours();
   h = (h > 12) ? (formatTime(h -= 12)) : formatTime(h); // 12hr clock
   var m = formatTime(date.getMinutes());
   document.getElementById('clock').innerHTML = h + ':' + m;
