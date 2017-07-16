@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/koryschneider/tab-a-startpage#readme",
   "devDependencies": {
-    "html-minifier": "^3.4.1"
+    "@types/jquery": "^3.2.1",
+    "html-minifier": "^3.5.2",
+    "typescript": "^2.3.4"
   }
 }
