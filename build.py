@@ -1,3 +1,6 @@
+## NOTE: depends on these (globally installed) npm packages:
+# postcss-cli autoprefixer html-minifier
+
 import subprocess
 
 output_file = 'index.html'
