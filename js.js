@@ -316,7 +316,7 @@ function openSettingsMenu() {
 
   // Button click handlers
   $('#submitIssueBtn').click(function() {
-    redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
+    redirect('https://github.com/KorySchneider/tab/issues/new', true);
   });
 
   $('#restoreDefaultSettingsBtn').click(function() {
@@ -366,7 +366,7 @@ function openSettingsMenu() {
   });
 
   $('#customCommandsHelpBtn').click(function() {
-    redirect('https://github.com/KorySchneider/tab-a-startpage/blob/gh-pages/README.md#custom-commands', true);
+    redirect('https://github.com/KorySchneider/tab/blob/gh-pages/README.md#custom-commands', true);
   });
 }
 
@@ -377,7 +377,7 @@ function openHelpMenu() {
       <br> \
       <p>Below is a list of commands, most of which act as shortcuts to sites or the search engine for those sites. To go to a site, simply enter its command (e.g. <strong>y</strong> for YouTube), or type a semicolon followed by a query to search the site (like this: <strong>y;cat videos</strong>). Input a URL by itself to go to it.</p> \
       <p><small>syntax:</small><br>command;query[;n]</p> \
-      <p><a href='https://github.com/KorySchneider/tab-a-startpage#readme' target='_blank'>For detailed instructions click here</a></p> \
+      <p><a href='https://github.com/KorySchneider/tab#readme' target='_blank'>For detailed instructions click here</a></p> \
     </div> \
     <table id='helpTable'> \
       <tr> \
@@ -434,7 +434,7 @@ function openHelpMenu() {
 
   // Button click handlers
   $('#submitIssueBtn').click(function() {
-    redirect('https://github.com/KorySchneider/tab-a-startpage/issues/new', true);
+    redirect('https://github.com/KorySchneider/tab/issues/new', true);
   });
 
   $('#settingsMenuBtn').click(function() {

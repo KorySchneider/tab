@@ -1,7 +1,6 @@
 # tab: a startpage
-_a startpage, new tab page, homepage_
 
-Tab lives [here](https://koryschneider.github.io/tab-a-startpage). You should probably read below if you haven't used it before.
+Tab lives [here](https://koryschneider.github.io/tab). You should probably read below if you haven't used it before.
 
 #### Contents of this page
 
@@ -85,9 +84,9 @@ To figure out what `search` should be for your custom command, go to the website
 If the website you wish to add a command for does not have a search engine, you may leave the `search` value blank (but do not remove it entirely).
 
 ## Chrome extension
-Replaces the new tab page with tab startpage.
+Replaces the new tab page with tab.
 
-[Highly recommended - get it here!](https://chrome.google.com/webstore/detail/tab-a-startpage/gedoejjmdjalipopahiffdghibcodjcj)
+[Highly recommended - get it here!](https://chrome.google.com/webstore/detail/tab/gedoejjmdjalipopahiffdghibcodjcj)
 
 ## Bugs & Suggestions
-If something is not working right or you have an idea to make this startpage better, please let me know by [opening an issue](https://github.com/KorySchneider/tab-a-startpage/issues/new) or emailing [tab.startpage@gmail.com](mailto:tab.startpage@gmail.com). Thanks!
+If something is not working right or you have an idea to make this startpage better, please let me know by [opening an issue](https://github.com/KorySchneider/tab/issues/new) or emailing [tab.startpage@gmail.com](mailto:tab.startpage@gmail.com). Thanks!
