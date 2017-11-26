@@ -1,26 +1,19 @@
-# tab: a startpage
+# [tab][tab-link]: a startpage
 
-Tab lives [here](https://koryschneider.github.io/tab). You should probably read below if you haven't used it before.
-
-#### Contents of this page
+*Tab lives [here][tab-link]*
 
  - [Usage](#usage)
-
  - [Examples](#examples)
-
  - [Menus](#menus)
-
  - [Custom Commands](#custom-commands)
-
  - [Chrome Extension](#chrome-extension)
-
  - [Bugs & Suggestions](#bugs-&-extensions)
 
 
 ## Usage
-The purpose of this site is to use short, simple commands to access and search websites quickly.
+Short, simple commands to access and search websites quickly.
 
-The syntax is as follows: `command;query[;n]`
+Syntax: `command;query[;n]`
 
 Commands are shortcuts for sites (e.g. `y` for YouTube). You can search sites by separating the command and your query with a semicolon. If you wanted to search YouTube for cats, you would enter: `y;cats`. If you simply enter a command and no query, it will take you to that site. <sup>(Note that leading/trailing spaces get stripped, so entering `y; cats` will do the same thing.)</sup>
 
@@ -90,3 +83,5 @@ Replaces the new tab page with tab.
 
 ## Bugs & Suggestions
 If something is not working right or you have an idea to make this startpage better, please let me know by [opening an issue](https://github.com/KorySchneider/tab/issues/new) or emailing [tab.startpage@gmail.com](mailto:tab.startpage@gmail.com). Thanks!
+
+[tab-link]: http://www.koryschneider.com/tab/
