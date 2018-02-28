@@ -90,4 +90,4 @@ Replaces the new tab page with tab.
 ## Bugs & Suggestions
 If something is not working right or you have an idea to make this startpage better, please let me know by [opening an issue](https://github.com/KorySchneider/tab/issues/new) or emailing [tab.startpage@gmail.com](mailto:tab.startpage@gmail.com). Thanks!
 
-[tab-link]: http://www.koryschneider.com/tab/
+[tab-link]: http://koryschneider.github.io/tab/
