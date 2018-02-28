@@ -81,12 +81,6 @@ Replaces the new tab page with tab.
 
 [Highly recommended - get it here!](https://chrome.google.com/webstore/detail/tab/gedoejjmdjalipopahiffdghibcodjcj)
 
-*if you're having issues with the extension:*  
- *- Open a new tab and go to about:extensions*  
- *- Click the checkbox next to 'Developer mode'*  
- *- Click 'Update extensions now'*  
- *- Restart Chrome/ium* 
-
 ## Bugs & Suggestions
 If something is not working right or you have an idea to make this startpage better, please let me know by [opening an issue](https://github.com/KorySchneider/tab/issues/new) or emailing [tab.startpage@gmail.com](mailto:tab.startpage@gmail.com). Thanks!
 
