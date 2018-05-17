@@ -43,8 +43,8 @@
 </head>
 
 <body>
-  <div id='app' v-cloak>
-    <span id='clock' v-text='clockText' v-show='config.showClock'></span>
+  <div id='app'>
+    <span id='clock'></span>
     <input id='input'
       v-on:keydown='handleKeyDown'
       type='text'

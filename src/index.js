@@ -1,3 +1,20 @@
+import { commands } from './commands.js';
+
+// Default config
+let config = {
+  defaultCommand: 'g',
+  bgColor: '#282828',
+  textColor: '#ebdbb2',
+  showClock: false,
+  alwaysNewTab: false,
+  gistID: '',
+  links: {},
+}
+
+let newTab = false;
+let lastEnteredCommand = '';
+let messageTimer = null;
+
 window.onload = () => {
   loadConfig();
 
@@ -8,6 +25,8 @@ window.onload = () => {
   document.querySelector('body').addEventListener('click', () => {
     document.querySelector('#input').focus();
   });
+
+  updateClock();
 };
 
 function evaluateInput() {
@@ -29,7 +48,7 @@ function evaluateInput() {
   }
 
   // Check if valid command or alias
-  const commandList = Object.keys(vm.commands);
+  const commandList = Object.keys(commands);
   const aliasList = Object.keys(vm.aliases);
   let validCommand = false;
   for (let i=0; i < commandList.length; i++) {
@@ -55,7 +74,7 @@ function evaluateInput() {
   // Check if valid link
   let validLink = false;
   if (!isURL && !validCommand) {
-    const linkList = Object.keys(vm.config.links);
+    const linkList = Object.keys(config.links);
     for (let i=0; i < linkList.length; i++) {
       if (command === linkList[i]) {
         validLink = true;
@@ -77,19 +96,19 @@ function evaluateInput() {
     return false;
   }
   if (validCommand) {
-    vm.commands[command](args);
+    commands[command](args);
   } else if (!validLink) {
-    vm.commands[vm.config['defaultCommand']](args);
+    commands[config['defaultCommand']](args);
   }
   if (validLink) {
-    vm.redirect(vm.config.links[command]);
+    vm.redirect(config.links[command]);
   }
   return false;
 }
 
 // Opens a URL either in current or new tab
 function redirect(url) {
-  if (vm.newTab || vm.config.alwaysNewTab)
+  if (vm.newTab || config.alwaysNewTab)
     window.open(url, '_blank').focus();
   else
     window.location.href = url;
@@ -103,21 +122,21 @@ function loadConfig() {
   if (Storage) {
     // Create config object if it doesn't exist
     if (localStorage.getItem('taabSettings') === null) {
-      localStorage.setItem('taabSettings', JSON.stringify(vm.config));
+      localStorage.setItem('taabSettings', JSON.stringify(config));
     // Otherwise load saved config from localStorage
     } else {
-      vm.config = JSON.parse(localStorage.getItem('taabSettings'));
+      config = JSON.parse(localStorage.getItem('taabSettings'));
     }
   }
 }
 
 function setColors() {
-  document.querySelector('body').style.backgroundColor = vm.config.bgColor;
-  document.querySelector('body').style.color = vm.config.textColor;
+  document.querySelector('body').style.backgroundColor = config.bgColor;
+  document.querySelector('body').style.color = config.textColor;
 }
 
 function saveConfig() {
-  localStorage.setItem('taabSettings', JSON.stringify(vm.config));
+  localStorage.setItem('taabSettings', JSON.stringify(config));
 }
 
 function displayMessage(msg, timeMs) {
@@ -153,8 +172,8 @@ function updateClock() {
   let h = d.getHours();
   let hours = (h > 12 ? h - 12 : h).toString();
   let minutes = ('0' + d.getMinutes()).slice(-2);
-  this.clockText = `${hours}:${minutes}`;
-  setTimeout(this.updateClock, 1000);
+  document.querySelector('#clock').innerText = `${hours}:${minutes}`;
+  setTimeout(updateClock, 1000);
 }
 
 function handleKeyDown(e) {
@@ -191,7 +210,7 @@ function fetchGist(gistID) {
         return;
       }
       let gistText = files[Object.keys(files)[0]].content;
-      vm.config.gistID = gistID;
+      config.gistID = gistID;
       vm.updateConfig(gistText);
     }
   }
@@ -210,7 +229,7 @@ function updateConfig(configString) {
   }
 
   for (let setting in config) {
-    vm.config[setting] = config[setting];
+    config[setting] = config[setting];
   }
 
   vm.saveConfig();
