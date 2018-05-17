@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
+    "dev": "webpack-dev-server --mode development --hot",
     "build": "webpack -p --progress && rm bundle.js"
   },
   "devDependencies": {
