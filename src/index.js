@@ -85,7 +85,7 @@ function evaluateInput() {
     vm.redirect(vm.config.links[command]);
   }
   return false;
-},
+}
 
 // Opens a URL either in current or new tab
 function redirect(url) {
@@ -96,7 +96,7 @@ function redirect(url) {
 
   vm.newTab = false;
   return false;
-},
+}
 
 function loadConfig() {
   // Proceed if storage supported
@@ -109,16 +109,16 @@ function loadConfig() {
       vm.config = JSON.parse(localStorage.getItem('taabSettings'));
     }
   }
-},
+}
 
 function setColors() {
   document.querySelector('body').style.backgroundColor = vm.config.bgColor;
   document.querySelector('body').style.color = vm.config.textColor;
-},
+}
 
 function saveConfig() {
   localStorage.setItem('taabSettings', JSON.stringify(vm.config));
-},
+}
 
 function displayMessage(msg, timeMs) {
   let msgDiv = document.querySelector('#message');
@@ -136,9 +136,9 @@ function displayMessage(msg, timeMs) {
   vm.messageTimer = setTimeout(() => {
     msgDiv.innerHTML = '';
   }, timeMs);
-},
+}
 
-function clearMessage() { document.querySelector('#message').innerHTML = ''; },
+function clearMessage() { document.querySelector('#message').innerHTML = ''; }
 
 // Adds protocol if not present, encodes search string
 function buildURL(url, search='', query='') {
@@ -146,7 +146,7 @@ function buildURL(url, search='', query='') {
     ? url
     : 'http://' + url;
   return dest + search + encodeURIComponent(query);
-},
+}
 
 function updateClock() {
   let d = new Date();
@@ -155,7 +155,7 @@ function updateClock() {
   let minutes = ('0' + d.getMinutes()).slice(-2);
   this.clockText = `${hours}:${minutes}`;
   setTimeout(this.updateClock, 1000);
-},
+}
 
 function handleKeyDown(e) {
   let keycode = e.which || e.keyCode;
@@ -178,7 +178,7 @@ function handleKeyDown(e) {
       }, 2);
     }
   }
-},
+}
 
 function fetchGist(gistID) {
   let xhr = new XMLHttpRequest();
@@ -197,7 +197,7 @@ function fetchGist(gistID) {
   }
   xhr.open('GET', url, true);
   xhr.send(null);
-},
+}
 
 function updateConfig(configString) {
   let config;
@@ -216,7 +216,7 @@ function updateConfig(configString) {
   vm.saveConfig();
   vm.setColors();
   vm.displayMessage('Config imported', 5000);
-},
+}
 
 function isURL(url) {
   if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(url)) {
@@ -225,4 +225,4 @@ function isURL(url) {
     }
   }
   return false;
-},
+}
