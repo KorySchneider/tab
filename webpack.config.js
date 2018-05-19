@@ -3,11 +3,26 @@ const webpack = require('webpack'),
       HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: __dirname + '/src/index.js',
 
   output: {
     path: __dirname,
     filename: 'bundle.js'
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env']
+          }
+        }
+      }
+    ]
   },
 
   plugins: [
