@@ -1,0 +1,52 @@
+<!doctype html><html>
+<head>
+  <title>taab</title>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+    body, #app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      width: 100%;
+    }
+    #clock {
+      font-size: 120px;
+      font-weight: bold;
+      margin-top: -20vh;
+      margin-bottom: 30px;
+    }
+    #input {
+      text-align: center;
+      font-size: 42px;
+      color: inherit;
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+    }
+    #message {
+      font-size: 16px;
+      margin-top: 42px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <span id="clock" v-text="clockText" v-show="config.showClock"></span>
+    <input id="input" v-on:keydown="handleKeyDown" type="text" autofocus autocomplete="off" spellcheck="false" autocapitalize="none" autocorrect="off">
+    <div id="message"></div>
+  </div>
+<script type="text/javascript">!function(e){var t={};function o(n){if(t[n])return t[n].exports;var r=t[n]={i:n,l:!1,exports:{}};return e[n].call(r.exports,r,r.exports,o),r.l=!0,r.exports}o.m=e,o.c=t,o.d=function(e,t,n){o.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:n})},o.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="",o(o.s=0)}([function(e,t,o){"use strict";window.onload=function(){Storage&&(null===localStorage.getItem("taabSettings")?localStorage.setItem("taabSettings",JSON.stringify(vm.config)):vm.config=JSON.parse(localStorage.getItem("taabSettings"))),document.querySelector("body").style.backgroundColor=vm.config.bgColor,document.querySelector("body").style.color=vm.config.textColor,document.querySelector("#input").focus(),document.querySelector("body").addEventListener("click",function(){document.querySelector("#input").focus()})}}]);</script></body>
+</html>
