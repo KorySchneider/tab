@@ -438,6 +438,15 @@ const commands = {
         updateConfig(args[1]);
         break;
 
+      case 'open':
+        if (config.gistID !== '') {
+          newTab = true;
+          commands.gist([config.gistID]);
+        } else {
+          displayMessage('Error: No gist ID found. Make sure you have fetched your config at least once.', 8000);
+        }
+        break;
+
       case 'fetch':
         let gistID;
         if (args.length > 1) {
