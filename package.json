@@ -1,9 +1,10 @@
 {
   "scripts": {
     "dev": "webpack-dev-server --mode development",
-    "build": "webpack -p"
+    "build": "webpack -p --progress && rm bundle.js"
   },
   "devDependencies": {
+    "html-webpack-inline-source-plugin": "^0.0.10",
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3",
