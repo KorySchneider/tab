@@ -23,7 +23,7 @@ let messageTimer = null;
 window.onload = () => {
   loadConfig();
 
-  setColors();
+  applyConfig();
 
   document.querySelector('#input').focus();
 
@@ -137,7 +137,7 @@ function loadConfig() {
   }
 }
 
-function setColors() {
+function applyConfig() {
   document.querySelector('body').style.backgroundColor = config.bgColor;
   document.querySelector('body').style.color = config.textColor;
 }
@@ -240,7 +240,7 @@ function updateConfig(configString) {
   }
 
   saveConfig();
-  setColors();
+  applyConfig();
   displayMessage('Config imported', 5000);
 }
 
@@ -358,7 +358,7 @@ const commands = {
     }
 
     saveConfig();
-    setColors();
+    applyConfig();
   },
 
   // Links
