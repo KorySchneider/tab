@@ -1,3 +1,4 @@
+(function() {
 // Default config
 let config = {
   defaultCommand: 'g',
@@ -702,3 +703,4 @@ const commands = {
     else redirect(buildURL(url, search, args.join(' ')));
   }
 }
+})()
