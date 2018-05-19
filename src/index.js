@@ -139,11 +139,20 @@ function loadConfig() {
 }
 
 function applyConfig() {
+  // Text and background colors
   document.querySelector('body').style.backgroundColor = config.bgColor;
   document.querySelector('body').style.color = config.textColor;
+
+  // Clock
+  let clock = document.querySelector('#clock');
+  if (config.showClock)
+    clock.style.display = 'inline';
+  else
+    clock.style.display = 'none';
 }
 
 function saveConfig() {
+  // Write to localStorage
   localStorage.setItem('taabSettings', JSON.stringify(config));
 }
 

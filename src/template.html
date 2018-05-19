@@ -24,6 +24,7 @@
       font-weight: bold;
       margin-top: -20vh;
       margin-bottom: 30px;
+      display: none;
     }
     #input {
       text-align: center;
@@ -44,7 +45,7 @@
 
 <body>
   <div id='app'>
-    <span id='clock'></span>
+    <div id='clock'></div>
     <input id='input'
       v-on:keydown='handleKeyDown'
       type='text'
