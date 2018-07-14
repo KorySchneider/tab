@@ -69,7 +69,7 @@ link has three parts:
 For example, here's what a link for Google would look like, and how it would
 function:  
 `link ;goog ;https://google.com ;/search?q=`  
-Now with our `goog` shortcut, we can enter `goog;binary` to search for "binary":
+Now with our `goog` shortcut, we can enter `goog;binary` to search for "binary":  
 `https://www.google.com/search?q=binary`
 
 Fun fact: this is how all commands on the first version of the site functioned.
