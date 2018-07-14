@@ -66,6 +66,15 @@ link has three parts:
  - `search` - A piece of a URL that gets appended to the base `url`, e.g.
  `/search?q=`.
 
+For example, here's what a link for Google would look like, and how it would
+function:
+`link ;goog ;https://google.com ;/search?q=`  
+Now with our `goog` shortcut, we can enter `goog;binary` to search for "binary":
+`https://www.google.com/search?q=binary`
+
+Fun fact: this is how all commands on the first version of the site functioned.
+Now all builtin commands are functions, which provides more flexibility.
+
 To see all your links: `link ;show`.  
 To delete a link: `link ;shortcut ;delete`.
 
