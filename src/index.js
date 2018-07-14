@@ -531,7 +531,7 @@ const commands = {
   // Help
   'help': (args) => {
     newTab = true;
-    redirect('https://github.com/taab-site/taab#readme');
+    redirect('https://github.com/koryschneider/tab#readme');
   },
 
   // Google
