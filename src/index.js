@@ -82,11 +82,10 @@ function evaluateInput() {
   // Check if valid link
   let validLink = false;
   if (!isURL && !validCommand) { // ensure shortcut not taken
-    const linkList = Object.keys(CONFIG.links);
-    for (let i=0; i < linkList.length; i++) {
-      if (command === linkList[i]) {
+    for (let i=0; i < CONFIG.links.length; i++) {
+      if (CONFIG.links[i].command == command) {
         validLink = true;
-        args.shift();
+        command = args.shift();
         break;
       }
     }
@@ -101,16 +100,23 @@ function evaluateInput() {
   // Execute
   if (isURL) {
     redirect(buildURL(command));
-    return false;
   }
-  if (validCommand) {
+
+  else if (validCommand) {
     commands[command](args);
-  } else if (!validLink) {
+  }
+
+  else if (validLink) {
+    let link = getFullLink(command);
+    console.log(link);
+    if (args.length == 0) redirect(link.url)
+    else redirect(link.url + link.search + args.join(' '));
+  }
+
+  else {
     commands[CONFIG['defaultCommand']](args);
   }
-  if (validLink) {
-    redirect(CONFIG.links[command]);
-  }
+
   return false;
 }
 
@@ -263,6 +269,16 @@ function checkIfURL(url) {
   return false;
 }
 
+// Get full link object from its shortcut
+function getFullLink(shortcut) {
+  for (let i=0; i < CONFIG.links.length; i++) {
+    if (shortcut == CONFIG.links[i].command) {
+      return CONFIG.links[i];
+    }
+  }
+  return null;
+}
+
 const commands = {
   // Set
   'set': (args) => {
@@ -358,9 +374,10 @@ const commands = {
           showClock: false,
           alwaysNewTab: false,
           gistID: '',
-          links: {},
+          links: [],
         }
         loadConfig();
+        displayMessage('Settings reset to defaults', 5000);
         break;
 
       default:
@@ -375,45 +392,74 @@ const commands = {
   'link': (args) => {
     switch(args.length) {
       case 0:
-        displayMessage(`link is a builtin command<br>To search for link try g;link<br>`, 8000);
+        displayMessage(`link is a builtin command<br>To search for "link" try g;link<br>`, 8000);
         break;
 
       case 1:
-        // Show links
+        // Show all links
         if (args[0] === 'show') {
-          let links = '';
-          for (let link in CONFIG.links) {
-            links += `${link} --> ${CONFIG.links[link]}<br>`;
+          let msg = '';
+          for (let i=0; i < CONFIG.links.length; i++) {
+            let link = CONFIG.links[i];
+            msg += `${link.command} --> ${link.url}`;
+            if (link.search !== '') msg += ` (${link.search})`;
+            msg += '<br>';
           }
-          displayMessage(links, 30000);
+          displayMessage(msg, 30000);
+          break;
         }
 
-        // Print link URL if existant link
-        if (Object.keys(CONFIG.links).includes(args[0])) {
-          displayMessage(`"${args[0]}" links to ${CONFIG.links[args[0]]}`, 5000);
+        // Show specific (existent) link
+        else {
+          let link = getFullLink(args[0]);
+          if (link) {
+            let msg = `"${args[0]}" links to ${link.url}`;
+            if (link.search !== '') msg += ` (${link.search})`;
+            displayMessage(msg, 10000);
+          }
+          break;
         }
-        break;
 
       case 2:
-        // Delete link
+      case 3:
+        // Delete
         if (args[1] === 'delete') {
-          if (delete CONFIG.links[args[0]]) {
-            displayMessage(`Link ${args[0]} deleted`, 5000);
+          for (let i=0; i < CONFIG.links.length; i++) {
+            if (args[0] == CONFIG.links[i].command) {
+              CONFIG.links.splice(i, 1);
+              displayMessage(`Link ${args[0]} deleted`, 5000);
+            }
           }
         }
 
-        // Add new link
+        // Add new
         else {
           // Ensure shortcut not taken
-          if (Object.keys(commands).includes(args[0]) || Object.keys(aliases).includes(args[0]) || Object.keys(CONFIG.links).includes(args[0])) {
-            displayMessage(`Shortcut already in use: ${args[0]}`, 5000);
+          for (let i=0; i < CONFIG.links.length; i++) {
+            if (CONFIG.links[i].command == args[0]) {
+              // Already using this shortcut, override?
+              if (confirm('Overwrite existing shortcut?')) {
+                // Remove existing shortcut if user says yes to avoid duplicate link commands
+                for (let i=0; i < CONFIG.links.length; i++) {
+                  if (CONFIG.links[i].command == args[0]) {
+                    CONFIG.links.splice(i, 1);
+                  }
+                }
+              } else {
+                // Do nothing if user says no
+                return;
+              }
+            }
+          }
+          if (Object.keys(commands).includes(args[0]) || Object.keys(aliases).includes(args[0])) {
+            displayMessage(`Cannot override builtin command: ${args[0]}`, 5000);
             return;
           }
 
           // Check that URL is valid
           let url = buildURL(args[1]);
           if (checkIfURL(url)) {
-            CONFIG.links[args[0]] = url;
+            CONFIG.links.push({ 'command': args[0], 'url': url, 'search': args[2] || '' });
           } else {
             displayMessage('Invalid URL', 5000);
             return;
