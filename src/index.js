@@ -7,7 +7,7 @@ let CONFIG = {
   showClock: false,
   alwaysNewTab: false,
   gistID: '',
-  links: {},
+  links: [],
 }
 let aliases = {
 // alias: command
@@ -139,6 +139,12 @@ function loadConfig() {
     // Otherwise load saved config from localStorage
     } else {
       CONFIG = JSON.parse(localStorage.getItem('taabSettings'));
+    }
+
+    // Legacy import
+    if (localStorage.getItem('customCommands') !== null) {
+      importLegacyLinks();
+      localStorage.removeItem('customCommands');
     }
   }
 }
@@ -276,6 +282,15 @@ function getFullLink(shortcut) {
     }
   }
   return null;
+}
+
+// Import legacy links (custom commands)
+function importLegacyLinks() {
+  let legacyLinks = JSON.parse(localStorage.getItem('customCommands'));
+  if (legacyLinks) {
+    CONFIG.links = legacyLinks;
+    saveConfig();
+  }
 }
 
 const commands = {
