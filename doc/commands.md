@@ -55,12 +55,19 @@ For example: `set;bgColor;#282828` or `set;defaultCommand;dg`
 ---
 
 #### link
-`link ;shortcut ;url`
+`link ;shortcut ;url [;search]`
 
-This is how you can create custom shortcuts. They are stored in your config.
+This is how you can create custom shortcuts. They are stored in your config. A
+link has three parts:
 
- - `shortcut` - A command shortcut, such as `y` for YouTube. Must not be in use.
+ - `shortcut` - A command shortcut, e.g. `y` for YouTube. Cannot be the same as
+   a builtin command.
  - `url` - A website URL, where you want to go when entering the above shortcut.
+ - `search` - A piece of a URL that gets appended to the base `url`, e.g.
+ `/search?q=`.
+
+To see all your links: `link ;show`.  
+To delete a link: `link ;shortcut ;delete`.
 
 ---
 
