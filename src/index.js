@@ -1,6 +1,6 @@
 (function() {
 // Default config
-let config = {
+let CONFIG = {
   defaultCommand: 'g',
   bgColor: '#282828',
   textColor: '#ebdbb2',
@@ -81,8 +81,8 @@ function evaluateInput() {
 
   // Check if valid link
   let validLink = false;
-  if (!isURL && !validCommand) {
-    const linkList = Object.keys(config.links);
+  if (!isURL && !validCommand) { // ensure shortcut not taken
+    const linkList = Object.keys(CONFIG.links);
     for (let i=0; i < linkList.length; i++) {
       if (command === linkList[i]) {
         validLink = true;
@@ -106,17 +106,17 @@ function evaluateInput() {
   if (validCommand) {
     commands[command](args);
   } else if (!validLink) {
-    commands[config['defaultCommand']](args);
+    commands[CONFIG['defaultCommand']](args);
   }
   if (validLink) {
-    redirect(config.links[command]);
+    redirect(CONFIG.links[command]);
   }
   return false;
 }
 
 // Opens a URL either in current or new tab
 function redirect(url) {
-  if (newTab || config.alwaysNewTab)
+  if (newTab || CONFIG.alwaysNewTab)
     window.open(url, '_blank').focus();
   else
     window.location.href = url;
@@ -130,22 +130,22 @@ function loadConfig() {
   if (Storage) {
     // Create config object if it doesn't exist
     if (localStorage.getItem('taabSettings') === null) {
-      localStorage.setItem('taabSettings', JSON.stringify(config));
+      localStorage.setItem('taabSettings', JSON.stringify(CONFIG));
     // Otherwise load saved config from localStorage
     } else {
-      config = JSON.parse(localStorage.getItem('taabSettings'));
+      CONFIG = JSON.parse(localStorage.getItem('taabSettings'));
     }
   }
 }
 
 function applyConfig() {
   // Text and background colors
-  document.querySelector('body').style.backgroundColor = config.bgColor;
-  document.querySelector('body').style.color = config.textColor;
+  document.querySelector('body').style.backgroundColor = CONFIG.bgColor;
+  document.querySelector('body').style.color = CONFIG.textColor;
 
   // Clock
   let clock = document.querySelector('#clock');
-  if (config.showClock)
+  if (CONFIG.showClock)
     clock.style.display = 'inline';
   else
     clock.style.display = 'none';
@@ -153,7 +153,7 @@ function applyConfig() {
 
 function saveConfig() {
   // Write to localStorage
-  localStorage.setItem('taabSettings', JSON.stringify(config));
+  localStorage.setItem('taabSettings', JSON.stringify(CONFIG));
 }
 
 function displayMessage(msg, timeMs) {
@@ -227,7 +227,7 @@ function fetchGist(gistID) {
         return;
       }
       let gistText = files[Object.keys(files)[0]].content;
-      config.gistID = gistID;
+      CONFIG.gistID = gistID;
       updateConfig(gistText);
     }
   }
@@ -246,7 +246,7 @@ function updateConfig(configString) {
   }
 
   for (let setting in config) {
-    config[setting] = config[setting];
+    CONFIG[setting] = config[setting];
   }
 
   saveConfig();
@@ -275,13 +275,13 @@ const commands = {
       case 'defaultCommand':
         // Display current value if none given
         if (args.length === 1) {
-          displayMessage(`Default command: ${config.defaultCommand}`, 5000);
+          displayMessage(`Default command: ${CONFIG.defaultCommand}`, 5000);
           break;
         }
 
         // Check if existant command
         if (Object.keys(commands).includes(args[1])) {
-          config['defaultCommand'] = args[1];
+          CONFIG['defaultCommand'] = args[1];
           displayMessage(`Set default command to ${args[1]}`, 3000);
         } else {
           displayMessage(`Error: command ${args[1]} not found; default command not changed`, 10000);
@@ -292,13 +292,13 @@ const commands = {
       case 'bgColor':
         // Display current value if none given
         if (args.length === 1) {
-          displayMessage(`Current background color: ${config.bgColor}`, 8000);
+          displayMessage(`Current background color: ${CONFIG.bgColor}`, 8000);
           break;
         }
 
         // Set new background color
         if (validHex(args[1])) {
-          config.bgColor = args[1];
+          CONFIG.bgColor = args[1];
         } else {
           displayMessage('Error: invalid hex value', 5000);
         }
@@ -308,13 +308,13 @@ const commands = {
       case 'textColor':
         // Display current value if none given
         if (args.length === 1) {
-          displayMessage(`Current background color: ${config.textColor}`, 8000);
+          displayMessage(`Current background color: ${CONFIG.textColor}`, 8000);
           break;
         }
 
         // Set new text color
         if (validHex(args[1])) {
-          config['textColor'] = args[1];
+          CONFIG['textColor'] = args[1];
         } else {
           displayMessage('Error: invalid hex value', 5000);
         }
@@ -325,12 +325,12 @@ const commands = {
       case 'alwaysNewTab':
         // Display current value if none given
         if (args.length === 1) {
-          let msg = `alwaysNewTab is ${(config.alwaysNewTab) ?  'on' : 'off'}`;
+          let msg = `alwaysNewTab is ${(CONFIG.alwaysNewTab) ?  'on' : 'off'}`;
           displayMessage(msg, 5000);
           break;
         }
-        if (args[1] === 'on') config.alwaysNewTab = true;
-        else if (args[1] === 'off') config.alwaysNewTab = false;
+        if (args[1] === 'on') CONFIG.alwaysNewTab = true;
+        else if (args[1] === 'off') CONFIG.alwaysNewTab = false;
         else displayMessage("Must be set to either 'on' or 'off'", 5000);
         break;
 
@@ -338,20 +338,20 @@ const commands = {
       case 'clock':
         // Display current value if none given
         if (args.length === 1) {
-          displayMessage(`Clock is ${(config.showClock) ? 'on' : 'off'}`, 5000);
+          displayMessage(`Clock is ${(CONFIG.showClock) ? 'on' : 'off'}`, 5000);
           break;
         }
 
         // Turn clock on or off
-        if (args[1] === 'on') config.showClock = true;
-        else if (args[1] === 'off') config.showClock = false;
+        if (args[1] === 'on') CONFIG.showClock = true;
+        else if (args[1] === 'off') CONFIG.showClock = false;
         else displayMessage("Must be set to either 'on' or 'off'", 5000);
         break;
 
       // Restore defaults
       case 'defaults':
         localStorage.removeItem('taabSettings');
-        config = {
+        CONFIG = {
           defaultCommand: 'g',
           bgColor: '#282828',
           textColor: '#ebdbb2',
@@ -382,22 +382,22 @@ const commands = {
         // Show links
         if (args[0] === 'show') {
           let links = '';
-          for (let link in config.links) {
-            links += `${link} --> ${config.links[link]}<br>`;
+          for (let link in CONFIG.links) {
+            links += `${link} --> ${CONFIG.links[link]}<br>`;
           }
           displayMessage(links, 30000);
         }
 
         // Print link URL if existant link
-        if (Object.keys(config.links).includes(args[0])) {
-          displayMessage(`"${args[0]}" links to ${config.links[args[0]]}`, 5000);
+        if (Object.keys(CONFIG.links).includes(args[0])) {
+          displayMessage(`"${args[0]}" links to ${CONFIG.links[args[0]]}`, 5000);
         }
         break;
 
       case 2:
         // Delete link
         if (args[1] === 'delete') {
-          if (delete config.links[args[0]]) {
+          if (delete CONFIG.links[args[0]]) {
             displayMessage(`Link ${args[0]} deleted`, 5000);
           }
         }
@@ -405,15 +405,15 @@ const commands = {
         // Add new link
         else {
           // Ensure shortcut not taken
-          if (Object.keys(commands).includes(args[0]) || Object.keys(aliases).includes(args[0]) || Object.keys(config.links).includes(args[0])) {
+          if (Object.keys(commands).includes(args[0]) || Object.keys(aliases).includes(args[0]) || Object.keys(CONFIG.links).includes(args[0])) {
             displayMessage(`Shortcut already in use: ${args[0]}`, 5000);
             return;
           }
 
           // Check that URL is valid
           let url = buildURL(args[1]);
-          if (isURL(url)) {
-            config.links[args[0]] = url;
+          if (checkIfURL(url)) {
+            CONFIG.links[args[0]] = url;
           } else {
             displayMessage('Invalid URL', 5000);
             return;
@@ -439,9 +439,9 @@ const commands = {
         break;
 
       case 'open':
-        if (config.gistID !== '') {
+        if (CONFIG.gistID !== '') {
           newTab = true;
-          commands.gist([config.gistID]);
+          commands.gist([CONFIG.gistID]);
         } else {
           displayMessage('Error: No gist ID found. Make sure you have fetched your config at least once.', 8000);
         }
@@ -456,8 +456,8 @@ const commands = {
             displayMessage('Error: unable to parse gist ID.<br>Try entering just the 32 character ID string.', 8000);
             return;
           }
-        } else if (config.gistID != undefined) {
-          gistID = config.gistID;
+        } else if (CONFIG.gistID != undefined) {
+          gistID = CONFIG.gistID;
         } else {
           displayMessage('Error: no gist ID', 5000);
           break;
@@ -728,4 +728,4 @@ const commands = {
     else redirect(buildURL(url, search, args.join(' ')))
   }
 }
-})()
+})() // closure
