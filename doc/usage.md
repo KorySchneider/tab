@@ -13,14 +13,6 @@ You can also enter a URL.
 
 [Click here for a complete list of commands!](commands.md)
 
-## Other Features
-
-Change the colors, default command, interface and behavior with the [`set`](commands.md#set) command.
-
-Add custom shortcuts with the [`link`](commands.md#link) command.
-
-Manage your settings across devices with the [`config`](commands.md#config) command.
-
 ## Examples
 
  - `y;cats` Search YouTube for 'cats'
@@ -35,3 +27,11 @@ Manage your settings across devices with the [`config`](commands.md#config) comm
 
 Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y;
 cats` will all do the same thing (search YouTube for "cats").
+
+## Other Features
+
+Change the colors, default command, interface and behavior with the [`set`](commands.md#set) command.
+
+Add custom shortcuts with the [`link`](commands.md#link) command.
+
+Manage your settings across devices with the [`config`](commands.md#config) command.
