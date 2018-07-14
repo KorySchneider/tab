@@ -10,14 +10,14 @@ To get places on the web faster.
 
 ## How
 
-See [this page][instructions] for instructions. There is also a [full list of
+See [this page][usage] for instructions. There is also a [full list of
 commands][commands].
 
 ## Browser Extension
 
 Replace the new tab page. [Chrome][chrome-ext] [Firefox][firefox-ext]
 
-[instructions]: 
-[commands]: 
+[usage]: https://github.com/KorySchneider/tab/blob/master/doc/usage.md
+[commands]: https://github.com/KorySchneider/tab/blob/master/doc/commands.md
 [chrome-ext]: https://chrome.google.com/webstore/detail/tab-a-startpage/gedoejjmdjalipopahiffdghibcodjcj
 [firefox-ext]: https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/
