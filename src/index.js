@@ -108,7 +108,6 @@ function evaluateInput() {
 
   else if (validLink) {
     let link = getFullLink(command);
-    console.log(link);
     if (args.length == 0) redirect(link.url)
     else redirect(link.url + link.search + args.join(' '));
   }
