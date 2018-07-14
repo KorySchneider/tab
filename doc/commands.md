@@ -67,7 +67,7 @@ link has three parts:
  `/search?q=`.
 
 For example, here's what a link for Google would look like, and how it would
-function:
+function:  
 `link ;goog ;https://google.com ;/search?q=`  
 Now with our `goog` shortcut, we can enter `goog;binary` to search for "binary":
 `https://www.google.com/search?q=binary`
