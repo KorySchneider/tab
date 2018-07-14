@@ -502,6 +502,7 @@ const commands = {
         if (CONFIG.gistID !== '') {
           newTab = true;
           commands.gist([CONFIG.gistID]);
+          return false;
         } else {
           displayMessage('Error: No gist ID found. Make sure you have fetched your config at least once.', 8000);
         }
