@@ -501,7 +501,7 @@ const commands = {
       case 'open':
         if (CONFIG.gistID !== '') {
           newTab = true;
-          commands.gist([CONFIG.gistID]);
+          redirect(`https://gist.github.com/${CONFIG.gistID}`);
           return false;
         } else {
           displayMessage('Error: No gist ID found. Make sure you have fetched your config at least once.', 8000);
