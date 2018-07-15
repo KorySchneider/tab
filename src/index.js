@@ -498,12 +498,10 @@ const commands = {
         updateConfig(args[1]);
         break;
 
-      case 'open': // TODO only working locally ???
+      case 'open':
         if (CONFIG.gistID !== '') {
-          //newTab = true;
-          //commands.gist([CONFIG.gistID]);
-          window.open(`https://gist.github.com/${CONFIG.gistID}`, '_blank').focus();
-          return false;
+          newTab = true;
+          commands.gist([CONFIG.gistID]);
         } else {
           displayMessage('Error: No gist ID found. Make sure you have fetched your config at least once.', 8000);
         }
