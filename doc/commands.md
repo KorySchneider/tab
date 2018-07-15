@@ -95,6 +95,18 @@ This is how you can manage your settings across devices.
  - `import ;<config>` - Direct import, paste in a config to import it.
  Less useful than `fetch`, but works if you don't use Gist.
 
+**To set up a config with Github Gist:**
+
+ - `config;export` and copy the output with Ctrl+C / Cmd+C.
+
+ - `gist;new`, paste the copied text, create public or private gist.
+
+ - Copy the link of the newly created Gist, then import it:
+ `config;fetch;<gist link>`. The gist ID is now part of your config, so simply
+ running `config;fetch` without the link will fetch the same gist.
+
+ - Edit your config via `config;open` and then `config;fetch` for easy syncing.
+
 ---
 
 #### help
