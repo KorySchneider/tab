@@ -1,19 +1,19 @@
 # [tab](https://koryschneider.github.io/tab)
 
-## What
+### What
 
 A minimal command line startpage.
 
-## Why
+### Why
 
 To get places on the web faster.
 
-## How
+### How
 
 See [this page][usage] for instructions. There is also a [full list of
 commands][commands].
 
-## Browser Extension
+### Browser Extension
 
 Replace the new tab page. [Chrome][chrome-ext] [Firefox][firefox-ext]
 
