@@ -27,7 +27,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'taab',
+      title: 'tab',
       template: __dirname + '/src/template.html',
       filename: __dirname + '/index.html',
       inlineSource: '.(js|css)$',
