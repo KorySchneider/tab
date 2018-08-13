@@ -238,15 +238,14 @@ function fetchGist(gistID) {
         return;
       }
       let gistText = files[Object.keys(files)[0]].content;
-      CONFIG.gistID = gistID;
-      updateConfig(gistText);
+      updateConfig(gistText, gistID);
     }
   }
   xhr.open('GET', url, true);
   xhr.send(null);
 }
 
-function updateConfig(configString) {
+function updateConfig(configString, gist) {
   let config;
   try {
     config = JSON.parse(configString);
@@ -259,6 +258,7 @@ function updateConfig(configString) {
   for (let setting in config) {
     CONFIG[setting] = config[setting];
   }
+  CONFIG.gistID = gist;
 
   saveConfig();
   applyConfig();
