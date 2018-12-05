@@ -2,7 +2,7 @@
 
 ### What
 
-A minimal command line startpage.
+A minimal, customizable command line startpage.
 
 ### Why
 
@@ -15,7 +15,7 @@ commands][commands].
 
 ### Browser Extension
 
-Replace the new tab page. [Chrome][chrome-ext] [Firefox][firefox-ext]
+Replace the new tab page. [Chrome][chrome-ext] | [Firefox][firefox-ext]
 
 [usage]: https://github.com/KorySchneider/tab/blob/master/doc/usage.md
 [commands]: https://github.com/KorySchneider/tab/blob/master/doc/commands.md
