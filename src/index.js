@@ -14,7 +14,6 @@ let aliases = {
   'cal': 'gc',
   'gk': 'k',
   'ddg': 'dg',
-  'map': 'gm',
   '?': 'help'
 }
 let newTab = false;
@@ -685,7 +684,7 @@ const commands = {
   },
 
   // Google Maps
-  'gm': (args) => {
+  'map': (args) => {
     const url = 'https://google.com/maps', search = '/search/';
     if (args.length == 0) redirect(url)
     else redirect(buildURL(url, search, args.join(' ')));
@@ -706,6 +705,13 @@ const commands = {
   // Google Images
   'img': (args) => {
     const url = 'https://google.com', search = '/search?tbm=isch&q=';
+    if (args.length == 0) redirect(url)
+    else redirect(buildURL(url, search, args.join(' ')));
+  },
+
+  // Gmail
+  'gm': (args) => {
+    const url = 'https://mail.google.com', search = '/mail/u/0/#search/';
     if (args.length == 0) redirect(url)
     else redirect(buildURL(url, search, args.join(' ')));
   },
