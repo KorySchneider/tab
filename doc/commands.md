@@ -178,6 +178,13 @@ For example: `gh;koryschneider/mintab` or `gh;new`
 
 ---
 
+#### Gmail
+`gm [;query]`
+
+ - **query** - Search your mail for `query`.
+
+---
+
 #### Inbox
 `i [;query | snoozed | done]`
 
