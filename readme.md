@@ -1,4 +1,4 @@
-# [tab](https://koryschneider.github.io/tab)
+# [tab](https://koryschneider.com/tab)
 
 ### What
 
@@ -10,12 +10,11 @@ To get places on the web faster.
 
 ### How
 
-See [this page][usage] for instructions. There is also a [full list of
-commands][commands].
+See [basic usage and examples][usage] or [the complete documentation][commands]. Or both.
 
 ### Browser Extension
 
-Replace the new tab page. [Chrome][chrome-ext] | [Firefox][firefox-ext]
+Replace the new tab page. Required for practicality. ([Chrome][chrome-ext] | [Firefox][firefox-ext])
 
 [usage]: https://github.com/KorySchneider/tab/blob/master/doc/usage.md
 [commands]: https://github.com/KorySchneider/tab/blob/master/doc/commands.md
