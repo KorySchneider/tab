@@ -7,9 +7,9 @@ corresponding website or add arguments to quickly traverse the site. There also 
 a few builtin commands for configuration/personalization.
 
 If no command is specified, the default command will execute. The default,
-default command is Google (use the `set` command to change this).
+default command is Google (use the [`set`](commands.md#set) command to change this).
 
-You can also enter a URL.
+You can also paste or enter a link.
 
 [Click here for a complete list of commands!](commands.md)
 
@@ -23,7 +23,7 @@ You can also enter a URL.
  
  - `set;defaultCommand;ddg` Change the default command to DuckDuckGo
  
- - `link;fb;facebook.com` Create a shortcut (`fb`) to facebook.com
+ - `link;ig;instagram.com` Create a shortcut (`ig`) to instagram.com
 
 Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y;
 cats` will all do the same thing (search YouTube for "cats").
