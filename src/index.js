@@ -716,21 +716,6 @@ const commands = {
     else redirect(buildURL(url, search, args.join(' ')));
   },
 
-  // Google Inbox
-  'i': (args) => {
-    const url = 'https://inbox.google.com', search = '/search/';
-    if (args.length == 0) {
-      redirect(url);
-    } else {
-      if (args[0] === 'snoozed')
-        redirect(url + '/snoozed')
-      else if (args[0] === 'done')
-        redirect(url + '/done')
-      else
-        redirect(buildURL(url, search, args.join(' ')));
-    }
-  },
-
   // Google Keep
   'k': (args) => {
     const url = 'https://keep.google.com', search = '/#search/text=';

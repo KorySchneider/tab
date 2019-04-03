@@ -18,7 +18,6 @@ Arguments in [brackets] are optional. Vertical pipes (`|`) mean 'or'.
    - [GitHub](#github)
    - [GitHub Gist](#github-gist)
    - [YouTube](#youtube)
-   - [Inbox](#inbox)
    - [Netflix](#netflix)
    - [Amazon](#amazon)
    - [Wikipedia](#wikipedia)
@@ -182,15 +181,6 @@ For example: `gh;koryschneider/mintab` or `gh;new`
 `gm [;query]`
 
  - **query** - Search your mail for `query`.
-
----
-
-#### Inbox
-`i [;query | snoozed | done]`
-
- - **query** - Search your inbox for `query`.
- - **snoozed** - Go to your snoozed emails.
- - **done** - Go to your done (archived) emails.
 
 ---
 
