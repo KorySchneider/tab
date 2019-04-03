@@ -14,7 +14,7 @@ See [basic usage and examples][usage] or [the complete documentation][commands] 
 
 ### Browser Extension
 
-Replaces the new tab page. Required for practicality. ([Chrome][chrome-ext] | [Firefox][firefox-ext])
+Replaces the new tab page -- required for practicality. ([Chrome][chrome-ext] | [Firefox][firefox-ext])
 
 [usage]: https://github.com/KorySchneider/tab/blob/master/doc/usage.md
 [commands]: https://github.com/KorySchneider/tab/blob/master/doc/commands.md
