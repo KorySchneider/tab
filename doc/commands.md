@@ -49,7 +49,7 @@ This is how you change your settings. Settings are saved locally, but can be syn
    shortcut (e.g. `y`) for `defaultCommand`.
  - `set;defaults` will restore default values for all options.
 
-For example: `set;bgColor;#282828` or `set;defaultCommand;dg`
+For example: `set;bgColor;#282828` | `set;defaultCommand;dg` | `set;clock;off`
 
 ---
 
