@@ -10,7 +10,7 @@ To get places on the web faster.
 
 ### How
 
-See [basic usage and examples][usage] or [the complete documentation][commands] (or both).
+See [basic usage and examples][usage] or the [complete documentation][commands] (or both).
 
 ### Browser Extension
 
