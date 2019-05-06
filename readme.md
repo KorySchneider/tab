@@ -6,7 +6,7 @@ A minimal, customizable command line [startpage](https://koryschneider.com/tab).
 
 ### Why
 
-To get places on the web faster.
+To get places on the web faster, with less distraction.
 
 ### How
 
