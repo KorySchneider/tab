@@ -21,7 +21,7 @@ You can also paste or enter a link.
 
  - `example.com;n` Go to example.com in a new tab
  
- - `set;defaultCommand;ddg` Change the default command to DuckDuckGo
+ - `set;clock;on` Display a clock on the page
  
  - `link;ig;instagram.com` Create a shortcut (`ig`) to instagram.com
 
