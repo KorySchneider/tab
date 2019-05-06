@@ -7,7 +7,7 @@ corresponding website or add arguments to quickly traverse the site. There also 
 a few builtin commands for configuration/personalization.
 
 If no command is specified, the default command will execute. The default,
-default command is Google (use the [`set`](commands.md#set) command to change this).
+default command is Google (use the [`set`](commands.md#set) command to change this, e.g. `set;defaultCommand;dg` to use DuckDuckGo by default).
 
 You can also paste or enter a link.
 
