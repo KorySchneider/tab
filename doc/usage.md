@@ -19,7 +19,7 @@ You can also paste or enter a link.
 
  - `r;dadjokes;top;month` See the best dadjokes of this month
 
- - `example.com;n` Go to example.com in a new tab
+ - `example.com;n` Open example.com in a new tab
  
  - `set;clock;on` Display a clock on the page
  
