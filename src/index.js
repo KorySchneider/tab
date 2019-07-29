@@ -4,11 +4,14 @@ let CONFIG = {
   defaultCommand: 'g',
   bgColor: '#282828',
   textColor: '#ebdbb2',
+  fontSize: '1.75em',
+  clockSize: '2em',
   showClock: false,
   alwaysNewTab: false,
   gistID: '',
   links: [],
-}
+};
+const DEFAULT_CONFIG = Object.assign({}, CONFIG);
 let aliases = {
 // alias: command
   'cal': 'gc',
@@ -22,8 +25,8 @@ let messageTimer = null;
 
 window.onload = () => {
   loadConfig();
-
   applyConfig();
+  saveConfig();
 
   document.querySelector('#input').focus();
 
@@ -134,10 +137,12 @@ function loadConfig() {
   if (Storage) {
     // Create config object if it doesn't exist
     if (localStorage.getItem('taabSettings') === null) {
-      localStorage.setItem('taabSettings', JSON.stringify(CONFIG));
+      localStorage.setItem('taabSettings', JSON.stringify(DEFAULT_CONFIG));
     // Otherwise load saved config from localStorage
     } else {
-      CONFIG = JSON.parse(localStorage.getItem('taabSettings'));
+      const savedConfig = JSON.parse(localStorage.getItem('taabSettings'));
+      // Merge new settings
+      CONFIG = Object.assign(CONFIG, savedConfig);
     }
 
     // Legacy import
@@ -150,11 +155,13 @@ function loadConfig() {
 
 function applyConfig() {
   // Text and background colors
-  document.querySelector('body').style.backgroundColor = CONFIG.bgColor;
-  document.querySelector('body').style.color = CONFIG.textColor;
+  document.body.style.backgroundColor = CONFIG.bgColor;
+  document.body.style.color = CONFIG.textColor;
+  document.body.style.fontSize = CONFIG.fontSize;
 
   // Clock
-  let clock = document.querySelector('#clock');
+  const clock = document.querySelector('#clock');
+  clock.style.fontSize = CONFIG.clockSize;
   if (CONFIG.showClock)
     clock.style.display = 'inline';
   else
@@ -285,7 +292,7 @@ function getFullLink(shortcut) {
 
 // Import legacy links (custom commands)
 function importLegacyLinks() {
-  let legacyLinks = JSON.parse(localStorage.getItem('customCommands'));
+  const legacyLinks = JSON.parse(localStorage.getItem('customCommands'));
   if (legacyLinks) {
     CONFIG.links = legacyLinks;
     saveConfig();
@@ -349,6 +356,28 @@ const commands = {
         }
         break;
 
+      case 'fontSize':
+        // Display current setting
+        if (args.length === 1) {
+          displayMessage(`Current input font size: ${CONFIG.fontSize}`, 8000);
+          break;
+        }
+
+        // Set new value
+        if (args[1]) CONFIG['fontSize'] = args[1];
+        break;
+
+      case 'clockSize':
+        // Display current setting
+        if (args.length === 1) {
+          displayMessage(`Current clock font size: ${CONFIG.clockSize}`, 8000);
+          break;
+        }
+
+        // Set new value
+        if (args[1]) CONFIG['clockSize'] = args[1];
+        break;
+
       // Always new tab
       case 'newtab':
       case 'alwaysNewTab':
@@ -380,16 +409,10 @@ const commands = {
       // Restore defaults
       case 'defaults':
         localStorage.removeItem('taabSettings');
-        CONFIG = {
-          defaultCommand: 'g',
-          bgColor: '#282828',
-          textColor: '#ebdbb2',
-          showClock: false,
-          alwaysNewTab: false,
-          gistID: '',
-          links: [],
-        }
+        CONFIG = DEFAULT_CONFIG;
         loadConfig();
+        applyConfig();
+        saveConfig();
         displayMessage('Settings reset to defaults', 5000);
         break;
 
