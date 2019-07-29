@@ -43,10 +43,8 @@ Arguments in [brackets] are optional. Vertical pipes (`|`) mean 'or'.
 
 This is how you change your settings. Settings are saved locally, but can be synced using Gist (see [config](#config) command).
 
- - **setting** - One of: `defaultCommand`, `bgColor`, `textColor`, `clock`, `newtab`. If no value
-   is given, the current value will be displayed.
- - **value** - Either a hex value for `bgColor` or `textColor`, or a command
-   shortcut (e.g. `y`) for `defaultCommand`.
+ - **setting** - One of: `defaultCommand`, `bgColor`, `textColor`, `fontSize`, `clock`, `clockSize`, `newtab`. If no value is given, the current value will be displayed.
+ - **value** - A hex value for `bgColor` or `textColor`, a command shortcut (e.g. `y`) for `defaultCommand`, a CSS font size (e.g. `1em` or `42px`) for `fontSize` or `clockSize`, or `on` or `off` for `clock`.
  - `set;defaults` will restore default values for all options.
 
 For example: `set;bgColor;#282828` | `set;defaultCommand;dg` | `set;clock;off`
