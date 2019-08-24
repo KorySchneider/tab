@@ -1,3 +1,5 @@
+import './style.css';
+
 (function() {
 // Default config
 let CONFIG = {

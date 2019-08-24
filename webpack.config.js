@@ -1,6 +1,7 @@
-const webpack = require('webpack'),
-      HtmlWebpackPlugin = require('html-webpack-plugin'),
-      HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const Critters = require('critters-webpack-plugin');
 
 module.exports = {
   entry: __dirname + '/src/index.js',
@@ -21,19 +22,30 @@ module.exports = {
             presets: ['env']
           }
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'tab',
-      template: __dirname + '/src/template.html',
-      filename: __dirname + '/index.html',
+      template: './src/template.html',
+      filename: './index.html',
       inlineSource: '.(js|css)$',
-      minify: true
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        useShortDoctype: true,
+      }
     }),
-
-    new HtmlWebpackInlineSourcePlugin()
+    new HtmlWebpackInlineSourcePlugin(),
+    new Critters({
+      preload: 'body',
+    }),
   ]
 }
