@@ -9,6 +9,7 @@ let CONFIG = {
   fontSize: '1.75em',
   clockSize: '2em',
   showClock: false,
+  militaryClock: false,
   alwaysNewTab: false,
   gistID: '',
   links: [],
@@ -206,7 +207,8 @@ function buildURL(url, search='', query='') {
 function updateClock() {
   let d = new Date();
   let h = d.getHours();
-  let hours = (h > 12 ? h - 12 : h).toString();
+  if (!CONFIG.militaryClock && h > 12) h -= 12;
+  let hours = h.toString();
   let minutes = ('0' + d.getMinutes()).slice(-2);
   document.querySelector('#clock').innerText = `${hours}:${minutes}`;
   setTimeout(updateClock, 1000);
@@ -398,14 +400,28 @@ const commands = {
       case 'clock':
         // Display current value if none given
         if (args.length === 1) {
-          displayMessage(`Clock is ${(CONFIG.showClock) ? 'on' : 'off'}`, 5000);
+          displayMessage(`Clock is ${(CONFIG.showClock) ? 'on' : 'off'},
+            ${CONFIG.militaryClock ? '24' : '12'}-hour`, 5000);
           break;
         }
 
-        // Turn clock on or off
-        if (args[1] === 'on') CONFIG.showClock = true;
-        else if (args[1] === 'off') CONFIG.showClock = false;
-        else displayMessage("Must be set to either 'on' or 'off'", 5000);
+        // Set on/off, 12/24 hour
+        switch(args[1]) {
+          case 'on':
+            CONFIG.showClock = true;
+            break;
+          case 'off':
+            CONFIG.showClock = false;
+            break;
+          case '12':
+            CONFIG.militaryClock = false;
+            break;
+          case '24':
+            CONFIG.militaryClock = true;
+            break;
+          default:
+            displayMessage("Must be set to 'on', 'off', '12' or '24'", 5000);
+        }
         break;
 
       // Restore defaults
