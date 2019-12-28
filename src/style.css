@@ -26,7 +26,6 @@ body, #app {
   background: transparent;
   border: none;
   outline: none;
-  width: 100%;
 }
 #message {
   font-size: 0.5em;
