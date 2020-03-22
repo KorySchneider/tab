@@ -16,7 +16,7 @@ body, #app {
   font-size: 2em;
   font-weight: bold;
   margin-top: -20vh;
-  margin-bottom: 30px;
+  margin-bottom: 10%;
   display: none;
 }
 #input {
