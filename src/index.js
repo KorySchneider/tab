@@ -13,6 +13,7 @@ let CONFIG = {
   alwaysNewTab: false,
   gistID: '',
   links: [],
+  caretColor: 'auto',
 };
 const DEFAULT_CONFIG = Object.assign({}, CONFIG);
 let aliases = {
@@ -161,6 +162,7 @@ function applyConfig() {
   document.body.style.backgroundColor = CONFIG.bgColor;
   document.body.style.color = CONFIG.textColor;
   document.body.style.fontSize = CONFIG.fontSize;
+  document.body.style.caretColor = CONFIG.caretColor;
 
   // Clock
   const clock = document.querySelector('#clock');
@@ -358,6 +360,17 @@ const commands = {
         } else {
           displayMessage('Error: invalid hex value', 5000);
         }
+        break;
+        
+      case 'caretColor':
+        // Display current setting
+        if (args.length === 1) {
+          displayMessage(`Current caret color: ${CONFIG.caretColor}`, 8000);
+          break;
+        }
+
+        // Set new value
+        if (args[1]) CONFIG['caretColor'] = args[1];
         break;
 
       case 'fontSize':
