@@ -43,7 +43,7 @@ Arguments in [brackets] are optional. Vertical pipes (`|`) mean 'or'.
 
 This is how you change your settings. Settings are saved locally, but can be synced using Gist (see [config](#config) command).
 
- - **setting** - One of: `defaultCommand`, `bgColor`, `textColor`, `fontSize`, `clock`, `clockSize`, `newtab`. If no value is given, the current value will be displayed.
+ - **setting** - One of: `defaultCommand`, `bgColor`, `textColor`, `caretColor`, `fontSize`, `clock`, `clockSize`, `newtab`. If no value is given, the current value will be displayed.
  - **value** - A hex value for `bgColor` or `textColor`, a command shortcut (e.g. `y`) for `defaultCommand`, a CSS font size (e.g. `1em` or `42px`) for `fontSize` or `clockSize`, and `on`, `off`, `12` or `24` for `clock`. It can also be `caretColor`, the color of the caret that you write with (`auto` or a color).
  - `set;defaults` will restore default values for all options.
 
