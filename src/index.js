@@ -10,6 +10,7 @@ let CONFIG = {
   clockSize: '2em',
   showClock: false,
   militaryClock: false,
+  showSeconds: false,
   alwaysNewTab: false,
   gistID: '',
   links: [],
@@ -212,8 +213,14 @@ function updateClock() {
   if (!CONFIG.militaryClock && h > 12) h -= 12;
   let hours = h.toString();
   let minutes = ('0' + d.getMinutes()).slice(-2);
-  document.querySelector('#clock').innerText = `${hours}:${minutes}`;
-  setTimeout(updateClock, 1000);
+  if (CONFIG.showSeconds) {
+    let seconds = ('0' + d.getSeconds()).slice(-2);
+    document.querySelector('#clock').innerText = `${hours}:${minutes}:${seconds}`;
+    setTimeout(updateClock, 1000);
+  } else {
+    document.querySelector('#clock').innerText = `${hours}:${minutes}`;
+    setTimeout(updateClock, 1000);
+  }
 }
 
 function handleKeyDown(e) {
@@ -432,8 +439,14 @@ const commands = {
           case '24':
             CONFIG.militaryClock = true;
             break;
+          case 'showSeconds':
+            CONFIG.showSeconds = true;
+            break;
+          case 'hideSeconds':
+            CONFIG.showSeconds = false;
+            break;
           default:
-            displayMessage("Must be set to 'on', 'off', '12' or '24'", 5000);
+            displayMessage("Must be set to 'on', 'off', '12', '24' or 'showSeconds'", 5000);
         }
         break;
 
